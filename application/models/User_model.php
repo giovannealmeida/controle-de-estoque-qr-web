@@ -61,6 +61,7 @@ class User_model extends CI_Model {
             $user = $result->result()[0];
             $key = $this->has_key($user->id)->key;
             if (password_verify($password, $user->password)) {          // Se a senha está correta
+                //print_r("teste");die;
                 return array('userData' => $user, 'key' => $key);
             }
         }
@@ -148,12 +149,12 @@ class User_model extends CI_Model {
         return $this->db->insert('tb_keys', $data);
     }
 
-    public function insert($data) {
+    public function insert($data, $password) {
         $this->db->insert('tb_users', $data);
         $user_id = $this->db->insert_id();
         if ($this->db->affected_rows() == 1) {
             $this->create_key($user_id);
-            return $this->db->get_where('tb_users', array('id' => $user_id))->result()[0];
+            return $this->get_access($data['email'], $password);
         }
 
         return null;

@@ -81,10 +81,10 @@ class Login_controller extends REST_Controller {
         $birthday = $this->post('birthday');
         $gender_id = $this->post('gender_id');
         $phone = $this->post('phone');
-        $city_id = $this->post('city_id');
+        //$city_id = $this->post('city_id');
         $cpf = $this->post('cpf');
 
-        if ($name && $email && $password && $birthday && $gender_id && $phone && $cpf && $city_id) {
+        if ($name && $email && $password && $birthday && $gender_id && $phone && $cpf) {
             $data = array(
                 'name' => $name,
                 'email' => $email,
@@ -93,7 +93,7 @@ class Login_controller extends REST_Controller {
                 'gender_id' => $gender_id,
                 'phone' => $phone,
                 'cpf' => $cpf,
-                'level_id' => 3
+                'level_id' => 1
             );
 
             if ($this->post('avatar') != NULL) {
@@ -109,11 +109,11 @@ class Login_controller extends REST_Controller {
             }
 
             $this->load->model("User_model", "user");
-            $result = $this->user->insert($data);
+            $result = $this->user->insert($data, $password);
             if ($result) {
-                $cidade_insert['user_id'] = $result->id;
+                /*$cidade_insert['user_id'] = $result->id;
                 $cidade_insert['city_id'] = $this->input->post('city_id');
-                $this->users->insert_city($cidade_insert);
+                $this->users->insert_city($cidade_insert);*/
                 $this->session->set_userdata('logged', $result);
                 $this->response(array('status' => TRUE, 'data' => $this->session->userdata("logged")), REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
             } else {
@@ -260,5 +260,47 @@ class Login_controller extends REST_Controller {
             $this->response(array('status' => FALSE, 'message' => 'params not found'), REST_Controller::HTTP_BAD_REQUEST);
         }
     }
+
+    public function cpf_sum_get() {
+        $input = $this->get('cpf');
+        if ($input) {
+            $second = str_replace('-', '', str_replace('.', '', $input));
+            $cpf = str_pad(preg_replace('[^0-9]', '', $second), 11, '0', STR_PAD_LEFT);
+            if (strlen($cpf) != 11 ||
+                $cpf == '00000000000' ||
+                $cpf == '11111111111' ||
+                $cpf == '22222222222' ||
+                $cpf == '33333333333' ||
+                $cpf == '44444444444' ||
+                $cpf == '55555555555' ||
+                $cpf == '66666666666' ||
+                $cpf == '77777777777' ||
+                $cpf == '88888888888' ||
+                $cpf == '99999999999') {
+                $this->response(array('status' => FALSE, 'message' => 'CPF is not valid'), REST_Controller::HTTP_OK);
+            } else {
+                for ($t = 9; $t < 11; $t++) {
+                    for ($d = 0, $c = 0; $c < $t; $c++) {
+                        $d += $cpf{$c} * (($t + 1) - $c);
+                    }
+
+                    $d = ((10 * $d) % 11) % 10;
+                    if ($cpf{$c} != $d) {
+                        $this->response(array('status' => FALSE, 'message' => 'CPF is not valid'), REST_Controller::HTTP_OK);
+                    }
+                }
+                $this->response(array('status' => TRUE, 'message' => 'CPF is valid'), REST_Controller::HTTP_OK);
+            }
+            $this->response(array('status' => FALSE, 'message' => 'CPF is not valid'), REST_Controller::HTTP_OK);
+        } else {
+            $this->response(array('status' => FALSE, 'message' => 'params not found'), REST_Controller::HTTP_BAD_REQUEST);
+        }
+    }
+
+    public function logout_get() {
+        session_destroy();
+        $this->response(array('status' => TRUE), REST_Controller::HTTP_OK);
+    }
+
 
 }
