@@ -20,11 +20,9 @@ class Login_controller extends CI_Controller {
         if ($this->input->post()) {
             $this->load->library('form_validation');
             $this->load->model('Users_model', 'users');
-
             $this->form_validation->set_rules('email', 'Email', 'required');
             $this->form_validation->set_rules('password', 'Senha', 'required');
             $this->form_validation->set_message('required', 'O campo <strong>%s</strong> é obrigatório');
-
             if ($this->form_validation->run() == true) {
                 if ($user = $this->users->getUserLogin($this->input->post("email"), $this->input->post("password"))) {
                     $this->session->set_userdata("logged_in", $user);

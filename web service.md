@@ -44,7 +44,7 @@ Descrição: Efetua o cadastro do usuário
 Método: POST
 URL: base_url + /api/Login_controller/register
 Parâmetro: name, email, password, birthday, gender_id, phone, cpf
-Retorno: status, "true" se cadastrado com sucesso, "false" se houve falha ao cadastrar, se o cadastro for efetuado com sucesso vai retornar data{userData{id, avatar, name, email, password, birthday, gender_id, cpf, phone e level_id}, key}
+Retorno: status, "true" se cadastrado com sucesso, "false" se houve falha ao cadastrar, se o cadastro for efetuado com sucesso vai retornar data{userData{id, avatar, name-fantasy, email, password, birthday, gender_id, cpf-cnpj, phone, city_id e level_id}, key}
 
 
 # Login
@@ -54,7 +54,7 @@ Descrição: Efetua o login
 Método: POST
 URL: base_url + /api/Login_controller
 Parâmetro: email e password
-Retorno: status, "true" se logado com sucesso, "false" se houve falha ao logar, se o login for retornado com sucesso vai retornar data{userData{id, avatar, name, email, password, birthday, gender_id, cpf, phone e level_id}, key}
+Retorno: status, "true" se logado com sucesso, "false" se houve falha ao logar, se o login for retornado com sucesso vai retornar data{userData{id, avatar, name-fantasy, email, password, birthday, gender_id, cpf-cnpj, phone, city_id e level_id}, key}
 
 # Logout
 
