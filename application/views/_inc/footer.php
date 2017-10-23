@@ -1,6 +1,6 @@
-<!-- BEGIN FOOTER -->
+    <!-- BEGIN FOOTER -->
 <div class="page-footer">
-    <div class="page-footer-inner"> <a href="#"  target="_blank">2017 © IKing. Digital Influecers.</a>
+    <div class="page-footer-inner"> <a href="#"  target="_blank">2017 © RootSilver. by Rockket.</a>
     </div>
     <div class="scroll-to-top">
         <i class="icon-arrow-up"></i>

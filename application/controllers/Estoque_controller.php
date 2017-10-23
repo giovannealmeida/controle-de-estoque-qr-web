@@ -1,6 +1,6 @@
 <?php
 
-class Home_controller extends CI_Controller {
+class Estoque_controller extends CI_Controller {
 
     private $user_info;
 
@@ -14,13 +14,23 @@ class Home_controller extends CI_Controller {
         }
     }
 
-    public function index() {
+    public function cadastro() {
 
         $data = $this->user_info;
         //print_r($data);die;
         $this->load->view("_inc/header", $data);
         $this->load->view("_inc/menu");
-        $this->load->view("dashboard");
+        $this->load->view("cadastro_produto");
+        $this->load->view("_inc/footer");
+    }
+
+    public function visualizar() {
+
+        $data = $this->user_info;
+        //print_r($data);die;
+        $this->load->view("_inc/header", $data);
+        $this->load->view("_inc/menu");
+        $this->load->view("visualizar_produto");
         $this->load->view("_inc/footer");
     }
 

@@ -29,10 +29,101 @@
                     <h3 class="uppercase">Menu</h3>
                 </li>
                 <li class="nav-item  ">
-                    <a href="<?= base_url("statistics_controller/index") ?>" class="nav-link nav-toggle">
+                    <a href="<?= base_url("Home_controller/index") ?>" class="nav-link nav-toggle">
                         <i class="icon-bar-chart"></i>
-                        <span class="title">Estatísticas</span>
+                        <span class="title">Paindel de Controle</span>
                     </a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <i class="fa fa-users"></i>
+                        <span class="title">Cadastro de Equipe</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item  ">
+                            <a href="<?= base_url("client_controller/new_client") ?>" class="nav-link ">
+                                <span class="title">Loja</span>
+                            </a>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="<?= base_url("client_controller/index") ?>" class="nav-link ">
+                                <span class="title">Vendedor</span>
+                            </a>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="<?= base_url("client_controller/index") ?>" class="nav-link ">
+                                <span class="title">Administrador</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item  ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <i class="fa fa-inbox"></i>
+                        <span class="title">Estoque</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item  ">
+                            <a href="<?= base_url("Estoque_controller/cadastro") ?>" class="nav-link ">
+                                <span class="title">Cadastro de Produto</span>
+                            </a>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="<?= base_url("Estoque_controller/visualizar") ?>" class="nav-link ">
+                                <span class="title">Visualizar Estoque</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item  ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <i class="fa fa-dollar"></i>
+                        <span class="title">Vendas</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item  ">
+                            <a href="<?= base_url("client_controller/new_client") ?>" class="nav-link ">
+                                <span class="title">Gerar Etiqueta</span>
+                            </a>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="<?= base_url("client_controller/index") ?>" class="nav-link ">
+                                <span class="title">Visualizar Vendas</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item  ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span class="title">Controle de Lojas</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item  ">
+                            <a href="<?= base_url("client_controller/new_client") ?>" class="nav-link ">
+                                <span class="title">Cadastro de Estoque</span>
+                            </a>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="<?= base_url("client_controller/index") ?>" class="nav-link ">
+                                <span class="title">Visualizar Estoque</span>
+                            </a>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="<?= base_url("client_controller/index") ?>" class="nav-link ">
+                                <span class="title">Translado</span>
+                            </a>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="<?= base_url("client_controller/index") ?>" class="nav-link ">
+                                <span class="title">Baixa</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item  ">
                     <a href="javascript:;" class="nav-link nav-toggle">
@@ -43,94 +134,11 @@
                     <ul class="sub-menu">
                         <li class="nav-item  ">
                             <a href="<?= base_url("client_controller/new_client") ?>" class="nav-link ">
-                                <span class="title">Cadastrar</span>
+                                <span class="title">Ver Lista</span>
                             </a>
-                        </li>
-                        <li class="nav-item  ">
-                            <a href="<?= base_url("client_controller/index") ?>" class="nav-link ">
-                                <span class="title">Gerenciar</span>
-                            </a>
-                        </li>
+                      </li>
                     </ul>
                 </li>
-                <li class="nav-item  ">
-                    <a href="<?= base_url("user_controller/list_royal") ?>" class="nav-link nav-toggle">
-                        <i class="icon-diamond"></i>
-                        <span class="title">Royal  Influencer</span>
-                    </a>
-                </li>
-                <li class="nav-item  ">
-                    <a href="<?= base_url("user_controller/list_king") ?>" class="nav-link nav-toggle">
-                        <i class="icon-star"></i>
-                        <span class="title">King  Influencer</span>
-                    </a>
-                </li>
-                <li class="nav-item  ">
-                    <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="icon-bulb"></i>
-                        <span class="title">Publicações</span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li class="nav-item  ">
-                            <a href="<?= base_url("publication_controller/new_publication") ?>" class="nav-link ">
-                                <span class="title">Cadastrar</span>
-                            </a>
-                        </li>
-                        <li class="nav-item  ">
-                            <a href="<?= base_url("publication_controller/index") ?>" class="nav-link ">
-                                <span class="title">Gerenciar</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <?php if ($user_profile->level_id == 1) : ?>
-                    <li class="nav-item  ">
-                        <a href="?p=" class="nav-link nav-toggle">
-                            <i class="icon-eye"></i>
-                            <span class="title">Staff</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li class="nav-item  ">
-                                <a href="?p=" class="nav-link nav-toggle">
-                                    <span class="title">Administradores</span>
-                                    <span class="arrow"></span>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li class="nav-item  ">
-                                        <a href="<?= base_url("administrador_controller/new_administrador") ?>" class="nav-link ">
-                                            <span class="title">Cadastrar</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item  ">
-                                        <a href="<?= base_url("administrador_controller/index") ?>" class="nav-link ">
-                                            <span class="title">Gerenciar</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item  ">
-                                <a href="?p=" class="nav-link nav-toggle">
-                                    <span class="title">Coordenadores</span>
-                                    <span class="arrow"></span>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li class="nav-item  ">
-                                        <a href="<?= base_url("coordinator_controller/new_coordinator") ?>" class="nav-link ">
-                                            <span class="title">Cadastrar</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item  ">
-                                        <a href="<?= base_url("coordinator_controller/index") ?>" class="nav-link ">
-                                            <span class="title">Gerenciar</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                <?php endif; ?>
             </ul>
             <!-- END SIDEBAR MENU -->
             <!-- END SIDEBAR MENU -->
