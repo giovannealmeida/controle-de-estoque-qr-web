@@ -19,6 +19,7 @@ class Estoque_controller extends CI_Controller {
         $data = $this->user_info;
         $this->load->model('Stock_model');
         $data['category'] = $this->Stock_model->get_category();
+        $data['last'] = $this->Stock_model->get_last_product_record();
         if($this->input->post()){
             $this->form_validation->set_rules('product_name', 'Nome do produto', 'required');
             $this->form_validation->set_rules('category', 'Categoria', 'required');

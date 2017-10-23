@@ -185,7 +185,7 @@
                                                                 <div class="form-group">
                                                                     <label class="control-label col-md-3">Nome do Produto</label>
                                                                     <div class="col-md-9">
-                                                                        <p class="form-control-static"> Produto X </p> <!-- Entrar com informações do banco -->
+                                                                        <p class="form-control-static"> <?= isset($last->product_name) ? $last->product_name : '' ?> </p> <!-- Entrar com informações do banco -->
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -194,7 +194,7 @@
                                                                 <div class="form-group">
                                                                     <label class="control-label col-md-3">Categoria:</label>
                                                                     <div class="col-md-9">
-                                                                        <p class="form-control-static"> Gategoria do produto X </p> <!-- Entrar com informações do banco -->
+                                                                        <p class="form-control-static"> <?= isset($last->category) ? $last->category : '' ?> </p> <!-- Entrar com informações do banco -->
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -206,7 +206,7 @@
                                                                 <div class="form-group">
                                                                     <label class="control-label col-md-3">Descrição:</label>
                                                                     <div class="col-md-9">
-                                                                        <p class="form-control-static"> Descrição do produto X </p> <!-- Entrar com informações do banco -->
+                                                                        <p class="form-control-static"> <?= isset($last->description) ? $last->description : '' ?> </p> <!-- Entrar com informações do banco -->
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -215,7 +215,7 @@
                                                                 <div class="form-group">
                                                                     <label class="control-label col-md-3">Valor de atacado:</label>
                                                                     <div class="col-md-9">
-                                                                        <p class="form-control-static"> R$ 5,00 </p>
+                                                                        <p class="form-control-static"> <?= isset($last->wholesale_value) ? $last->wholesale_value : '' ?> </p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -227,7 +227,7 @@
                                                                 <div class="form-group">
                                                                   <label class="control-label col-md-3">Quantidade:</label>
                                                                   <div class="col-md-9">
-                                                                      <p class="form-control-static"> 200 </p>
+                                                                      <p class="form-control-static"> <?= isset($last->quantity_in_stock) ? $last->quantity_in_stock : '' ?> </p>
                                                                   </div>
                                                                 </div>
                                                             </div>
@@ -236,7 +236,7 @@
                                                                 <div class="form-group">
                                                                   <label class="control-label col-md-3">Valor de varejo:</label>
                                                                   <div class="col-md-9">
-                                                                      <p class="form-control-static"> R$ 20,00 </p>
+                                                                      <p class="form-control-static"> <?= isset($last->retail_value) ? $last->retail_value : '' ?> </p>
                                                                   </div>
                                                                 </div>
                                                             </div>
