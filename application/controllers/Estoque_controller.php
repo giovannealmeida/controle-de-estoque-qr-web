@@ -15,9 +15,28 @@ class Estoque_controller extends CI_Controller {
     }
 
     public function cadastro() {
-
+        $this->load->library('form_validation');
         $data = $this->user_info;
-        //print_r($data);die;
+        $this->load->model('Stock_model');
+        $data['category'] = $this->Stock_model->get_category();
+        if($this->input->post()){
+            $this->form_validation->set_rules('product_name', 'Nome do produto', 'required');
+            $this->form_validation->set_rules('category', 'Categoria', 'required');
+            $this->form_validation->set_rules('description', 'Descrição', 'required');
+            $this->form_validation->set_rules('wholesale_value', 'Valor atacado', 'required');
+            $this->form_validation->set_rules('retail_value', 'Valor Varejo', 'required');
+            $this->form_validation->set_rules('quantity_in_stock', 'Quantidade em estoque', 'required');
+            $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+
+            if ($this->form_validation->run() == true) {
+                $insert = $this->Stock_model->insert_product($this->input->post());
+                if($insert){
+                    $this->session->set_flashdata('success', 'Produto cadastrado com sucesso!');
+                }else{
+                    $this->session->set_flashdata('fail', 'Não foi possível cadastrar');
+                }
+            }
+        }
         $this->load->view("_inc/header", $data);
         $this->load->view("_inc/menu");
         $this->load->view("cadastro_produto");

@@ -37,6 +37,8 @@
                                         <a href="#tab_3" data-toggle="tab"> Visualizar Produtos </a>
                                     </li>
                                 </ul>
+
+
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="tab_2">
                                         <div class="portlet box green">
@@ -52,7 +54,27 @@
                                             </div>
                                             <div class="portlet-body form">
                                                 <!-- BEGIN FORM-->
-                                                <form action="#" class="form-horizontal">
+                                                <form action="<?= base_url('Estoque_controller/cadastro') ?>" class="form-horizontal" method="post" data-toggle ="validator">
+
+                                                    <?php if (validation_errors()): ?>
+                                                        <br/>
+                                                        <div class="alert alert-danger">
+                                                            <strong>Erros no formulário!</strong><br/>
+                                                            <br/>
+                                                            <?php echo validation_errors(); ?>
+                                                        </div>
+                                                    <?php elseif($this->session->flashdata("success")): ?>
+                                                        <br/>
+                                                        <div class="alert alert-success">
+                                                            <strong><?= $this->session->flashdata("success"); ?></strong><br/>
+                                                        </div>
+                                                    <?php elseif($this->session->flashdata("fail")): ?>
+                                                        <br/>
+                                                        <div class="alert alert-danger">
+                                                            <strong><?= $this->session->flashdata("fail"); ?></strong><br/>
+                                                        </div>
+                                                    <?php endif; ?>
+
                                                     <div class="form-body">
                                                         <h3 class="form-section">Informações Básicas</h3>
                                                         <div class="row">
@@ -60,8 +82,8 @@
                                                                 <div class="form-group">
                                                                     <label class="control-label col-md-3">Nome do Produto</label>
                                                                     <div class="col-md-9">
-                                                                        <input type="text" class="form-control" placeholder="ex: Colar de prata com pedra">
-                                                                        <span class="help-block"> Defina um nome curto para o produto </span>
+                                                                        <input type="text" name="product_name" class="form-control" placeholder="ex: Colar de prata com pedra" required="required">
+                                                                        <div class="help-block with-errors"></div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -70,18 +92,12 @@
                                                                 <div class="form-group">
                                                                     <label class="control-label col-md-3">Categoria</label>
                                                                     <div class="col-md-9">
-                                                                        <select name="categoria" class="form-control">
-                                                                            <option value="1">Produto acabado</option>
-                                                                            <option value="1">Mercadoria para Revenda</option>
-                                                                            <option value="1">Matéria-prima</option>
-                                                                            <option value="1">Embalagem</option>
-                                                                            <option value="1">Produto em processo</option>
-                                                                            <option value="1">Subproduto</option>
-                                                                            <option value="1">Produto intermediário</option>
-                                                                            <option value="1">Material consumo</option>
-                                                                            <option value="1">Serviço</option>
+                                                                        <select name="category" class="form-control">
+                                                                            <?php foreach ($category as $value): ?>
+                                                                            <option value="<?=$value->id ?>"><?= $value->description ?></option>
+                                                                            <?php endforeach; ?>
                                                                         </select>
-                                                                        <span class="help-block"> This field has error. </span>
+                                                                        <div class="help-block with-errors"></div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -93,8 +109,8 @@
                                                                 <div class="form-group">
                                                                     <label class="control-label col-md-3">Descrição</label>
                                                                     <div class="col-md-9">
-                                                                      <input type="text" class="form-control" placeholder="ex: corrente entrelaçada com pedra indiana">
-                                                                      <span class="help-block"> Descreva de maneira completa o produto </span>
+                                                                      <input name="description" type="text" class="form-control" placeholder="ex: corrente entrelaçada com pedra indiana" required="required">
+                                                                        <div class="help-block with-errors"></div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -103,13 +119,13 @@
                                                                 <div class="form-group">
                                                                     <label class="control-label col-md-3">Valor Atacado</label>
                                                                     <div class="col-md-3">
-                                                                      <input type="text" class="form-control" placeholder="ex: 5,00">
-                                                                      <span class="help-block"> Apenas números </span>
+                                                                      <input name="wholesale_value" type="text" class="form-control money" placeholder="ex: 5,00" required="required">
+                                                                        <div class="help-block with-errors"></div>
                                                                     </div>
                                                                     <label class="control-label col-md-3">Valor Varejo</label>
                                                                     <div class="col-md-3">
-                                                                      <input type="text" class="form-control" placeholder="ex: 5,00">
-                                                                      <span class="help-block"> Apenas números </span>
+                                                                      <input name="retail_value" type="text" class="form-control money" placeholder="ex: 5,00" required="required">
+                                                                        <div class="help-block with-errors"></div>
                                                                     </div>
                                                                 </div>
                                                               </div>
@@ -121,8 +137,8 @@
                                                                 <div class="form-group">
                                                                     <label class="control-label col-md-3">Quantidade em estoque</label>
                                                                     <div class="col-md-6">
-                                                                      <input type="text" class="form-control" placeholder="ex: 200">
-                                                                      <span class="help-block"> Apenas números </span>
+                                                                      <input name="quantity_in_stock" type="number" class="form-control" placeholder="ex: 200" required="required">
+                                                                        <div class="help-block with-errors"></div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -253,3 +269,11 @@
                 <!-- END CONTENT BODY -->
             </div>
             <!-- END CONTENT -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="<?= base_url("assets/global/plugins/jquery-inputmask/jquery.inputmask.bundle.min.js") ?>" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="<?= base_url("assets/js/validator.js") ?>"  type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"  type="text/javascript"></script>
+<script src="<?= base_url('assets/js/mask.js') ?>"  type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
