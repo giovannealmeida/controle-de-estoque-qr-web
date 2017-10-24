@@ -56,6 +56,8 @@ class User_model extends CI_Model {
     }
 
     public function get_access($email, $password) {
+        $this->db->where("level_id", 2);
+        $this->db->or_where("level_id", 3);
         $result = $this->db->get_where('tb_users', array('email' => $email));
         if ($result->num_rows() > 0) {
             $user = $result->result()[0];
@@ -261,7 +263,7 @@ class User_model extends CI_Model {
 
     public function getUserLogin($email, $password) {
         $this->db->where("email", $email);
-        $this->db->where("(level_id = 1 OR level_id = 2)");
+        $this->db->where("level_id", 1);
         $response = $this->db->get('tb_users');
         if ($response->num_rows() == 1) {
             $user = $response->result()[0];
