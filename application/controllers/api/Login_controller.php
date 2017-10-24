@@ -39,7 +39,7 @@ class Login_controller extends REST_Controller {
 
                     $this->response(array('status' => TRUE, 'data' => $data), REST_Controller::HTTP_OK);
                 } else {
-                    $this->response(array('status' => false, 'message' => 'Cant Create Session or Key'), REST_Controller::HTTP_OK);
+                    $this->response(array('status' => false, 'message' => 'Usuário ou senha inválidos'), REST_Controller::HTTP_OK);
                 }
             } else {
                 $this->response(array('status' => TRUE, 'data' => $this->session->userdata("logged")), REST_Controller::HTTP_OK);

@@ -53,26 +53,78 @@ Retorno:
     }]
 }
 ```
-## Estados
+
+## Estados [GET /api/States_controller]
 
 Retorna informações do estado por id, nome, uf, id da cidade ou todos os estados
 
-Método: GET
-URL: base_url + /api/States_controller
-Parâmetro: "id" para estado por id, "name" para estado por nome, "uf" para estado por uf,  "city_id" para estado por cidade e nada para retornar todas as cidades
-Retorno: id, name, uf. Array quando o parâmetro for diferente de "id"
+Parâmetros:
 
-#Etapas do cadastro de usuário
+* ```"id"``` para estado por id  
+* ```"name"``` para estado por nome  
+* ```"uf"``` para estado por uf  
+* ```"city_id"``` para estado por cidade  
+* nada para retornar todas as cidades
 
-- Validação do email
+Retorno:
 
-Descrição: Verifica se o email já está cadastrado no sistema
-Método: GET
-URL: base_url + /api/Login_controller/email_check
-Parâmetro: email
-Retorno: status, "true" para já cadastrado, "false" para ainda não cadastrado
+* Objeto
 
-- Validação do CPF
+``` json
+{
+  "status":true,
+  "message":"",
+  "data":
+    {
+      "id":1,
+      "name":"Estado",
+      "uf":"UF"
+    }
+}
+```
+
+* Array
+
+``` json
+{
+  "status":true,
+  "message":"",
+  "data":[
+    {
+      "id":1,
+      "name":"Estado",
+      "uf":"UF"
+    },
+    {
+      "id":2,
+      "name":"Estado2",
+      "uf":"UF2"
+    }]
+}
+```
+
+## Etapas do cadastro de usuário
+
+### Validação do email [GET /api/Login_controller/email_check]
+
+Verifica se o email já está cadastrado no sistema
+
+Parâmetros:
+
+* ```"email"```
+
+Retorno:
+
+Status ```true``` para e-mail cadastrado e ```false``` para e-mail não cadastrado.
+
+``` json
+{
+  "status":true,
+  "message":"",
+}
+```
+
+## Validação do CPF
 
 Descrição: Verifica se o cpf é válido
 Método: GET
