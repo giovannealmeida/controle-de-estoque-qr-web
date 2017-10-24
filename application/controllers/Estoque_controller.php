@@ -50,8 +50,10 @@ class Estoque_controller extends CI_Controller {
                 $insert = $this->Stock_model->insert_product($data_insert);
                 if($insert){
                     $this->session->set_flashdata('success', 'Produto cadastrado com sucesso!');
+                    redirect('Estoque_controller/cadastro');
                 }else{
                     $this->session->set_flashdata('fail', 'Não foi possível cadastrar');
+                    redirect('Estoque_controller/cadastro');
                 }
             }
         }
@@ -71,6 +73,42 @@ class Estoque_controller extends CI_Controller {
         $this->load->view("_inc/header", $data);
         $this->load->view("_inc/menu");
         $this->load->view("visualizar_produto");
+        $this->load->view("_inc/footer");
+    }
+
+    public function editar(){
+        $this->load->library('form_validation');
+        $this->load->model('Stock_model');
+        $data = $this->user_info;
+        $id = $this->input->get_post('id');
+
+        if($this->input->post()){
+            $this->form_validation->set_rules('product_name', 'Nome do produto', 'required');
+            $this->form_validation->set_rules('category', 'Categoria', 'required');
+            $this->form_validation->set_rules('description', 'Descrição', 'required');
+            $this->form_validation->set_rules('wholesale_value', 'Valor atacado', 'required');
+            $this->form_validation->set_rules('retail_value', 'Valor Varejo', 'required');
+            $this->form_validation->set_rules('quantity_in_stock', 'Quantidade em estoque', 'required');
+            $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+
+            if ($this->form_validation->run() == true) {
+                $update = $this->Stock_model->update_product($this->input->post(), $this->input->get_post('id'));
+                if($update){
+                    $this->session->set_flashdata('success', 'Produto atualizado com sucesso!');
+                    redirect('Estoque_controller/editar?id=' . $this->input->get_post('id'));
+                }else{
+                    $this->session->set_flashdata('fail', 'Não foi possível atualizar');
+                    redirect('Estoque_controller/editar?id=' . $this->input->get_post('id'));
+                }
+            }
+        }
+
+        $data['product'] = $this->Stock_model->get_product_by_id($id);
+        $data['category'] = $this->Stock_model->get_category();
+        $data['last'] = $this->Stock_model->get_last_product_record();
+        $this->load->view("_inc/header", $data);
+        $this->load->view("_inc/menu");
+        $this->load->view("cadastro_produto");
         $this->load->view("_inc/footer");
     }
 

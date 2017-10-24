@@ -60,4 +60,24 @@ class Stock_model extends CI_Model {
         }
     }
 
+    public function get_product_by_id($id){
+        $this->db->where('id', $id);
+        $query = $this->db->get('tb_products p');
+        if ($query->num_rows() > 0) {
+            return $query->row(0);
+        } else {
+            return null;
+        }
+    }
+
+    public function update_product($data, $id){
+        $this->db->where('id', $id);
+        $this->db->update('tb_products', $data);
+
+        if ($this->db->affected_rows() == 1) {
+            return true;
+        }
+        return false;
+    }
+
 }

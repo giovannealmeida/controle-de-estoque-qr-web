@@ -16,13 +16,13 @@
                                 <i class="fa fa-circle"></i>
                             </li>
                             <li>
-                                <span>Cadastro de Produto</span>
+                                <span><?= isset($product->id) ? 'Edição de Produto' :'Cadastro de Produto' ?></span>
                             </li>
                         </ul>
                     </div>
                     <!-- END PAGE BAR -->
                     <!-- BEGIN PAGE TITLE-->
-                    <h3 class="page-title"> Cadastro de Produtos
+                    <h3 class="page-title"> <?= isset($product->id) ? 'Edição de Produto' :'Cadastro de Produto' ?>
                     </h3>
                     <!-- END PAGE TITLE-->
                     <!-- END PAGE HEADER-->
@@ -31,7 +31,7 @@
                             <div class="tabbable-line boxless tabbable-reversed">
                                 <ul class="nav nav-tabs">
                                     <li class="active">
-                                        <a href="#tab_2" data-toggle="tab" aria-expanded="true"> Cadastro </a>
+                                        <a href="#tab_2" data-toggle="tab" aria-expanded="true"> <?= isset($product->id) ? 'Edição' :'Cadastro' ?> </a>
                                     </li>
                                     <li>
                                         <a href="#tab_3" data-toggle="tab"> Visualizar Produtos </a>
@@ -44,7 +44,7 @@
                                         <div class="portlet box green">
                                             <div class="portlet-title">
                                                 <div class="caption">
-                                                    <i class="fa fa-gift"></i>Formulário de cadastro </div>
+                                                    <i class="fa fa-gift"></i>Formulário de <?= isset($product->id) ? 'edição' :'cadastro' ?></div>
                                                 <div class="tools">
                                                     <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
                                                     <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
@@ -54,7 +54,7 @@
                                             </div>
                                             <div class="portlet-body form">
                                                 <!-- BEGIN FORM-->
-                                                <form action="<?= base_url('Estoque_controller/cadastro') ?>" class="form-horizontal" method="post" data-toggle ="validator">
+                                                <form action="<?= isset($product->id) ? base_url('Estoque_controller/editar?id=') . $product->id : base_url('Estoque_controller/cadastro') ?>" class="form-horizontal" method="post" data-toggle ="validator">
 
                                                     <?php if (validation_errors()): ?>
                                                         <br/>
@@ -82,7 +82,7 @@
                                                                 <div class="form-group">
                                                                     <label class="control-label col-md-3">Nome do Produto</label>
                                                                     <div class="col-md-9">
-                                                                        <input type="text" name="product_name" class="form-control" placeholder="ex: Colar de prata com pedra" required="required">
+                                                                        <input type="text" name="product_name" class="form-control" placeholder="ex: Colar de prata com pedra" required="required" value="<?= isset($product->product_name) ? $product->product_name : '' ?> ">
                                                                         <div class="help-block with-errors"></div>
                                                                     </div>
                                                                 </div>
@@ -94,7 +94,7 @@
                                                                     <div class="col-md-9">
                                                                         <select name="category" class="form-control">
                                                                             <?php foreach ($category as $value): ?>
-                                                                            <option value="<?=$value->id ?>"><?= $value->description ?></option>
+                                                                            <option value="<?=$value->id ?>" <?= isset($product->category) && $product->category == $value->id  ? 'selected' : '' ?>><?= $value->description ?></option>
                                                                             <?php endforeach; ?>
                                                                         </select>
                                                                         <div class="help-block with-errors"></div>
@@ -109,7 +109,7 @@
                                                                 <div class="form-group">
                                                                     <label class="control-label col-md-3">Descrição</label>
                                                                     <div class="col-md-9">
-                                                                      <input name="description" type="text" class="form-control" placeholder="ex: corrente entrelaçada com pedra indiana" required="required">
+                                                                      <input name="description" type="text" class="form-control" placeholder="ex: corrente entrelaçada com pedra indiana" required="required" value="<?= isset($product->description) ? $product->description : '' ?>">
                                                                         <div class="help-block with-errors"></div>
                                                                     </div>
                                                                 </div>
@@ -119,12 +119,12 @@
                                                                 <div class="form-group">
                                                                     <label class="control-label col-md-3">Valor Atacado</label>
                                                                     <div class="col-md-3">
-                                                                      <input name="wholesale_value" type="text" class="form-control money" placeholder="ex: 5,00" required="required">
+                                                                      <input name="wholesale_value" type="text" class="form-control money" placeholder="ex: 5,00" required="required" value="<?= isset($product->wholesale_value) ? $product->wholesale_value : '' ?>">
                                                                         <div class="help-block with-errors"></div>
                                                                     </div>
                                                                     <label class="control-label col-md-3">Valor Varejo</label>
                                                                     <div class="col-md-3">
-                                                                      <input name="retail_value" type="text" class="form-control money" placeholder="ex: 5,00" required="required">
+                                                                      <input name="retail_value" type="text" class="form-control money" placeholder="ex: 5,00" required="required" value="<?= isset($product->retail_value) ? $product->retail_value : '' ?>">
                                                                         <div class="help-block with-errors"></div>
                                                                     </div>
                                                                 </div>
@@ -137,7 +137,7 @@
                                                                 <div class="form-group">
                                                                     <label class="control-label col-md-3">Quantidade em estoque</label>
                                                                     <div class="col-md-6">
-                                                                      <input name="quantity_in_stock" type="number" class="form-control" placeholder="ex: 200" required="required">
+                                                                      <input name="quantity_in_stock" type="number" class="form-control" placeholder="ex: 200" required="required" value="<?= isset($product->quantity_in_stock) ? $product->quantity_in_stock : '' ?>">
                                                                         <div class="help-block with-errors"></div>
                                                                     </div>
                                                                 </div>
@@ -149,7 +149,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="row">
                                                                     <div class="col-md-offset-3 col-md-9">
-                                                                        <button type="submit" class="btn green">Cadastrar</button>
+                                                                        <button type="submit" class="btn green"><?= isset($product->id) ? 'Editar' :'cadastro' ?></button>
                                                                         <button type="button" class="btn default">Cancelar</button>
                                                                     </div>
                                                                 </div>
@@ -248,8 +248,8 @@
                                                             <div class="col-md-6">
                                                                 <div class="row">
                                                                     <div class="col-md-offset-3 col-md-9">
-                                                                        <button type="submit" class="btn green">
-                                                                            <i class="fa fa-pencil"></i> Editar</button>
+                                                                        <a type="button" href="<?= isset($last->id) ? base_url('Estoque_controller/editar?id=' . $last->id) : '#' ?>" class="btn green">
+                                                                            <i class="fa fa-pencil"></i> Editar</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
