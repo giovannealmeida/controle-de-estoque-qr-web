@@ -4,7 +4,8 @@
 
 Retorna informações da cidade por id, nome, id do estado ou todas as cidades.
 
-Parâmetros:  
+Parâmetros:
+
 * ```"id"``` para busca de cidade por id  
 * ```"name"``` para busca de cidade por nome  
 * ```"state_id"``` para busca de cidade por estado  
