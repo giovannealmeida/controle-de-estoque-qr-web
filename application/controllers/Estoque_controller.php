@@ -17,11 +17,11 @@ class Estoque_controller extends CI_Controller {
     public function cadastro() {
         $this->load->library('form_validation');
         $this->load->model('Util_model');
-        /*$params = array('value' => '125689365472365458',
+        /*$params = array('value' => '123456',
             'into' => 0,
             'filename' => 'barcode.gif',
-            'width_bar' => 300,
-            'height_bar' => 65,
+            'width_bar' => 73,
+            'height_bar' => 60,
             'show_codebar' => true);
         $this->load->library('barCodeGenrator', $params);*/
         $data = $this->user_info;

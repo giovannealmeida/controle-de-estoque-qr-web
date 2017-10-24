@@ -15,15 +15,14 @@ class Pdf extends CI_Controller {
         ob_start(); // inicia o buffer
 
         $mpdf = new mPDF ();
+        //$mpdf->SetDefaultFontSize(100);
+        //$mpdf->SetMargins(5, 5, 5);
         $mpdf->allow_charset_conversion = true;
         $mpdf->charset_in = 'UTF-8';
         $mpdf->margin_bottom_collapse = true;
 
         $description = $this->load->view('description', null, true);
         $mpdf->WriteHTML($description);
-        $mpdf->AddPage();
-        $qrcode = $this->load->view('qrcode', null, true);
-        $mpdf->WriteHTML($qrcode);
         $mpdf->Output();
     }
 
