@@ -39,7 +39,7 @@ class User_controller extends REST_Controller {
             $this->response(array('status' => FALSE, 'message' => 'params not found'), REST_Controller::HTTP_BAD_REQUEST);
         }
 
-        $this->response($result, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+        $this->response(array('status' => TRUE, 'data' => $result), REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
     }
 
 }
