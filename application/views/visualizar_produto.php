@@ -65,8 +65,8 @@
                                 <td> <span class="label label-sm label-success"> <?= $value->status ?> </span> </td>
                                 <td>
                                     <div class="margin-bottom-5">
-                                        <button class="btn btn-sm green btn-outline filter-submit margin-bottom">
-                                            <i class="fa fa-pencil"></i> Editar</button>
+                                        <a type="button" href="<?= base_url('Estoque_controller/editar?id=' . $value->id)?>" class="btn green">
+                                            <i class="fa fa-pencil"></i> Editar</a>
                                     </div>
                                 </td>
                                 </tr>

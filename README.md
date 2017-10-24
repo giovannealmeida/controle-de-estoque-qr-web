@@ -170,3 +170,12 @@ Método: POST
 URL: base_url + /api/Login_controller/forgot_password_send_hash
 Parâmetro: email
 Retorno: status, "true" se email enviado com sucesso, "false" se houve falha ao enviar email
+
+- Obter usuário
+
+Descrição: Recupera dados do usuário
+Método: GET
+URL: base_url + /api/User_controller
+Parâmetro: id
+Retorno: se não existir retorna null, se existir retorna id, avatar, name, email, password, birthday, gender_id, cpf, phone e level_id
+
