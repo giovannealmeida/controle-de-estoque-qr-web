@@ -23,6 +23,9 @@
             </ul>
         </div>
         <!-- END PAGE BAR -->
+        <h3 class="page-title"> Lista de Produtos
+            <small>em estoque</small>
+        </h3>
         <!-- END PAGE HEADER-->
         <div class="row">
             <div class="col-md-12">
