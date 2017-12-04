@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 //$config['base_url'] = 'http://iking.versalius.com.br/';
-$config['base_url'] = 'http://localhost/controle-de-estoque-qr-web/';
+$config['base_url'] = 'http://localhost/rootsilver/';
 
 /*
 |--------------------------------------------------------------------------

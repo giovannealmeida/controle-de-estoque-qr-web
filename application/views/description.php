@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <?php for ($i = 0; $i < 500; $i++): ?>
+        <?php for ($i = 0; $i < 1; $i++): ?>
 
             <?php if ($i == 0): ?>
-                <img id="imagem" src="<?= base_url('assets/img/etiqueta2.jpg'); ?>"/>
+                <img id="imagem" src="<?= base_url('assets/img/etiqueta.jpg'); ?>"/>
                 <?php $left = 60 ?>
                 <?php $top = 50 ?>
                 <?php $left_code = 55.7 ?>
