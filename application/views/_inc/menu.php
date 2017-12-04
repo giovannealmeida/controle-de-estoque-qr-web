@@ -47,12 +47,12 @@
                             </a>
                         </li>
                         <li class="nav-item  ">
-                            <a href="<?= base_url("client_controller/index") ?>" class="nav-link ">
+                            <a href="<?= base_url("Equipe_controller/vendedor") ?>" class="nav-link ">
                                 <span class="title">Vendedor</span>
                             </a>
                         </li>
                         <li class="nav-item  ">
-                            <a href="<?= base_url("client_controller/index") ?>" class="nav-link ">
+                            <a href="<?= base_url("Equipe_controller/administrador") ?>" class="nav-link ">
                                 <span class="title">Administrador</span>
                             </a>
                         </li>

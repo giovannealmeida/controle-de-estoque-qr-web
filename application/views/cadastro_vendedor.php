@@ -48,9 +48,9 @@
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label class="control-label col-md-3">Nome Fantasia</label>
+                                                                    <label class="control-label col-md-3">Nome Completo</label>
                                                                     <div class="col-md-9">
-                                                                        <input type="text" name="loja_name" class="form-control" placeholder="ex: Site RootSilver" required="required" value="">
+                                                                        <input type="text" name="vendedor_name" class="form-control" placeholder="ex: Tiago Silva" required="required" value="">
                                                                         <div class="help-block with-errors"></div>
                                                                     </div>
                                                                 </div>
@@ -58,9 +58,31 @@
                                                             <!--/span-->
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <label class="control-label col-md-3">CNPJ</label>
+                                                                    <label class="control-label col-md-3">CPF</label>
                                                                     <div class="col-md-9">
-                                                                      <input type="text" name="loja_cnpj" class="form-control" placeholder="ex: 200122521/2150-3" required="required" value="">
+                                                                      <input type="text" name="vendedor_cpf" class="form-control" placeholder="ex: 200122521893" required="required" value="">
+                                                                      <div class="help-block with-errors"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--/span-->
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label class="control-label col-md-3">E-mail</label>
+                                                                    <div class="col-md-9">
+                                                                        <input type="text" name="vendedor_email" class="form-control" placeholder="ex: Tiago Silva" required="" value="">
+                                                                        <div class="help-block with-errors"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--/span-->
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label class="control-label col-md-3">Senha</label>
+                                                                    <div class="col-md-9">
+                                                                      <input type="text" name="vendedor_password" class="form-control" placeholder="Digite uma senha para o primeiro acesso" required="required" value="">
                                                                       <div class="help-block with-errors"></div>
                                                                     </div>
                                                                 </div>
@@ -73,7 +95,7 @@
                                                                 <div class="form-group">
                                                                     <label class="control-label col-md-3">Cidade</label>
                                                                     <div class="col-md-9">
-                                                                      <select name="city" class="form-control">
+                                                                      <select name="category" class="form-control">
                                                                       </select>
                                                                       <div class="help-block with-errors"></div>
                                                                     </div>
@@ -87,7 +109,7 @@
                                                                 <div class="form-group">
                                                                     <label class="control-label col-md-3">Estado</label>
                                                                     <div class="col-md-9">
-                                                                      <select name="state" class="form-control">
+                                                                      <select name="category" class="form-control">
                                                                       </select>
                                                                       <div class="help-block with-errors"></div>
                                                                     </div>
@@ -95,30 +117,31 @@
                                                             </div>
                                                         </div>
 
-                                                        <h3 class="form-section">Informações de Contato</h3>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label class="control-label col-md-3">Telefone</label>
-                                                                    <div class="col-md-9">
-                                                                        <input type="text" name="loja_tel" class="form-control" placeholder="ex: (0XX) XXXX-XXXX" required="" value="">
-                                                                        <div class="help-block with-errors"></div>
-                                                                    </div>
+                                                      <h3 class="form-section">Informações para Venda</h3>
+                                                      <div class="row">
+                                                          <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3">Loja vinculada</label>
+                                                                <div class="col-md-9">
+                                                                  <select name="loja_vinculada" class="form-control">
+                                                                  </select>
+                                                                  <div class="help-block with-errors"></div>
                                                                 </div>
                                                             </div>
-                                                            <!--/span-->
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label class="control-label col-md-3">E-mail</label>
-                                                                    <div class="col-md-9">
-                                                                      <input type="text" name="loja_email" class="form-control" placeholder="ex: contato@...." required="" value="">
-                                                                      <div class="help-block with-errors"></div>
-                                                                    </div>
+                                                          </div>
+                                                          <!--/span-->
+                                                          <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3">Tipo de Venda</label> <!-- Atacado,Varejo, Ambos-->
+                                                                <div class="col-md-9">
+                                                                  <select name="tipo_venda" class="form-control">
+                                                                  </select>
+                                                                  <div class="help-block with-errors"></div>
                                                                 </div>
                                                             </div>
-                                                            <!--/span-->
-                                                        </div>
-                                                        <!--/row-->
+                                                          </div>
+                                                          <!--/span-->
+                                                      </div>
 
                                                     </div>
                                                     <div class="form-actions">

@@ -22,4 +22,20 @@ class Equipe_controller extends CI_Controller {
         $this->load->view("_inc/footer");
     }
 
+    public function vendedor() {
+        $data = $this->user_info;
+        $this->load->view("_inc/header", $data);
+        $this->load->view("_inc/menu");
+        $this->load->view("cadastro_vendedor");
+        $this->load->view("_inc/footer");
+    }
+
+    public function administrador() {
+        $data = $this->user_info;
+        $this->load->view("_inc/header", $data);
+        $this->load->view("_inc/menu");
+        $this->load->view("cadastro_administrador");
+        $this->load->view("_inc/footer");
+    }
+
 }
