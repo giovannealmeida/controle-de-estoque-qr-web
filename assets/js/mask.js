@@ -22,7 +22,7 @@ $(document).ready(function () {
     $('.phone_us').mask('(000) 000-0000');
     $('.mixed').mask('AAA 000-S0S');
     $('.cpf').mask('999.999.999-99', {reverse: true});
-    $('.cnpj').mask('00.000.000/0000-00', {reverse: true});
+    $('.cnpj').mask('99.999.999/9999-99', {reverse: true});
     $(".money").inputmask('decimal', {
         'alias': 'numeric',
         'groupSeparator': ',',

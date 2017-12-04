@@ -11,7 +11,11 @@ class States_model extends CI_Model {
     public function get_all() {
         $query = $this->db->get('tb_states');
         if ($query->num_rows() > 0) {
-            return $query->result();
+            $result[NULL] = 'Selecione um estado';
+            foreach ($query->result() as $key => $value){
+                $result[$value->id] = $value->name;
+            }
+            return $result;
         } else {
             return null;
         }
