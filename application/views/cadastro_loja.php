@@ -92,7 +92,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">Estado</label>
                                                         <div class="col-md-9">
-                                                            <?php echo form_dropdown(array('class' => "form-control selectpicker", 'data-live-search' => "true", 'required' => "true", 'id' => "selectState",), $states, set_value('selectState')); ?>
+                                                            <?php echo form_dropdown(array('class' => "form-control selectpicker", 'data-live-search' => "true", 'required' => "true", 'id' => "selectState",), $states, set_value('city_id')); ?>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>

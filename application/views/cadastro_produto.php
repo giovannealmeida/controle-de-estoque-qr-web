@@ -2,6 +2,7 @@
 <link href="<?= base_url("assets/global/plugins/datatables/datatables.min.css") ?>" rel="stylesheet" type="text/css" />
 <link href="<?= base_url("assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css") ?>" rel="stylesheet" type="text/css" />
 <link href="<?= base_url("assets/global/plugins/fancybox/source/jquery.fancybox.css") ?>" rel="stylesheet" type="text/css" />
+<link href="../assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 
 <!-- BEGIN CONTENT -->
             <div class="page-content-wrapper">
@@ -92,7 +93,7 @@
                                                                 <div class="form-group">
                                                                     <label class="control-label col-md-3">Categoria</label>
                                                                     <div class="col-md-9">
-                                                                        <select name="category" class="form-control">
+                                                                        <select name="category" class="form-control selectpicker" data-live-search ="true">
                                                                             <?php foreach ($category as $value): ?>
                                                                             <option value="<?=$value->id ?>" <?= isset($product->category) && $product->category == $value->id  ? 'selected' : '' ?>><?= $value->description ?></option>
                                                                             <?php endforeach; ?>
@@ -276,4 +277,6 @@
 <script src="<?= base_url("assets/js/validator.js") ?>"  type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"  type="text/javascript"></script>
 <script src="<?= base_url('assets/js/mask.js') ?>"  type="text/javascript"></script>
+<script src="<?= base_url("assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js") ?>" type="text/javascript"></script>
+<script src="<?= base_url("assets/pages/scripts/components-bootstrap-select.min.js") ?>"  type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
