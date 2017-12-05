@@ -154,7 +154,7 @@
                     <li class="dropdown dropdown-user">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                             <img alt="" class="img-circle" src="<?= $user_profile->avatar != NULL ? base_url($user_profile->avatar) : base_url("assets/layouts/layout/img/avatar3_small.jpg") ?>" />
-                            <span class="username username-hide-on-mobile"> <?= $user_profile->name_fantasy ?> </span>
+                            <span class="username username-hide-on-mobile"> <?= $user_profile->name ?> </span>
                             <i class="fa fa-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">

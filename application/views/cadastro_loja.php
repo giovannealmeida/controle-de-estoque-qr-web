@@ -69,7 +69,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">Nome Fantasia</label>
                                                         <div class="col-md-9">
-                                                            <input type="text" name="fantasy_name" class="form-control" placeholder="ex: Site RootSilver" required="required" value="">
+                                                            <?= form_input('fantasy_name', set_value('fantasy_name'), array('class' => 'form-control', 'placeholder' => 'ex: Site RootSilver', 'required' => 'required')); ?>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
@@ -79,7 +79,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">CNPJ</label>
                                                         <div class="col-md-9">
-                                                            <input type="text" name="cnpj" class="form-control cnpj" placeholder="ex: 200122521/2150-3" required="required" value="">
+                                                            <?= form_input('cnpj', set_value('cnpj'), array('class' => 'form-control cnpj', 'placeholder' => 'ex: 200122521/2150-3', 'required' => 'required')); ?>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
@@ -92,7 +92,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">Estado</label>
                                                         <div class="col-md-9">
-                                                            <?php echo form_dropdown(array('class' => "form-control selectpicker", 'data-live-search' => "true", 'required' => "true", 'id' => "selectState",), $states, set_value('city_id')); ?>
+                                                            <?= form_dropdown(array('class' => "form-control selectpicker", 'data-live-search' => "true", 'required' => "true", 'id' => "selectState",), $states, set_value('city_id')); ?>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
@@ -104,7 +104,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">Cidade</label>
                                                         <div class="col-md-9">
-                                                            <?php echo form_dropdown(array('class' => "form-control selectpicker", 'data-live-search' => "true", 'data-width' => "100%", 'required' => "true", 'name' => "city_id", 'id' => "selectCity",), $cities, set_value('selectCity')); ?>
+                                                            <?= form_dropdown(array('class' => "form-control selectpicker", 'data-live-search' => "true", 'data-width' => "100%", 'required' => "true", 'name' => "city_id", 'id' => "selectCity",), $cities, set_value('selectCity')); ?>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
@@ -118,7 +118,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">Telefone</label>
                                                         <div class="col-md-9">
-                                                            <input type="text" name="phone" class="form-control phone" placeholder="ex: (0XX) XXXX-XXXX" value="">
+                                                            <?= form_input('phone', set_value('phone'), array('class' => 'form-control phone', 'placeholder' => 'ex: (0XX) XXXX-XXXX')); ?>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
@@ -128,7 +128,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">E-mail</label>
                                                         <div class="col-md-9">
-                                                            <input type="text" name="email" class="form-control" placeholder="ex: contato@...." value="">
+                                                            <?= form_input(array('name' => 'email', 'class' => 'form-control', 'id' => 'email', 'type' => 'email', 'placeholder' => 'ex: contato@....'), set_value('email')); ?>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>

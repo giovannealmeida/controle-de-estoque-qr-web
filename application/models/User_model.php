@@ -57,7 +57,6 @@ class User_model extends CI_Model {
 
     public function get_access($email, $password) {
         $this->db->where("level_id", 2);
-        $this->db->or_where("level_id", 3);
         $result = $this->db->get_where('tb_users', array('email' => $email));
         if ($result->num_rows() > 0) {
             $user = $result->result()[0];
@@ -155,8 +154,12 @@ class User_model extends CI_Model {
         $this->db->insert('tb_users', $data);
         $user_id = $this->db->insert_id();
         if ($this->db->affected_rows() == 1) {
-            $this->create_key($user_id);
-            return $this->get_access($data['email'], $password);
+            if ($data['level_id'] != 1) {
+                $this->create_key($user_id);
+                return $this->get_access($data['email'], $password);
+            } else {
+                return TRUE;
+            }
         }
 
         return null;
@@ -333,6 +336,17 @@ class User_model extends CI_Model {
         $this->db->where_in("ci.id", $cities);
         $this->db->where("level_id", 4);
         return $this->db->get("tb_users u")->result();
+    }
+
+    public function get_all_genders() {
+        $query = $this->db->get('tb_genders');
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $value) {
+                $result[$value->id] = $value->name;
+            }
+            return $result;
+        }
+        return NULL;
     }
 
 }

@@ -69,7 +69,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">Nome Completo</label>
                                                         <div class="col-md-9">
-                                                            <input type="text" name="name" class="form-control" placeholder="ex: Tiago Silva" required="required" value="">
+                                                            <?= form_input('name', set_value('name'), array('class' => 'form-control', 'placeholder' => 'ex: Tiago Silva', 'required' => 'required')); ?>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
@@ -79,7 +79,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">CPF</label>
                                                         <div class="col-md-9">
-                                                            <input type="text" name="cpf" class="form-control cpf" placeholder="ex: 200122521893" required="required" value="">
+                                                            <?= form_input('cpf', set_value('cpf'), array('class' => 'form-control cpf', 'placeholder' => 'ex: 200122521893', 'required' => 'required')); ?>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
@@ -91,7 +91,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">E-mail</label>
                                                         <div class="col-md-9">
-                                                            <input type="text" name="vendedor_email" class="form-control" placeholder="ex: Tiago Silva" value="">
+                                                           <?= form_input(array('name' => 'email', 'class' => 'form-control', 'id' => 'email', 'type' => 'email', 'placeholder' => 'ex: contato@....', 'required' => 'required'), set_value('email')); ?>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
@@ -101,7 +101,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">Senha</label>
                                                         <div class="col-md-9">
-                                                            <input type="text" name="password" class="form-control" placeholder="Digite uma senha para o primeiro acesso" required="required" value="">
+                                                            <?= form_password(array("name" => "password", "class" => "form-control", "placeholder" => "Digite uma senha para o primeiro acesso", "required" => "required")); ?>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
@@ -119,9 +119,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>  
-                                            <!--/row-->
-                                            <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">Cidade</label>
@@ -131,7 +128,27 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
+                                            </div>  
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3">Data de nascimento</label>
+                                                        <div class="col-md-9">
+                                                            <?= form_input(array('name' => 'birthday', 'class' => 'form-control', 'id' => 'birthday', 'type' => 'date', 'required' => 'true'), set_value('birthday')); ?>
+                                                            <div class="help-block with-errors"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3">Gênero</label>
+                                                        <div class="col-md-9">
+                                                            <?php echo form_dropdown(array('class' => "form-control selectpicker", 'data-live-search' => "true", 'data-width' => "100%", 'required' => "true", 'name' => "gender_id", 'id' => "gender_id"), $genders, set_value('gender_id')); ?>
+                                                            <div class="help-block with-errors"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>                                                  
                                         </div>
                                         <div class="form-actions">
