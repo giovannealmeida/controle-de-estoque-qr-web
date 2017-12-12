@@ -18,7 +18,7 @@ class Stock_model extends CI_Model {
         }
     }
 
-    public function get_products(){
+    public function get_products() {
         $this->db->select('p.id, p.code, p.product_name, p.description, p.quantity_in_stock, p.wholesale_value, p.retail_value, s.status');
         $this->db->join('tb_status s', 'p.status = s.id');
         $query = $this->db->get('tb_products p');
@@ -37,7 +37,7 @@ class Stock_model extends CI_Model {
         return false;
     }
 
-    public function get_last_product_record(){
+    public function get_last_product_record() {
         $this->db->select('p.id, p.product_name, p.description, p.quantity_in_stock, p.wholesale_value, p.retail_value, c.description as category');
         $this->db->order_by("p.id", "desc");
         $this->db->limit(1);
@@ -50,7 +50,7 @@ class Stock_model extends CI_Model {
         }
     }
 
-    public function verify_code($code){
+    public function verify_code($code) {
         $this->db->where('code', $code);
         $query = $this->db->get('tb_products');
         if ($query->num_rows() > 0) {
@@ -60,7 +60,7 @@ class Stock_model extends CI_Model {
         }
     }
 
-    public function get_product_by_id($id){
+    public function get_product_by_id($id) {
         $this->db->where('id', $id);
         $query = $this->db->get('tb_products p');
         if ($query->num_rows() > 0) {
@@ -70,7 +70,7 @@ class Stock_model extends CI_Model {
         }
     }
 
-    public function update_product($data, $id){
+    public function update_product($data, $id) {
         $this->db->where('id', $id);
         $this->db->update('tb_products', $data);
 
@@ -78,6 +78,17 @@ class Stock_model extends CI_Model {
             return true;
         }
         return false;
+    }
+
+    public function get_products_select() {
+        $query = $this->db->get('tb_products');
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $value) {
+                $result[$value->id] = $value->code . ' - ' . $value->product_name;
+            }
+            return $result;
+        }
+        return NULL;
     }
 
 }

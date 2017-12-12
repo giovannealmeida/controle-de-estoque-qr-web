@@ -13,7 +13,7 @@
         <div class="page-bar">
             <ul class="page-breadcrumb">
                 <li>
-                    <a href="index.html">Cadastro de Loja</a>
+                    <a href="#">Cadastro de Loja</a>
                     <i class="fa fa-circle"></i>
                 </li>
             </ul>
@@ -157,11 +157,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">Loja vinculada</label>
                                                         <div class="col-md-9">
-                                                            <select name="store_id" class="form-control selectpicker" required="required" data-live-search="true">
-                                                                <?php foreach ($stores as $store): ?>
-                                                                    <option value="<?= $store->id ?>"><?= $store->cnpj . ' - ' . $store->fantasy_name ?></option>
-                                                                <?php endforeach; ?>
-                                                            </select>
+                                                             <?php echo form_dropdown(array('class' => "form-control selectpicker", 'data-live-search' => 'true', 'data-width' => "100%", 'required' => "true", 'name' => "store_id", 'id' => "store_id",), $stores, set_value('store_id')); ?>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>

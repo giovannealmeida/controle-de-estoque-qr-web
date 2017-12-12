@@ -61,7 +61,7 @@ class Estoque_controller extends CI_Controller {
         $data['last'] = $this->Stock_model->get_last_product_record();
         $this->load->view("_inc/header", $data);
         $this->load->view("_inc/menu");
-        $this->load->view("cadastro_produto");
+        $this->load->view("estoque/cadastro_produto");
         $this->load->view("_inc/footer");
     }
 
@@ -72,7 +72,7 @@ class Estoque_controller extends CI_Controller {
         $data['products'] = $this->Stock_model->get_products();
         $this->load->view("_inc/header", $data);
         $this->load->view("_inc/menu");
-        $this->load->view("visualizar_produto");
+        $this->load->view("estoque/visualizar_produto");
         $this->load->view("_inc/footer");
     }
 
@@ -108,7 +108,7 @@ class Estoque_controller extends CI_Controller {
         $data['last'] = $this->Stock_model->get_last_product_record();
         $this->load->view("_inc/header", $data);
         $this->load->view("_inc/menu");
-        $this->load->view("cadastro_produto");
+        $this->load->view("estoque/cadastro_produto");
         $this->load->view("_inc/footer");
     }
 

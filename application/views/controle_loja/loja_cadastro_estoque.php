@@ -3,6 +3,7 @@
 <!--PAGE LEVELS PLUGINS-->
 <link href="<?= base_url('/assets/global/plugins/datatables/datatables.min.css'); ?>" rel="stylesheet" type="text/css" />
 <link href="<?= base_url('/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css'); ?>" rel="stylesheet" type="text/css" />
+<link href="../assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 
 <!-- BEGIN CONTENT -->
 <div class="page-content-wrapper">
@@ -39,7 +40,25 @@
                                 </div>
                                 <div class="portlet-body form">
                                     <!-- BEGIN FORM-->
-                                    <form action="" class="form-horizontal" method="post" data-toggle ="validator">
+                                    <form action="<?= base_url('Lojas_controller/cadastro') ?>" class="form-horizontal" method="post" data-toggle ="validator">
+                                        <?php if (validation_errors()): ?>
+                                            <br/>
+                                            <div class="alert alert-danger">
+                                                <strong>Erros no formulário!</strong><br/>
+                                                <br/>
+                                                <?php echo validation_errors(); ?>
+                                            </div>
+                                        <?php elseif ($this->session->flashdata("success")): ?>
+                                            <br/>
+                                            <div class="alert alert-success">
+                                                <strong><?= $this->session->flashdata("success"); ?></strong><br/>
+                                            </div>
+                                        <?php elseif ($this->session->flashdata("fail")): ?>
+                                            <br/>
+                                            <div class="alert alert-danger">
+                                                <strong><?= $this->session->flashdata("fail"); ?></strong><br/>
+                                            </div>
+                                        <?php endif; ?>
                                         <div class="form-body">
                                             <!--/row-->
                                             <div class="row">
@@ -47,10 +66,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">Selecione a Loja</label>
                                                         <div class="col-md-9">
-                                                          <select class="form-control">   <!-- Select com pesquisa -->
-                                                                <option value="">loja  1</option>
-                                                                <option value="">loja 2</option>
-                                                            </select>
+                                                            <?php echo form_dropdown(array('class' => "form-control selectpicker", 'data-live-search' => 'true', 'data-width' => "100%", 'required' => "true", 'name' => "store_id", 'id' => "store_id",), $stores, set_value('store_id')); ?>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
@@ -61,10 +77,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">Produto</label>
                                                         <div class="col-md-9">
-                                                          <select class="form-control">   <!-- Select com pesquisa -->
-                                                                <option value="">prod 1</option>
-                                                                <option value="">Prod 2</option>
-                                                            </select>
+                                                            <?php echo form_dropdown(array('class' => "form-control selectpicker", 'data-live-search' => 'true', 'data-width' => "100%", 'required' => "true", 'name' => "product_id", 'id' => "product_id",), $products, set_value('product_id')); ?>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
@@ -73,7 +86,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">Quantidade</label> <!-- EXIBIR MENSAGEM DE ERRO SE A QUANTIDADE ULTRAPASSAR A DO ESTOQUE GERAL-->
                                                         <div class="col-md-5">
-                                                            <input type="text" id="qtde" class="form-control" placeholder="Digite a quantidade do produto">
+                                                            <?= form_input(array('name' => 'amount', 'class' => 'form-control', 'id' => 'amount', 'type' => 'number', 'placeholder' => 'Digite a quantidade do produto', 'required' => 'required'), set_value('amount')); ?>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
@@ -110,48 +123,41 @@
             <div class="col-md-12">
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet light bordered">
-                                <div class="portlet-body">
-                                  <table class="table table-striped table-bordered table-hover sample_1">
-                                      <thead>
-                                      <tr>
-                                        <th>
-                                            Loja
-                                        </th>
-                                          <th>
-                                              Código do Produto
-                                          </th>
-                                          <th>
-                                              Nome
-                                          </th>
-                                          <th>
-                                              Quantidade
-                                          </th>
-                                          <th>
-                                              Status
-                                          </th>
-                                          <th>
-                                              Ações
-                                          </th>
-                                      </tr>
-                                      </thead>
-                                      <!--<?php if(count($products) > 0): ?>
-                                      <?php foreach ($products as $value): ?>
-                                          <td tabindex="0" class="sorting_1"> <?= $value->code ?> </td>
-                                          <td> <?= $value->product_name ?> </td>
-                                          <td> <?= $value->quantity_in_stock ?> </td>
-                                          <td> <span class="label label-sm label-success"> <?= $value->status ?> </span> </td>
-                                          <td>
-                                              <div class="margin-bottom-5">
-                                                  <a type="button" href="<?= base_url('Estoque_controller/editar?id=' . $value->id)?>" class="btn green">
-                                                      <i class="fa fa-pencil"></i> Editar</a>
-                                              </div>
-                                          </td>
-                                          </tr>
-                                      <?php endforeach;?>
-                                    <?php endif; ?> -->
-                                  </table>
-                                </div>
-                            </div>
+                    <div class="portlet-body">
+                        <table class="table table-striped table-bordered table-hover sample_1">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Loja
+                                    </th>
+                                    <th>
+                                        Código do Produto
+                                    </th>
+                                    <th>
+                                        Nome
+                                    </th>
+                                    <th>
+                                        Quantidade
+                                    </th>
+                                    <th>
+                                        Data
+                                    </th>
+                                </tr>
+                            </thead>
+                            <?php if (count($records) > 0): ?>
+                                <?php foreach ($records as $value): ?>
+                                    <tr>
+                                        <td tabindex="0" class="sorting_1"> <?= $value->cnpj . ' - ' . $value->fantasy_name ?> </td>
+                                        <td> <?= $value->code ?> </td>
+                                        <td> <?= $value->product_name ?> </td>
+                                        <td> <?= $value->amount ?> </td>
+                                        <td> <?= $value->date_send ?> </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- END CONTENT BODY -->
@@ -161,10 +167,13 @@
 <!-- END CONTAINER -->
 <!-- BEGIN CORE PLUGINS -->
 <!-- <script src="<?= base_url('/assets/global/plugins/jquery.min.js'); ?>" type="text/javascript"></script> -->
+<script src="<?= base_url("assets/js/validator.js") ?>"  type="text/javascript"></script>
 <script src="<?= base_url('/assets/global/scripts/datatable.js'); ?>" type="text/javascript"></script>
 <script src="<?= base_url('/assets/global/plugins/datatables/datatables.min.js'); ?>" type="text/javascript"></script>
 <script src="<?= base_url('/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js'); ?>" type="text/javascript"></script>
 <script src="<?= base_url('/assets/pages/scripts/table-datatables-buttons.min.js'); ?>" type="text/javascript"></script>
+<script src="<?= base_url("assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js") ?>" type="text/javascript"></script>
+<script src="<?= base_url("assets/pages/scripts/components-bootstrap-select.min.js") ?>"  type="text/javascript"></script>
 
 <!-- END CONTAINER -->
 <!-- END THEME LAYOUT SCRIPTS -->
