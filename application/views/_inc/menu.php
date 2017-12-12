@@ -104,7 +104,7 @@
                     </a>
                     <ul class="sub-menu">
                         <li class="nav-item  ">
-                            <a href="<?= base_url("client_controller/new_client") ?>" class="nav-link ">
+                            <a href="<?= base_url("Lojas_controller/cadastro") ?>" class="nav-link ">
                                 <span class="title">Cadastro de Estoque</span>
                             </a>
                         </li>
