@@ -180,7 +180,7 @@ Parâmetro: id
 Retorno: se não existir retorna null, se existir retorna id, avatar, name, email, password, birthday, gender_id, cpf, phone e level_id
 
 
-## Produtos [GET /api/User_controller]
+## Produtos [GET /api/Estoque_controller]
 
 Retorna informações do produto pelo código
 
@@ -205,4 +205,29 @@ Retorno:
         "status": "Estoque"
     }
 ]
+```
+
+
+## Clientes [POST /api/Cliente_controller]
+
+cadastra um novo Cliente
+
+Parâmetros:
+
+* ```"name"```Nome completo do cliente (obrigatório)
+* ```"email"```Email do cliente (Opcional)
+* ```"gender_id"```Id do gênero do cliente (obrigatório)
+* ```"gender_id"```Id do gênero do cliente (obrigatório)
+* ```"phone"```Telefone do cliente (obrigatório)
+* ```"ciyt_id"```Id da cidade do cliente (obrigatório)
+
+Retorno:
+
+* Objeto
+
+``` json
+{
+    "status": true,
+    "message": "Customer successfully registered"
+}
 ```
