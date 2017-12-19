@@ -17,16 +17,16 @@ class Estoque_controller extends CI_Controller {
     public function cadastro() {
         $this->load->library('form_validation');
         $this->load->model('Util_model');
-        /*$params = array('value' => '123456',
-            'into' => 0,
-            'filename' => 'barcode.gif',
-            'width_bar' => 73,
-            'height_bar' => 60,
-            'show_codebar' => true);
-        $this->load->library('barCodeGenrator', $params);*/
+        /* $params = array('value' => '123456',
+          'into' => 0,
+          'filename' => 'barcode.gif',
+          'width_bar' => 73,
+          'height_bar' => 60,
+          'show_codebar' => true);
+          $this->load->library('barCodeGenrator', $params); */
         $data = $this->user_info;
         $this->load->model('Stock_model');
-        if($this->input->post()){
+        if ($this->input->post()) {
             $this->form_validation->set_rules('product_name', 'Nome do produto', 'required');
             $this->form_validation->set_rules('category', 'Categoria', 'required');
             $this->form_validation->set_rules('description', 'Descrição', 'required');
@@ -37,7 +37,7 @@ class Estoque_controller extends CI_Controller {
 
             if ($this->form_validation->run() == true) {
                 $data_insert['code'] = $this->Util_model->generateRandomString(13, '1234567890');
-                while ($this->Stock_model->verify_code($data_insert['code']) == true){
+                while ($this->Stock_model->verify_code($data_insert['code']) == true) {
                     $data_insert['code'] = $this->Util_model->generateRandomString(13, '1234567890');
                 }
                 $data_insert['product_name'] = $this->input->post('product_name');
@@ -48,10 +48,10 @@ class Estoque_controller extends CI_Controller {
                 $data_insert['retail_value'] = $this->input->post('retail_value');
                 $data_insert['status'] = 1;
                 $insert = $this->Stock_model->insert_product($data_insert);
-                if($insert){
+                if ($insert) {
                     $this->session->set_flashdata('success', 'Produto cadastrado com sucesso!');
                     redirect('Estoque_controller/cadastro');
-                }else{
+                } else {
                     $this->session->set_flashdata('fail', 'Não foi possível cadastrar');
                     redirect('Estoque_controller/cadastro');
                 }
@@ -76,13 +76,13 @@ class Estoque_controller extends CI_Controller {
         $this->load->view("_inc/footer");
     }
 
-    public function editar(){
+    public function editar() {
         $this->load->library('form_validation');
         $this->load->model('Stock_model');
         $data = $this->user_info;
         $id = $this->input->get_post('id');
 
-        if($this->input->post()){
+        if ($this->input->post()) {
             $this->form_validation->set_rules('product_name', 'Nome do produto', 'required');
             $this->form_validation->set_rules('category', 'Categoria', 'required');
             $this->form_validation->set_rules('description', 'Descrição', 'required');
@@ -93,10 +93,10 @@ class Estoque_controller extends CI_Controller {
 
             if ($this->form_validation->run() == true) {
                 $update = $this->Stock_model->update_product($this->input->post(), $this->input->get_post('id'));
-                if($update){
+                if ($update) {
                     $this->session->set_flashdata('success', 'Produto atualizado com sucesso!');
                     redirect('Estoque_controller/editar?id=' . $this->input->get_post('id'));
-                }else{
+                } else {
                     $this->session->set_flashdata('fail', 'Não foi possível atualizar');
                     redirect('Estoque_controller/editar?id=' . $this->input->get_post('id'));
                 }
@@ -110,6 +110,19 @@ class Estoque_controller extends CI_Controller {
         $this->load->view("_inc/menu");
         $this->load->view("estoque/cadastro_produto");
         $this->load->view("_inc/footer");
+    }
+
+    public function excluir() {
+        $this->load->model('Stock_model');
+        $id = $this->input->get_post('id');
+        $delete = $this->Stock_model->delete_product($id);
+        if ($delete) {
+            $this->session->set_flashdata('success', 'Produto excluído com sucesso!');
+            redirect('Estoque_controller/visualizar');
+        } else {
+            $this->session->set_flashdata('fail', 'Não foi possível excluir');
+            redirect('Estoque_controller/visualizar');
+        }
     }
 
 }

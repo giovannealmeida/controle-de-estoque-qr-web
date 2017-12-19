@@ -18,9 +18,14 @@ class Stock_model extends CI_Model {
         }
     }
 
-    public function get_products() {
+    public function get_products($code = null) {
         $this->db->select('p.id, p.code, p.product_name, p.description, p.quantity_in_stock, p.wholesale_value, p.retail_value, s.status');
         $this->db->join('tb_status s', 'p.status = s.id');
+
+        if ($code != null) {
+            $this->db->where('code', $code);
+        }
+        
         $query = $this->db->get('tb_products p');
         if ($query->num_rows() > 0) {
             return $query->result();
@@ -73,6 +78,16 @@ class Stock_model extends CI_Model {
     public function update_product($data, $id) {
         $this->db->where('id', $id);
         $this->db->update('tb_products', $data);
+
+        if ($this->db->affected_rows() == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    public function delete_product($id) {
+        $this->db->where('id', $id);
+        $this->db->delete('tb_products');
 
         if ($this->db->affected_rows() == 1) {
             return true;
