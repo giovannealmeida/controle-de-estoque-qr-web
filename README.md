@@ -179,14 +179,20 @@ URL: base_url + /api/User_controller
 Parâmetro: id
 Retorno: se não existir retorna null, se existir retorna id, avatar, name, email, password, birthday, gender_id, cpf, phone e level_id
 
- - Obter produtos
 
-Descrição: Recuperar dados do produto
-Método: GET
-URL: base_url + /api/Estoque_controller
-Parâmetro: code
+## Produtos [GET /api/User_controller]
+
+Retorna informações do produto pelo código
+
+Parâmetros:
+
+* ```"code"``` para busca de produtos pelo código
+
 Retorno:
 
+* Array
+
+``` json
 [
     {
         "id": "12",
@@ -199,3 +205,4 @@ Retorno:
         "status": "Estoque"
     }
 ]
+```
