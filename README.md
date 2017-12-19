@@ -179,3 +179,23 @@ URL: base_url + /api/User_controller
 Parâmetro: id
 Retorno: se não existir retorna null, se existir retorna id, avatar, name, email, password, birthday, gender_id, cpf, phone e level_id
 
+ - Obter produtos
+
+Descrição: Recuperar dados do produto
+Método: GET
+URL: base_url + /api/Estoque_controller
+Parâmetro: code
+Retorno:
+
+[
+    {
+        "id": "12",
+        "code": "2147483647",
+        "product_name": "Brinco top ",
+        "description": "Brinco de perola brilhante",
+        "quantity_in_stock": "59",
+        "wholesale_value": "R$ 120.00",
+        "retail_value": "R$ 150.00",
+        "status": "Estoque"
+    }
+]
