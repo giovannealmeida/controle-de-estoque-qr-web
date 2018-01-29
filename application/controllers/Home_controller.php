@@ -15,9 +15,9 @@ class Home_controller extends CI_Controller {
     }
 
     public function index() {
-
+        $this->load->model('Stock_model');
         $data = $this->user_info;
-        //print_r($data);die;
+        $data['stock'] = $this->Stock_model->get_products();
         $this->load->view("_inc/header", $data);
         $this->load->view("_inc/menu");
         $this->load->view("dashboard");

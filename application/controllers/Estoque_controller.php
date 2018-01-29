@@ -46,6 +46,7 @@ class Estoque_controller extends CI_Controller {
                 $data_insert['category'] = $this->input->post('category');
                 $data_insert['wholesale_value'] = $this->input->post('wholesale_value');
                 $data_insert['retail_value'] = $this->input->post('retail_value');
+                $data_insert['weight'] = $this->input->post('weight');
                 $data_insert['status'] = 1;
                 $insert = $this->Stock_model->insert_product($data_insert);
                 if ($insert) {

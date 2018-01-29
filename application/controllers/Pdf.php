@@ -14,12 +14,7 @@ class Pdf extends CI_Controller {
         $this->load->library('mpdf60/mpdf.php');
         ob_start(); // inicia o buffer
 
-        $mpdf = new mPDF ();
-        //$mpdf->SetDefaultFontSize(100);
-        //$mpdf->SetMargins(5, 5, 5);
-        $mpdf->allow_charset_conversion = true;
-        $mpdf->charset_in = 'UTF-8';
-        $mpdf->margin_bottom_collapse = true;
+        $mpdf = new mPDF ('utf-8', 'Letter', 0, '', -1, 0, 9, 0, 0, 0);
 
         $description = $this->load->view('description', null, true);
         $mpdf->WriteHTML($description);

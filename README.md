@@ -220,6 +220,7 @@ Parâmetros:
 * ```"gender_id"```Id do gênero do cliente (obrigatório)
 * ```"phone"```Telefone do cliente (obrigatório)
 * ```"ciyt_id"```Id da cidade do cliente (obrigatório)
+* ```"cpf"```Cpf do cliente (obrigatório)
 
 Retorno:
 
@@ -229,5 +230,32 @@ Retorno:
 {
     "status": true,
     "message": "Customer successfully registered"
+}
+```
+
+## Clientes [GET /api/Cliente_controller/client_exists]
+
+Verifica se o cliente já foi cadastrado
+
+Parâmetros:
+
+* ```"cpf"```Nome completo do cliente (obrigatório)
+Retorno:
+
+* Objeto
+
+``` json
+{
+    "status": true,
+    "message": "Customer already registered"
+}
+```
+
+ou
+
+``` json
+{
+    "status": false,
+    "message": "Customer not yet registered"
 }
 ```

@@ -42,7 +42,7 @@
                         <i class="fa fa-cubes"></i>
                     </div>
                     <div class="details">
-                        <div class="number"> 1,127,390 </div>
+                        <div class="number"><?= count($stock) ?></div>
                         <div class="desc"> Produtos em Estoque </div>
                     </div>
                     <a class="more" href="javascript:;"> Veja mais

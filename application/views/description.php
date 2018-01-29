@@ -1,48 +1,48 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <?php for ($i = 0; $i < 1; $i++): ?>
-
+        <?php for ($i = 0; $i < 63; $i++): ?>
             <?php if ($i == 0): ?>
-                <img id="imagem" src="<?= base_url('assets/img/etiqueta.jpg'); ?>"/>
-                <?php $left = 60 ?>
-                <?php $top = 50 ?>
-                <?php $left_code = 55.7 ?>
-                <?php $top_code = 100 ?>
+                <?php $left = 15 ?>
+                <?php $top = 30 ?>
+                <?php $left_code = 4 ?>
+                <?php $top_code = 90 ?>
                 <div style="position: absolute;top: <?= $top . "px" ?>;left:<?= $left . "px" ?>;right: 0;bottom: 0;margin: auto;"><p>Colar Discos Entrelaçados</p><p>R$ 50,00</p></div>
-                <div style="position: absolute;top: <?= $top_code . "px" ?>;left:<?= $left_code . "px" ?>;right: 0;bottom: 0;margin: auto;"><img style="width: 2.8cm; height: 1cm" src="<?= base_url('assets/img/cadastro.gif'); ?>"></div>
-            <?php elseif ($i % 6 == 0 && $i > 5 && $i % 66 != 0): ?>
-                <img id="imagem" src="<?= base_url('assets/img/etiqueta2.jpg'); ?>"/>
-                <?php $left = 60 ?>
-                <?php $top += 89.7; ?>
-                <?php $left_code = 55.7 ?>
-                <?php $top_code += 89.2; ?>
+                <div style="position: absolute;top: <?= $top_code . "px" ?>;left:<?= $left_code . "px" ?>;right: 0;bottom: 0;margin: auto;"><img id="code" src="<?= base_url('assets/img/cadastro.gif'); ?>"></div>
+            <?php elseif ($i % 7 == 0 && $i > 5 && $i % 66 != 0): ?>
+                <?php $left = 15 ?>
+                <?php $top += 113; ?>
+                <?php $left_code = 4 ?>
+                <?php $top_code += 113; ?>
                 <div style="position: absolute;top: <?= $top . "px" ?>;left:<?= $left . "px" ?>;right: 0;bottom: 0;margin: auto;"><p>Colar Discos Entrelaçados</p><p>R$ 50,00</p></div>
-                <div style="position: absolute;top: <?= $top_code . "px" ?>;left:<?= $left_code . "px" ?>;right: 0;bottom: 0;margin: auto;"><img style="width: 2.8cm; height: 1cm" src="<?= base_url('assets/img/cadastro.gif'); ?>"></div>
+                <div style="position: absolute;top: <?= $top_code . "px" ?>;left:<?= $left_code . "px" ?>;right: 0;bottom: 0;margin: auto;"><img id="code" src="<?= base_url('assets/img/cadastro.gif'); ?>"></div>
             <?php elseif ($i % 66 == 0): ?>
             <pagebreak></pagebreak>
-            <img id="imagem" src="<?= base_url('assets/img/etiqueta2.jpg'); ?>"/>
-            <?php $left = 60 ?>
-            <?php $top = 50 ?>
-            <?php $left_code = 55.7 ?>
-            <?php $top_code = 100 ?>
+            <?php $left = 15 ?>
+                <?php $top = 30 ?>
+                <?php $left_code = 4 ?>
+                <?php $top_code = 90 ?>
             <div style="position: absolute;top: <?= $top . "px" ?>;left:<?= $left . "px" ?>;right: 0;bottom: 0;margin: auto;"><p>Colar Discos Entrelaçados</p><p>R$ 50,00</p></div>
-            <div style="position: absolute;top: <?= $top_code . "px" ?>;left:<?= $left_code . "px" ?>;right: 0;bottom: 0;margin: auto;"><img style="width: 2.8cm; height: 1cm" src="<?= base_url('assets/img/cadastro.gif'); ?>"></div>
+            <div style="position: absolute;top: <?= $top_code . "px" ?>;left:<?= $left_code . "px" ?>;right: 0;bottom: 0;margin: auto;"><img id="code" src="<?= base_url('assets/img/cadastro.gif'); ?>"></div>
         <?php else: ?>
-            <img id="imagem" src="<?= base_url('assets/img/etiqueta2.jpg'); ?>"/>
-            <?php $left += 112.7; ?>
-            <?php $left_code += 112.7; ?>
+            <?php $left += 108.9; ?>
+            <?php $left_code += 108.9; ?>
             <div style="position: absolute;top: <?= $top . "px" ?>;left:<?= $left . "px" ?>;right: 0;bottom: 0;margin: auto;"><p>Colar Discos Entrelaçados</p><p>R$ 50,00</p></div>
-            <div style="position: absolute;top: <?= $top_code . "px" ?>;left:<?= $left_code . "px" ?>;right: 0;bottom: 0;margin: auto;"><img  style="width: 2.8cm; height: 1cm" src="<?= base_url('assets/img/cadastro.gif'); ?>"></div>
+            <div style="position: absolute;top: <?= $top_code . "px" ?>;left:<?= $left_code . "px" ?>;right: 0;bottom: 0;margin: auto;"><img id="code" src="<?= base_url('assets/img/cadastro.gif'); ?>"></div>
         <?php endif; ?>
     <?php endfor; ?>
 </body>
 <style>
     #imagem {
-        width: 3.0cm;
-        height: 2.5cm;
-        padding-left: -5px;
-        padding-top: -10px;
+        width: 2.6cm;
+        height: 3.07cm;
+        margin-top: -2mm;
+        margin-left: 1.7mm;
+    }
+
+    #code {
+        width: 2.5cm;
+        height: 1.2cm;
     }
 
     p{

@@ -118,11 +118,6 @@
                                 <span class="title">Translado</span>
                             </a>
                         </li>
-                        <li class="nav-item  ">
-                            <a href="<?= base_url("client_controller/index") ?>" class="nav-link ">
-                                <span class="title">Baixa</span>
-                            </a>
-                        </li>
                     </ul>
                 </li>
                 <li class="nav-item  ">

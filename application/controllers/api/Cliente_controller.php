@@ -43,23 +43,40 @@ class Cliente_controller extends REST_Controller {
         $gender_id = $this->post('gender_id');
         $phone = $this->post('phone');
         $city_id = $this->post('city_id');
+        $cpf = $this->post('cpf');
 
-        if ($name && $gender_id && $phone && $city_id) {
+        if ($name && $gender_id && $phone && $city_id && $cpf) {
             $data = array(
                 'name' => $name,
                 'email' => $email,
                 'gender_id' => $gender_id,
                 'phone' => $phone,
-                'city_id' => $city_id
+                'city_id' => $city_id,
+                'cpf' => $cpf
             );
 
             $result = $this->Client_model->insert($data);
             if ($result) {
-               $this->response(array('status' => true, 'message' => 'Customer successfully registered'), REST_Controller::HTTP_OK);
+                $this->response(array('status' => true, 'message' => 'Customer successfully registered'), REST_Controller::HTTP_OK);
             } else {
                 $this->response(array('status' => false, 'message' => 'Could not register client'), REST_Controller::HTTP_OK);
             }
         } else {
+            $this->response(array('status' => false, 'message' => 'Params not found'), REST_Controller::HTTP_BAD_REQUEST);
+        }
+    }
+
+    public function client_exists_get() {
+        $this->load->model("Client_model");
+        $cpf = $this->get('cpf');
+        if ($cpf) {
+            $result = $this->Client_model->client_exists($cpf);
+            if ($result == true) {
+                $this->response(array('status' => true, 'message' => 'Customer already registered'), REST_Controller::HTTP_BAD_REQUEST);
+            } else {
+                $this->response(array('status' => false, 'message' => 'Customer not yet registered'), REST_Controller::HTTP_BAD_REQUEST);
+            }
+        }else{
             $this->response(array('status' => false, 'message' => 'Params not found'), REST_Controller::HTTP_BAD_REQUEST);
         }
     }

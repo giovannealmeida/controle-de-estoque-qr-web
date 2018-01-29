@@ -16,5 +16,15 @@ class Client_model extends CI_Model {
 
         return FALSE;
     }
-
+    
+    public function client_exists($cpf){
+        $this->db->where('cpf', $cpf);
+        $query = $this->db->get('tb_clients');
+        
+        if ($query->num_rows() == 1) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
