@@ -239,7 +239,7 @@ Verifica se o cliente já foi cadastrado
 
 Parâmetros:
 
-* ```"cpf"```Nome completo do cliente (obrigatório)
+* ```"cpf"```cpf do cliente (obrigatório)
 Retorno:
 
 * Objeto
