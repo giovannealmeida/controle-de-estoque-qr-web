@@ -64,6 +64,12 @@
                                         Quantidade
                                     </th>
                                     <th>
+                                        Valor varejo
+                                    </th>
+                                    <th>
+                                        Valor atacado
+                                    </th>
+                                    <th>
                                         Status
                                     </th>
                                     <th>
@@ -76,6 +82,8 @@
                                     <td tabindex="0" class="sorting_1"> <?= $value->code ?> </td>
                                     <td> <?= $value->product_name ?> </td>
                                     <td> <?= $value->quantity_in_stock ?> </td>
+                                    <td> <?= $value->retail_value ?> </td>
+                                    <td> <?= $value->wholesale_value ?> </td>
                                     <?php if ($value->quantity_in_stock > 10): ?>
                                         <td><span class="label label-sm label-success"> Em estoque </span> </td>
                                     <?php elseif ($value->quantity_in_stock > 0 && $value->quantity_in_stock <= 10): ?>
