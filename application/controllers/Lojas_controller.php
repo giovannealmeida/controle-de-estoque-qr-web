@@ -46,6 +46,7 @@ class Lojas_controller extends CI_Controller {
             }
         }
         $data['stores'] = $this->Team_model->get_stores_select();
+        $data['products_info'] = json_encode($this->Stock_model->get_products_info());
         $data['products'] = $this->Stock_model->get_products_select();
         $data['records'] = $this->Store_model->get_all_last();
         $this->load->view("_inc/header", $data);

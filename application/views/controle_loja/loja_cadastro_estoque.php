@@ -95,7 +95,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">Valor</label> <!-- EXIBIR MENSAGEM DE ERRO SE A QUANTIDADE ULTRAPASSAR A DO ESTOQUE GERAL-->
                                                         <div class="col-md-5">
-                                                            <input name="value" type="text" class="form-control money" placeholder="ex: 5,00" required="required">
+                                                            <?= form_input(array('name' => 'value', 'class' => 'form-control money', 'id' => 'value', 'type' => 'text', 'required' => 'required'), set_value('value')); ?>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
@@ -193,3 +193,14 @@
 
 <!-- END CONTAINER -->
 <!-- END THEME LAYOUT SCRIPTS -->
+<script>
+    var products_info = <?php print_r($products_info) ?>;
+    $("#value").val(products_info[$('select[name=product_id]').val()].value);
+    $("#amount").val(products_info[$('select[name=product_id]').val()].quantity);
+
+    $('#product_id').change(function (ev) {
+        $("#value").val(products_info[this.value].value);
+        $("#amount").val(products_info[this.value].quantity);
+        //$("#amount").val();
+    });
+</script>

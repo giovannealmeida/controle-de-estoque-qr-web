@@ -24,13 +24,29 @@ class Stock_model extends CI_Model {
         if ($code != null) {
             $this->db->where('code', $code);
         }
-        
+
         $query = $this->db->get('tb_products p');
         if ($query->num_rows() > 0) {
             return $query->result();
         } else {
             return null;
         }
+    }
+
+    public function get_products_info($code = null) {
+
+        if ($code != null) {
+            $this->db->where('code', $code);
+        }
+
+        $query = $this->db->get('tb_products p');
+        $products = array();
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $key => $value){
+                $products[$value->id] = array('quantity' => $value->quantity_in_stock, 'value' => $value->retail_value);
+            }
+        }
+        return $products;
     }
 
     public function insert_product($data) {
