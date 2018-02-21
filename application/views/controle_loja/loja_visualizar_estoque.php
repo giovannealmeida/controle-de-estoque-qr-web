@@ -27,14 +27,30 @@
         <h3 class="page-title"> Visualizar Estoque
             <small>para lojas credenciadas</small>
         </h3>
-        <h3 class="page-title"> Lista de produtos
-            <small>por loja</small>
-        </h3>
+
+        <?php if ($this->session->flashdata("success")): ?>
+            <br/>
+            <div class="alert alert-success">
+                <strong><?= $this->session->flashdata("success"); ?></strong><br/>
+            </div>
+        <?php elseif ($this->session->flashdata("fail")): ?>
+            <br/>
+            <div class="alert alert-danger">
+                <strong><?= $this->session->flashdata("fail"); ?></strong><br/>
+            </div>
+        <?php endif; ?>
         <!-- END PAGE HEADER-->
         <div class="row">
             <div class="col-md-12">
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption font-dark">
+                            <i class="icon-settings font-dark"></i>
+                            <span class="caption-subject bold uppercase">Lista de Produtos</span>
+                        </div>
+                        <div class="tools"> </div>
+                    </div>
                     <div class="portlet-body">
                         <table class="table table-striped table-bordered table-hover sample_1">
                             <thead>
@@ -59,6 +75,24 @@
                                     </th>
                                 </tr>
                             </thead>
+                            <?php if (count($records) > 0): ?>
+                                <?php foreach ($records as $value): ?>
+                                    <tr>
+                                        <td tabindex="0" class="sorting_1"> <?= $value->cnpj . ' - ' . $value->fantasy_name ?> </td>
+                                        <td> <?= $value->code ?> </td>
+                                        <td> <?= $value->product_name ?> </td>
+                                        <td> <?= $value->amount ?> </td>
+                                        <td> <?= $value->value ?> </td>
+                                        <td>
+                                            <div class="margin-bottom-5">
+                                                <a type="button" href="<?= base_url('Lojas_controller/editar?id=' . $value->id) ?>" class="btn green">
+                                                    <i class="fa fa-pencil"></i> Editar</a>
+                                                <a class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir? A quantidade de produtos irá voltar para o estoque geral')" href="<?= base_url('Lojas_controller/excluir?id=' . $value->id) ?>"><span class="glyphicon glyphicon-remove"></span> Remover</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </table>
                     </div>
                 </div>

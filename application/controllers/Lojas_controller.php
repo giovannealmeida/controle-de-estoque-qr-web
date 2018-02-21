@@ -26,21 +26,26 @@ class Lojas_controller extends CI_Controller {
             $this->form_validation->set_message('valid_amount', '');
             $this->form_validation->set_message('required', 'O campo %s é obrigatório');
             if ($this->form_validation->run() == true) {
-                $product = $this->Stock_model->get_product_by_id($this->input->post('product_id'));
-                $update = array('quantity_in_stock' => $product->quantity_in_stock - $this->input->post('amount'));
-                $this->Stock_model->update_product($update, $this->input->post('product_id'));
-                $insert_data['store_id'] = $this->input->post('store_id');
-                $insert_data['product_id'] = $this->input->post('product_id');
-                $insert_data['amount'] = $this->input->post('amount');
-                $insert_data['value'] = $this->input->post('value');
-                date_default_timezone_set('America/Sao_Paulo');
-                $date = date('Y-m-d H:i');
-                $insert_data['date_send'] = $date;
-                $insert = $this->Store_model->insert($insert_data);
-                if ($insert) {
-                    $this->session->set_flashdata('success', 'Produtos enviados com sucesso!');
+                $exist = $this->Store_model->check_association($this->input->post('product_id'), $this->input->post('store_id'));
+                if ($exist) {
+                    $this->session->set_flashdata('fail', 'O produto já foi encaminhado para loja, para alterar a quantidade ou o valor utilize o botão editar na aba controle de estoque/visualizar estoque');
                 } else {
-                    $this->session->set_flashdata('fail', 'Não foi possível enviar');
+                    $product = $this->Stock_model->get_product_by_id($this->input->post('product_id'));
+                    $update = array('quantity_in_stock' => $product->quantity_in_stock - $this->input->post('amount'));
+                    $this->Stock_model->update_product($update, $this->input->post('product_id'));
+                    $insert_data['store_id'] = $this->input->post('store_id');
+                    $insert_data['product_id'] = $this->input->post('product_id');
+                    $insert_data['amount'] = $this->input->post('amount');
+                    $insert_data['value'] = $this->input->post('value');
+                    date_default_timezone_set('America/Sao_Paulo');
+                    $date = date('Y-m-d H:i');
+                    $insert_data['date_send'] = $date;
+                    $insert = $this->Store_model->insert($insert_data);
+                    if ($insert) {
+                        $this->session->set_flashdata('success', 'Produtos enviados com sucesso!');
+                    } else {
+                        $this->session->set_flashdata('fail', 'Não foi possível enviar');
+                    }
                 }
                 redirect('Lojas_controller/cadastro');
             }
@@ -48,7 +53,41 @@ class Lojas_controller extends CI_Controller {
         $data['stores'] = $this->Team_model->get_stores_select();
         $data['products_info'] = json_encode($this->Stock_model->get_products_info());
         $data['products'] = $this->Stock_model->get_products_select();
-        $data['records'] = $this->Store_model->get_all_last();
+        $this->load->view("_inc/header", $data);
+        $this->load->view("_inc/menu");
+        $this->load->view("controle_loja/loja_cadastro_estoque");
+        $this->load->view("_inc/footer");
+    }
+
+    public function editar() {
+        $this->load->library('form_validation');
+        $data = $this->user_info;
+        $this->load->model('Team_model');
+        $this->load->model('Stock_model');
+        $this->load->model('Store_model');
+        $data['store_stock'] = $this->Store_model->get_association_by_id($this->input->get_post('id'));
+        if ($this->input->post()) {
+            $this->form_validation->set_rules('amount', 'Quantidade', 'required|callback_amount_check');
+            $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+            //$this->form_validation->set_message('valid_amount', '');
+            $this->form_validation->set_message('required', 'O campo %s é obrigatório');
+            if ($this->form_validation->run() == true) {
+                $update_data['amount'] = $this->input->post('amount');
+                $update_data['value'] = $this->input->post('value');
+                $update = $this->Store_model->update($update_data, $this->input->get_post('id'));
+                if ($update) {
+                    $product = $this->Stock_model->get_product_by_id($data['store_stock']->product_id);
+                    $update = array('quantity_in_stock' => ($data['store_stock']->amount - $update_data['amount']) + $product->quantity_in_stock);
+                    $this->Stock_model->update_product($update, $product->id);
+                    $this->session->set_flashdata('success', 'Estoque da loja atualizado com sucesso!');
+                } else {
+                    $this->session->set_flashdata('fail', 'Não foi possível atualizar o estoque da  loja');
+                }
+                redirect('Lojas_controller/editar?id=' . $this->input->get_post('id'));
+            }
+        }
+        $data['stores'] = $this->Team_model->get_stores_select();
+        $data['products'] = $this->Stock_model->get_products_select();
         $this->load->view("_inc/header", $data);
         $this->load->view("_inc/menu");
         $this->load->view("controle_loja/loja_cadastro_estoque");
@@ -56,9 +95,11 @@ class Lojas_controller extends CI_Controller {
     }
 
     public function visualizar() {
+        $this->load->model('Store_model');
+        $data['records'] = $this->Store_model->get_all();
         $this->load->view("_inc/header");
         $this->load->view("_inc/menu");
-        $this->load->view("controle_loja/loja_visualizar_estoque");
+        $this->load->view("controle_loja/loja_visualizar_estoque", $data);
         $this->load->view("_inc/footer");
     }
 
@@ -69,20 +110,49 @@ class Lojas_controller extends CI_Controller {
         $this->load->view("_inc/footer");
     }
 
-    public function excluir($id){
-
+    public function excluir() {
+        $this->load->model('Stock_model');
+        $this->load->model('Store_model');
+        $id = $this->input->get_post('id');
+        $association = $this->Store_model->get_association_by_id($id);
+        $product = $this->Stock_model->get_product_by_id($association->product_id);
+        $update = array('quantity_in_stock' => $association->amount + $product->quantity_in_stock);
+        $delete = $this->Store_model->delete($id);
+        if ($delete) {
+            $update = $this->Stock_model->update_product($update, $association->product_id);
+            $this->session->set_flashdata('success', 'Produto removido com sucesso!');
+            redirect('Lojas_controller/visualizar');
+        } else {
+            $this->session->set_flashdata('fail', 'Não foi possível remover');
+            redirect('Lojas_controller/visualizar');
+        }
     }
 
     public function amount_check($str) {
         $this->load->model('Stock_model');
-        $product = $this->Stock_model->get_product_by_id($this->input->post('product_id'));
-        if ($product->quantity_in_stock < $str) {
-            $this->form_validation->set_message('amount_check', 'Não há quantidade suficiente em estoque');
+        if ($this->input->post('product_id', TRUE) != FALSE) {
+            $product_id = $this->input->post('product_id');
+            $product = $this->Stock_model->get_product_by_id($product_id);
+            if ($product->quantity_in_stock < $str) {
+                $this->form_validation->set_message('amount_check', 'Não há quantidade suficiente em estoque');
 
-            return false;
+                return false;
+            }
+            return true;
+        } else {
+            $product_id = $this->Store_model->get_association_by_id($this->input->get_post('id'))->product_id;
+            $product = $this->Stock_model->get_product_by_id($product_id);
+            $store_stock = $this->Store_model->get_association_by_id($this->input->get_post('id'))->amount;
+            $var = $str - $store_stock;
+            if ($var > 0) {
+                if ($product->quantity_in_stock < $var) {
+                    $this->form_validation->set_message('amount_check', 'Não há quantidade suficiente em estoque');
+
+                    return false;
+                }
+            }
+            return true;
         }
-
-        return true;
     }
 
 }
