@@ -109,12 +109,12 @@
                             </a>
                         </li>
                         <li class="nav-item  ">
-                            <a href="<?= base_url("client_controller/index") ?>" class="nav-link ">
+                            <a href="<?= base_url("Lojas_controller/visualizar") ?>" class="nav-link ">
                                 <span class="title">Visualizar Estoque</span>
                             </a>
                         </li>
                         <li class="nav-item  ">
-                            <a href="<?= base_url("client_controller/index") ?>" class="nav-link ">
+                            <a href="<?= base_url("Lojas_controller/translado") ?>" class="nav-link ">
                                 <span class="title">Translado</span>
                             </a>
                         </li>
