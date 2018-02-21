@@ -164,7 +164,7 @@
                                         <td> <?= $value->product_name ?> </td>
                                         <td> <?= $value->amount ?> </td>
                                         <td> <?= $value->value ?> </td>
-                                        <td> <?= $value->date_send ?> </td>
+                                        <td> <?= $newDate = date("d-m-Y H:i:s", strtotime($value->date_send)) ?> </td>
                                     </tr>
                                 <?php endforeach; ?>
                             <?php endif; ?>
