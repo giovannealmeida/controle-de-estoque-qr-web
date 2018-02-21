@@ -54,9 +54,23 @@ class Lojas_controller extends CI_Controller {
         $this->load->view("controle_loja/loja_cadastro_estoque");
         $this->load->view("_inc/footer");
     }
-    
+
+    public function visualizar() {
+        $this->load->view("_inc/header");
+        $this->load->view("_inc/menu");
+        $this->load->view("controle_loja/loja_visualizar_estoque");
+        $this->load->view("_inc/footer");
+    }
+
+    public function translado() {
+        $this->load->view("_inc/header");
+        $this->load->view("_inc/menu");
+        $this->load->view("controle_loja/loja_translado_estoque");
+        $this->load->view("_inc/footer");
+    }
+
     public function excluir($id){
-        
+
     }
 
     public function amount_check($str) {
