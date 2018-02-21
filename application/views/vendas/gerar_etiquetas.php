@@ -14,23 +14,19 @@
         <div class="page-bar">
             <ul class="page-breadcrumb">
                 <li>
-                    <a href="#">Controle de Loja</a>
+                    <a href="#">Vendas</a>
                     <i class="fa fa-circle"></i>
                 </li>
                 <li>
-                    <a href="#">Translado de estoque</a>
+                    <a href="#">Gerar etiquetas</a>
                     <i class="fa fa-circle"></i>
                 </li>
             </ul>
         </div>
         <!-- END PAGE BAR -->
-        <h3 class="page-title"> Translado de Estoque
-            <small>para lojas credenciadas</small>
+        <h3 class="page-title"> Gerar etiquetas
+            <small>para produtos</small>
         </h3>
-        <h3 class="page-title">
-            <small> Escolha a loja de origem e em seguida a de destino</small>
-        </h3>
-        <!-- END PAGE HEADER-->
         <!-- Produto a ser seelcionado-->
         <div class="row">
             <div class="col-md-12">
@@ -45,20 +41,15 @@
                                 <div class="portlet-body form">
                                     <!-- BEGIN FORM-->
                                     <form action="<?= base_url('Lojas_controller/cadastro') ?>" class="form-horizontal" method="post" data-toggle ="validator">
-
                                         <div class="form-body">
                                             <!--/row-->
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="control-label col-md-3">Loja Origem</label>
+                                                        <label class="control-label col-md-3">Selecione a Loja</label>
                                                         <div class="col-md-9">
                                                           <select class="form-control">
                                                               <option>Loja 1</option>
-                                                              <option>Loja 2</option>
-                                                              <option>Loja 3</option>
-                                                              <option>Loja 4</option>
-                                                              <option>Loja 5</option>
                                                           </select>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
@@ -66,59 +57,27 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="control-label col-md-3">Loja Destino</label>
+                                                        <label class="control-label col-md-3">Produto</label> <!-- EXIBIR MENSAGEM DE ERRO SE A QUANTIDADE ULTRAPASSAR A DO ESTOQUE GERAL-->
                                                         <div class="col-md-5">
-                                                          <select class="form-control">
-                                                              <option>Loja 1</option>
-                                                              <option>Loja 2</option>
-                                                              <option>Loja 3</option>
-                                                              <option>Loja 4</option>
-                                                              <option>Loja 5</option>
-                                                          </select>
-                                                            <div class="help-block with-errors"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!--
-
-                                            </div>-->
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="control-label col-md-3">Produto</label>
-                                                        <div class="col-md-9">
                                                           <select class="form-control">
                                                               <option>Produto 1</option>
-                                                              <option>Produto 2</option>
-                                                              <option>Produto 3</option>
-                                                              <option>Produto 4</option>
-                                                              <option>Produto 5</option>
                                                           </select>
-                                                            <div class="help-block with-errors"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="control-label col-md-3">Valor</label> <!-- EXIBIR MENSAGEM DE ERRO SE A QUANTIDADE ULTRAPASSAR A DO ESTOQUE GERAL-->
-                                                        <div class="col-md-5">
-                                                            <input name="value" type="text" class="form-control money" placeholder="ex: 5,00" required="required">
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                              <div class="col-md-6">
-                                                  <div class="form-group">
-                                                      <label class="control-label col-md-3">Quantidade</label> <!-- EXIBIR MENSAGEM DE ERRO SE A QUANTIDADE ULTRAPASSAR A DO ESTOQUE GERAL-->
-                                                      <div class="col-md-5">
-                                                        <input class="form-control">                                                            
-                                                        </input>
-                                                          <div class="help-block with-errors"></div>
-                                                      </div>
-                                                  </div>
-                                              </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3">Quantidade</label>
+                                                        <div class="col-md-9">
+                                                          <input class="form-control">
+                                                          </input>
+                                                            <div class="help-block with-errors"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-actions">
@@ -126,7 +85,7 @@
                                                 <div class="col-md-6">
                                                     <div class="row">
                                                         <div class="col-md-offset-3 col-md-9">
-                                                            <button type="submit" class="btn green"> Enviar </button>
+                                                            <button type="submit" class="btn green"> Adicionar </button>
                                                             <button type="button" class="btn default">Cancelar</button>
                                                         </div>
                                                     </div>
@@ -141,6 +100,46 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <h3 class="page-title"> Lista de produtos
+            <small>por loja</small>
+        </h3>
+        <!-- END PAGE HEADER-->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                <div class="portlet light bordered">
+                    <div class="portlet-body">
+                        <table class="table table-striped table-bordered table-hover sample_1">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Loja
+                                    </th>
+                                    <th>
+                                        Código do Produto
+                                    </th>
+                                    <th>
+                                        Nome
+                                    </th>
+                                    <th>
+                                        Quantidade
+                                    </th>
+                                    <th>
+                                        Opção <!--Remover-->
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+              <button type="button" class="btn btn-primary">Gerar</button>
             </div>
         </div>
         <!-- END CONTENT BODY -->

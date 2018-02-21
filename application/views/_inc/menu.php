@@ -85,12 +85,12 @@
                     </a>
                     <ul class="sub-menu">
                         <li class="nav-item  ">
-                            <a href="<?= base_url("client_controller/new_client") ?>" class="nav-link ">
+                            <a href="<?= base_url("Vendas_controller/etiquetas") ?>" class="nav-link ">
                                 <span class="title">Gerar Etiqueta</span>
                             </a>
                         </li>
                         <li class="nav-item  ">
-                            <a href="<?= base_url("client_controller/index") ?>" class="nav-link ">
+                            <a href="<?= base_url("Vendas_controller/venda") ?>" class="nav-link ">
                                 <span class="title">Visualizar Vendas</span>
                             </a>
                         </li>
@@ -128,7 +128,7 @@
                     </a>
                     <ul class="sub-menu">
                         <li class="nav-item  ">
-                            <a href="<?= base_url("client_controller/new_client") ?>" class="nav-link ">
+                            <a href="<?= base_url("Clientes_controller/visualizar_clientes") ?>" class="nav-link ">
                                 <span class="title">Ver Lista</span>
                             </a>
                       </li>
