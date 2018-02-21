@@ -76,7 +76,13 @@
                                     <td tabindex="0" class="sorting_1"> <?= $value->code ?> </td>
                                     <td> <?= $value->product_name ?> </td>
                                     <td> <?= $value->quantity_in_stock ?> </td>
-                                    <td> <span class="label label-sm label-success"> <?= $value->status ?> </span> </td>
+                                    <?php if ($value->quantity_in_stock > 10): ?>
+                                        <td><span class="label label-sm label-success"> Em estoque </span> </td>
+                                    <?php elseif ($value->quantity_in_stock > 0 && $value->quantity_in_stock <= 10): ?>
+                                        <td><span class="label label-sm label-warning"> Acabando </span> </td>
+                                    <?php else: ?>
+                                        <td><span class="label label-sm label-danger"> Sem estoque </span> </td>
+                                    <?php endif; ?>
                                     <td>
                                         <div class="margin-bottom-5">
                                             <a type="button" href="<?= base_url('Estoque_controller/editar?id=' . $value->id) ?>" class="btn green">

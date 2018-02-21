@@ -32,6 +32,7 @@ class Lojas_controller extends CI_Controller {
                 $insert_data['store_id'] = $this->input->post('store_id');
                 $insert_data['product_id'] = $this->input->post('product_id');
                 $insert_data['amount'] = $this->input->post('amount');
+                $insert_data['value'] = $this->input->post('value');
                 date_default_timezone_set('America/Sao_Paulo');
                 $date = date('Y-m-d H:i');
                 $insert_data['date_send'] = $date;

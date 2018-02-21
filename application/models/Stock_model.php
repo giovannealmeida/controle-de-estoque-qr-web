@@ -19,8 +19,7 @@ class Stock_model extends CI_Model {
     }
 
     public function get_products($code = null) {
-        $this->db->select('p.id, p.code, p.product_name, p.description, p.quantity_in_stock, p.wholesale_value, p.retail_value, s.status');
-        $this->db->join('tb_status s', 'p.status = s.id');
+        $this->db->select('p.id, p.code, p.product_name, p.description, p.quantity_in_stock, p.wholesale_value, p.retail_value');
 
         if ($code != null) {
             $this->db->where('code', $code);

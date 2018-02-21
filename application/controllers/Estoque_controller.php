@@ -47,7 +47,6 @@ class Estoque_controller extends CI_Controller {
                 $data_insert['wholesale_value'] = $this->input->post('wholesale_value');
                 $data_insert['retail_value'] = $this->input->post('retail_value');
                 $data_insert['weight'] = $this->input->post('weight');
-                $data_insert['status'] = 1;
                 $insert = $this->Stock_model->insert_product($data_insert);
                 if ($insert) {
                     $this->session->set_flashdata('success', 'Produto cadastrado com sucesso!');
@@ -115,13 +114,20 @@ class Estoque_controller extends CI_Controller {
 
     public function excluir() {
         $this->load->model('Stock_model');
+        $this->load->model('Store_model');
         $id = $this->input->get_post('id');
-        $delete = $this->Stock_model->delete_product($id);
-        if ($delete) {
-            $this->session->set_flashdata('success', 'Produto excluído com sucesso!');
-            redirect('Estoque_controller/visualizar');
+        $check_association = $this->Store_model->check_association($id);
+        if ($check_association == FALSE) {
+            $delete = $this->Stock_model->delete_product($id);
+            if ($delete) {
+                $this->session->set_flashdata('success', 'Produto excluído com sucesso!');
+                redirect('Estoque_controller/visualizar');
+            } else {
+                $this->session->set_flashdata('fail', 'Não foi possível excluir');
+                redirect('Estoque_controller/visualizar');
+            }
         } else {
-            $this->session->set_flashdata('fail', 'Não foi possível excluir');
+            $this->session->set_flashdata('fail', 'O produto está associado ao estoque de uma loja, remova primeiro da loja para poder excluir');
             redirect('Estoque_controller/visualizar');
         }
     }

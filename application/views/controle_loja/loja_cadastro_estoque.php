@@ -71,6 +71,15 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3">Quantidade</label> <!-- EXIBIR MENSAGEM DE ERRO SE A QUANTIDADE ULTRAPASSAR A DO ESTOQUE GERAL-->
+                                                        <div class="col-md-5">
+                                                            <?= form_input(array('name' => 'amount', 'class' => 'form-control', 'id' => 'amount', 'type' => 'number', 'placeholder' => 'Digite a quantidade do produto', 'required' => 'required'), set_value('amount')); ?>
+                                                            <div class="help-block with-errors"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -84,9 +93,9 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="control-label col-md-3">Quantidade</label> <!-- EXIBIR MENSAGEM DE ERRO SE A QUANTIDADE ULTRAPASSAR A DO ESTOQUE GERAL-->
+                                                        <label class="control-label col-md-3">Valor</label> <!-- EXIBIR MENSAGEM DE ERRO SE A QUANTIDADE ULTRAPASSAR A DO ESTOQUE GERAL-->
                                                         <div class="col-md-5">
-                                                            <?= form_input(array('name' => 'amount', 'class' => 'form-control', 'id' => 'amount', 'type' => 'number', 'placeholder' => 'Digite a quantidade do produto', 'required' => 'required'), set_value('amount')); ?>
+                                                            <input name="value" type="text" class="form-control money" placeholder="ex: 5,00" required="required">
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
@@ -140,6 +149,9 @@
                                         Quantidade
                                     </th>
                                     <th>
+                                        Valor
+                                    </th>
+                                    <th>
                                         Data
                                     </th>
                                 </tr>
@@ -151,6 +163,7 @@
                                         <td> <?= $value->code ?> </td>
                                         <td> <?= $value->product_name ?> </td>
                                         <td> <?= $value->amount ?> </td>
+                                        <td> <?= $value->value ?> </td>
                                         <td> <?= $value->date_send ?> </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -168,6 +181,9 @@
 <!-- BEGIN CORE PLUGINS -->
 <!-- <script src="<?= base_url('/assets/global/plugins/jquery.min.js'); ?>" type="text/javascript"></script> -->
 <script src="<?= base_url("assets/js/validator.js") ?>"  type="text/javascript"></script>
+<script src="<?= base_url("assets/global/plugins/jquery-inputmask/jquery.inputmask.bundle.min.js") ?>" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"  type="text/javascript"></script>
+<script src="<?= base_url('assets/js/mask.js') ?>"  type="text/javascript"></script>
 <script src="<?= base_url('/assets/global/scripts/datatable.js'); ?>" type="text/javascript"></script>
 <script src="<?= base_url('/assets/global/plugins/datatables/datatables.min.js'); ?>" type="text/javascript"></script>
 <script src="<?= base_url('/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js'); ?>" type="text/javascript"></script>
