@@ -38,6 +38,18 @@ class consult_controller extends CI_Controller {
 
         print_r(json_encode($array));
     }
+    
+    public function getProductByStore($store_id, $product_id = null){
+        
+        if($product_id != null){
+            $this->db->where('sp.product_id', $product_id);
+        }
+        $this->db->select('p.id as id, p.product_name as name, sp.amount, sp.value');
+        $this->db->join('tb_products p', 'p.id = sp.product_id', 'inner');
+        $this->db->where('sp.store_id', $store_id);
+        $query = $this->db->get('tb_store_product sp');
+        print_r(json_encode($query->result()));
+    }
 
 
 }

@@ -61,6 +61,17 @@ class Store_model extends CI_Model {
         }
     }
     
+    public function get_association($store_id, $product_id){
+        $this->db->where('store_id', $store_id);
+        $this->db->where('product_id', $product_id);
+        $query = $this->db->get('tb_store_product');
+        if ($query->num_rows() > 0) {
+            return $query->row(0);
+        }else{
+            return null;
+        }
+    }
+    
        public function delete($id) {
         $this->db->where('id', $id);
         $this->db->delete('tb_store_product');
