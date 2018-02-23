@@ -79,25 +79,26 @@
                             </thead>
                             <?php if (count($products) > 0): ?>
                                 <?php foreach ($products as $value): ?>
-                                    <td tabindex="0" class="sorting_1"> <?= $value->code ?> </td>
-                                    <td> <?= $value->product_name ?> </td>
-                                    <td> <?= $value->quantity_in_stock ?> </td>
-                                    <td> <?= $value->retail_value ?> </td>
-                                    <td> <?= $value->wholesale_value ?> </td>
-                                    <?php if ($value->quantity_in_stock > 10): ?>
-                                        <td><span class="label label-sm label-success"> Em estoque </span> </td>
-                                    <?php elseif ($value->quantity_in_stock > 0 && $value->quantity_in_stock <= 10): ?>
-                                        <td><span class="label label-sm label-warning"> Acabando </span> </td>
-                                    <?php else: ?>
-                                        <td><span class="label label-sm label-danger"> Sem estoque </span> </td>
-                                    <?php endif; ?>
-                                    <td>
-                                        <div class="margin-bottom-5">
-                                            <a type="button" href="<?= base_url('Estoque_controller/editar?id=' . $value->id) ?>" class="btn green">
-                                                <i class="fa fa-pencil"></i> Editar</a>
-                                            <a class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir?')" href="<?= base_url('Estoque_controller/excluir?id=' . $value->id) ?>"><span class="glyphicon glyphicon-remove"></span> Remover</a>
-                                        </div>
-                                    </td>
+                                    <tr>
+                                        <td tabindex="0" class="sorting_1"> <?= $value->code ?> </td>
+                                        <td> <?= $value->product_name ?> </td>
+                                        <td> <?= $value->quantity_in_stock ?> </td>
+                                        <td> <?= $value->retail_value ?> </td>
+                                        <td> <?= $value->wholesale_value ?> </td>
+                                        <?php if ($value->quantity_in_stock > 10): ?>
+                                            <td><span class="label label-sm label-success"> Em estoque </span> </td>
+                                        <?php elseif ($value->quantity_in_stock > 0 && $value->quantity_in_stock <= 10): ?>
+                                            <td><span class="label label-sm label-warning"> Acabando </span> </td>
+                                        <?php else: ?>
+                                            <td><span class="label label-sm label-danger"> Sem estoque </span> </td>
+                                        <?php endif; ?>
+                                        <td>
+                                            <div class="margin-bottom-5">
+                                                <a type="button" href="<?= base_url('Estoque_controller/editar?id=' . $value->id) ?>" class="btn green">
+                                                    <i class="fa fa-pencil"></i> Editar</a>
+                                                <a class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir?')" href="<?= base_url('Estoque_controller/excluir?id=' . $value->id) ?>"><span class="glyphicon glyphicon-remove"></span> Remover</a>
+                                            </div>
+                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                             <?php endif; ?>

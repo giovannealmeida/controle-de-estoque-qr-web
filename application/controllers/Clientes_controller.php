@@ -12,28 +12,28 @@ class Clientes_controller extends CI_Controller {
         }
     }
 
-
     public function visualizar_clientes() {
+        $this->load->model('Client_model');
+        $data = $this->user_info;
+        $data['clients'] = $this->Client_model->all();
         $this->load->view("_inc/header");
         $this->load->view("_inc/menu");
-        $this->load->view("clientes/visualizar_clientes");
+        $this->load->view("clientes/visualizar_clientes", $data);
         $this->load->view("_inc/footer");
     }
 
-    public function excluir($id){
+    public function excluir() {
+        $this->load->model('Client_model');
+        $id = $this->input->get_post('id');
 
-    }
-
-    public function amount_check($str) {
-        $this->load->model('Stock_model');
-        $product = $this->Stock_model->get_product_by_id($this->input->post('product_id'));
-        if ($product->quantity_in_stock < $str) {
-            $this->form_validation->set_message('amount_check', 'Não há quantidade suficiente em estoque');
-
-            return false;
+        $delete = $this->Client_model->delete($id);
+        if ($delete) {
+            $this->session->set_flashdata('success', 'Cliente excluído com sucesso!');
+            redirect('Clientes_controller/visualizar_clientes');
+        } else {
+            $this->session->set_flashdata('fail', 'Não foi possível excluir');
+            redirect('Clientes_controller/visualizar_clientes');
         }
-
-        return true;
     }
 
 }
