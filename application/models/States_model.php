@@ -57,7 +57,7 @@ class States_model extends CI_Model {
         $result = $this->db->get("tb_cities c");
 
         if ($result->num_rows()) {
-            return $result->result();
+            return $result->row(0);
         }
         return null;
     }

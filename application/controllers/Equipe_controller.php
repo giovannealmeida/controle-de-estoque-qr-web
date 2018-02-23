@@ -39,7 +39,7 @@ class Equipe_controller extends CI_Controller {
             }
         }
         $data['states'] = $this->States_model->get_all();
-        $data['cities'] = array(NULL => 'Selecione uma cidade');
+        $data['cities'] = array(NULL => 'Selecione um estado');
         $this->load->view("_inc/header", $data);
         $this->load->view("_inc/menu");
         $this->load->view("cadastro_equipe/cadastro_loja");
@@ -92,7 +92,7 @@ class Equipe_controller extends CI_Controller {
         $data['stores'] = $this->Team_model->get_stores_select();
         $data['type_sales'] = $this->Team_model->get_all_type_sale();
         $data['states'] = $this->States_model->get_all();
-        $data['cities'] = array(NULL => 'Selecione uma cidade');
+        $data['cities'] = array(NULL => 'Selecione um estado');
         $this->load->view("_inc/header", $data);
         $this->load->view("_inc/menu");
         $this->load->view("cadastro_equipe/cadastro_vendedor");
@@ -137,7 +137,7 @@ class Equipe_controller extends CI_Controller {
         }
         $data['genders'] = $this->User_model->get_all_genders();
         $data['states'] = $this->States_model->get_all();
-        $data['cities'] = array(NULL => 'Selecione uma cidade');
+        $data['cities'] = array(NULL => 'Selecione um estado');
         $this->load->view("_inc/header", $data);
         $this->load->view("_inc/menu");
         $this->load->view("cadastro_equipe/cadastro_administrador");
