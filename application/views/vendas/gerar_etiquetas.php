@@ -24,85 +24,70 @@
             </ul>
         </div>
         <!-- END PAGE BAR -->
-        <h3 class="page-title"> Gerar etiquetas
-            <small>para produtos</small>
-        </h3>
         <!-- Produto a ser seelcionado-->
-        <div class="row">
-            <div class="col-md-12">
-                <div class="tabbable-line boxless tabbable-reversed">
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tab_2">
-                            <div class="portlet box green">
-                                <div class="portlet-title">
-                                    <div class="caption">
-                                        Selecione os produtos par a a loja</div>
-                                </div>
-                                <div class="portlet-body form">
-                                    <!-- BEGIN FORM-->
-                                    <form action="<?= base_url('Lojas_controller/cadastro') ?>" class="form-horizontal" method="post" data-toggle ="validator">
-                                        <div class="form-body">
-                                            <!--/row-->
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="control-label col-md-3">Selecione a Loja</label>
-                                                        <div class="col-md-9">
-                                                          <select class="form-control">
-                                                              <option>Loja 1</option>
-                                                          </select>
-                                                            <div class="help-block with-errors"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="control-label col-md-3">Produto</label> <!-- EXIBIR MENSAGEM DE ERRO SE A QUANTIDADE ULTRAPASSAR A DO ESTOQUE GERAL-->
-                                                        <div class="col-md-5">
-                                                          <select class="form-control">
-                                                              <option>Produto 1</option>
-                                                          </select>
-                                                            <div class="help-block with-errors"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="control-label col-md-3">Quantidade</label>
-                                                        <div class="col-md-9">
-                                                          <input class="form-control">
-                                                          </input>
-                                                            <div class="help-block with-errors"></div>
-                                                        </div>
-                                                    </div>
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Selecione o produto</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="portlet-body form">
+                            <!-- BEGIN FORM-->
+                            <form class="form-horizontal" data-toggle ="validator" action="#" method="POST">
+                                <div class="form-body">
+                                    <!--/row-->
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Loja</label>
+                                                <div class="col-md-9">
+                                                    <?php echo form_dropdown(array('class' => "form-control selectpicker", 'data-live-search' => 'true', 'data-width' => "100%", 'required' => "true", 'name' => "store_id", 'id' => "store_id"), $stores, set_value('store_id')); ?>
+                                                    <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-actions">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="row">
-                                                        <div class="col-md-offset-3 col-md-9">
-                                                            <button type="submit" class="btn green"> Adicionar </button>
-                                                            <button type="button" class="btn default">Cancelar</button>
-                                                        </div>
-                                                    </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Produto</label> <!-- EXIBIR MENSAGEM DE ERRO SE A QUANTIDADE ULTRAPASSAR A DO ESTOQUE GERAL-->
+                                                <div class="col-md-9">
+                                                    <?php echo form_dropdown(array('class' => "form-control selectpicker", 'data-live-search' => 'true', 'data-width' => "100%", 'required' => "true", 'name' => "product_id", 'id' => "product_id",), $products, set_value('product_id')); ?>
+                                                    <div class="help-block with-errors"></div>
                                                 </div>
-                                                <div class="col-md-6"> </div>
                                             </div>
                                         </div>
-                                    </form>
-                                    <!-- END FORM-->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Quantidade</label> <!-- EXIBIR MENSAGEM DE ERRO SE A QUANTIDADE ULTRAPASSAR A DO ESTOQUE GERAL-->
+                                                <div class="col-md-9">
+                                                    <?= form_input(array('name' => 'amount', 'class' => 'form-control', 'id' => 'amount', 'type' => 'number', 'placeholder' => 'Digite a quantidade do produto', 'required' => 'required'), set_value('amount')); ?>
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-default" data-dismiss="modal" id="btnAdcionar">Adicionar</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </form>
+                            <!-- END FORM-->
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
-        <h3 class="page-title"> Lista de produtos
+        <h3 class="page-title"> Lista de etiquetas
             <small>por loja</small>
         </h3>
         <!-- END PAGE HEADER-->
@@ -110,9 +95,23 @@
             <div class="col-md-12">
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption font-dark">
+                            <i class="icon-settings font-dark"></i>
+                            <span class="caption-subject bold uppercase">Lista de etiquetas</span>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="btn-group">
+                                <button class="btn green" data-toggle="modal" data-target="#myModal"> Adicionar
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="tools"> </div>
+                    </div>
                     <div class="portlet-body">
-                        <table class="table table-striped table-bordered table-hover sample_1">
-                            <thead>
+                        <table class="table table-striped table-bordered table-hover sample_1" >
+                            <thead id="table_etiquetas">
                                 <tr>
                                     <th>
                                         Loja
@@ -139,7 +138,7 @@
 
         <div class="row">
             <div class="col-md-3">
-              <button type="button" class="btn btn-primary">Gerar</button>
+                <button type="button" class="btn btn-primary">Gerar</button>
             </div>
         </div>
         <!-- END CONTENT BODY -->
@@ -159,6 +158,64 @@
 <script src="<?= base_url('/assets/pages/scripts/table-datatables-buttons.min.js'); ?>" type="text/javascript"></script>
 <script src="<?= base_url("assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js") ?>" type="text/javascript"></script>
 <script src="<?= base_url("assets/pages/scripts/components-bootstrap-select.min.js") ?>"  type="text/javascript"></script>
+<script src="../assets/pages/scripts/table-datatables-editable.js" type="text/javascript"></script>
+<script>
+    $('#store_id').change(function (ev) {
+        changeProduct(this);
+    });
 
+    function changeProduct(store_id) {
+        $("#product_id").empty();
+        $('#product_id').append($('<option></option>').val('').html("Carregando..."));
+        $('#product_id').prop('disabled', true);
+        $('#product_id').selectpicker('refresh');
+        var base = '<?= base_url() ?>';
+        urlConsulta = base + "index.php/consult_controller/getProductByStore/" + store_id.value;
+        $.ajax({url: urlConsulta,
+            success: function (result) {
+                $("#product_id").empty();
+                $('#product_id').append($('<option></option>').val('').html("Selecione um produto"));
+                $.each(JSON.parse(result), function (index, item) {
+                    if (index == store_id.index - 1) {
+                        $('#product_id').append($('<option></option>').val(item.id).html(item.name).attr('selected', 'selected'));
+                    } else {
+                        $('#product_id').append($('<option></option>').val(item.id).html(item.name));
+                    }
+                });
+
+                $('#product_id').prop('disabled', false);
+                $('#product_id').selectpicker('refresh');
+            },
+            error: function (error) {
+                alert("Falha ao consultar produto!");
+            }
+        });
+    }
+
+    $('#btnAdcionar').click(function () {
+        var store = $("#store_id option:selected").val();
+        var product = $("#product_id option:selected").val();
+        urlConsulta = base_url.url + "index.php/Consult_controller/getProductByStore/" + store + '/' + product;
+        var jqTds = $('>td');
+        $.ajax({url: urlConsulta,
+            success: function (result) {
+                $.each(JSON.parse(result), function (index, item) {
+                    var table = $('.sample_1').DataTable();
+                    table.row.add([item.store, item.code, item.name, $('#amount').val(), '<a type="button" onClick="remove(this)">Delete</a>']).draw();
+                });
+                $('#amount').val('');
+            },
+            error: function (error) {
+                alert("Falha ao consultar produto!");
+            }
+        });
+    });
+
+    function remove(btn) {
+        var row = btn.parentNode.parentNode;
+        var table = $('.sample_1').DataTable();
+        table.row(row).remove().draw();
+    }
+</script>
 <!-- END CONTAINER -->
 <!-- END THEME LAYOUT SCRIPTS -->

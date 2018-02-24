@@ -13,9 +13,17 @@ class Vendas_controller extends CI_Controller {
     }
 
     public function etiquetas() {
+        $this->load->library('form_validation');
+        $data = $this->user_info;
+        $this->load->model('Stock_model');
+        $this->load->model('Team_model');
+        $this->load->model('Store_model');
+        $stores = array('' => 'Selecione a loja');
+        $data['stores'] = $stores + $this->Team_model->get_stores_select();
+        $data['products'] = array('' => 'Selecione a loja de origem');
         $this->load->view("_inc/header");
         $this->load->view("_inc/menu");
-        $this->load->view("vendas/gerar_etiquetas");
+        $this->load->view("vendas/gerar_etiquetas", $data);
         $this->load->view("_inc/footer");
     }
 
@@ -26,8 +34,8 @@ class Vendas_controller extends CI_Controller {
         $this->load->view("_inc/footer");
     }
 
-    public function excluir($id){
-
+    public function excluir($id) {
+        
     }
 
     public function amount_check($str) {
