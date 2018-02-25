@@ -15,15 +15,9 @@ class Estoque_controller extends CI_Controller {
     }
 
     public function cadastro() {
+
         $this->load->library('form_validation');
         $this->load->model('Util_model');
-        /* $params = array('value' => '123456',
-          'into' => 0,
-          'filename' => 'barcode.gif',
-          'width_bar' => 73,
-          'height_bar' => 60,
-          'show_codebar' => true);
-          $this->load->library('barCodeGenrator', $params); */
         $data = $this->user_info;
         $this->load->model('Stock_model');
         if ($this->input->post()) {
@@ -36,10 +30,17 @@ class Estoque_controller extends CI_Controller {
             $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 
             if ($this->form_validation->run() == true) {
-                $data_insert['code'] = $this->Util_model->generateRandomString(13, '1234567890');
+                $data_insert['code'] = $this->Util_model->generateRandomString(6, '1234567890');
                 while ($this->Stock_model->verify_code($data_insert['code']) == true) {
-                    $data_insert['code'] = $this->Util_model->generateRandomString(13, '1234567890');
+                    $data_insert['code'] = $this->Util_model->generateRandomString(6, '1234567890');
                 }
+                $params = array('value' => $data_insert['code'],
+                    'into' => 1,
+                    'filename' => 'assets/qrcode/' . $data_insert['code'] . '.gif',
+                    'width_bar' => 73,
+                    'height_bar' => 60,
+                    'show_codebar' => true);
+                $this->load->library('barCodeGenrator', $params);
                 $data_insert['product_name'] = $this->input->post('product_name');
                 $data_insert['description'] = $this->input->post('description');
                 $data_insert['quantity_in_stock'] = $this->input->post('quantity_in_stock');

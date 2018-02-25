@@ -68,7 +68,7 @@
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">Quantidade</label> <!-- EXIBIR MENSAGEM DE ERRO SE A QUANTIDADE ULTRAPASSAR A DO ESTOQUE GERAL-->
                                                 <div class="col-md-9">
-                                                    <?= form_input(array('name' => 'amount', 'class' => 'form-control', 'id' => 'amount', 'type' => 'number', 'placeholder' => 'Digite a quantidade do produto', 'required' => 'required'), set_value('amount')); ?>
+                                                    <?= form_input(array('name' => 'amount', 'class' => 'form-control', 'id' => 'amount', 'type' => 'number', 'placeholder' => 'Digite a quantidade do produto', 'required' => 'required', 'value' => '63'), set_value('amount')); ?>
                                                     <div class="help-block with-errors"></div>
                                                 </div>
                                             </div>
@@ -110,35 +110,36 @@
                         <div class="tools"> </div>
                     </div>
                     <div class="portlet-body">
-                        <table class="table table-striped table-bordered table-hover sample_1" >
-                            <thead id="table_etiquetas">
-                                <tr>
-                                    <th>
-                                        Loja
-                                    </th>
-                                    <th>
-                                        Código do Produto
-                                    </th>
-                                    <th>
-                                        Nome
-                                    </th>
-                                    <th>
-                                        Quantidade
-                                    </th>
-                                    <th>
-                                        Opção <!--Remover-->
-                                    </th>
-                                </tr>
-                            </thead>
-                        </table>
+                        <form class="form-horizontal" data-toggle ="validator" action="<?= base_url('Vendas_controller/etiquetas') ?>" method="POST">
+                            <table class="table table-striped table-bordered table-hover sample_1" >
+                                <thead id="table_etiquetas">
+                                    <tr>
+                                        <th>
+                                            Loja
+                                        </th>
+                                        <th>
+                                            Código do Produto
+                                        </th>
+                                        <th>
+                                            Nome
+                                        </th>
+                                        <th>
+                                            Quantidade
+                                        </th>
+                                        <th>
+                                            Opção <!--Remover-->
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <button type="submit" class="btn btn-primary" formtarget="_blank">Gerar</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3">
-                <button type="button" class="btn btn-primary">Gerar</button>
             </div>
         </div>
         <!-- END CONTENT BODY -->
@@ -170,7 +171,11 @@
         $('#product_id').prop('disabled', true);
         $('#product_id').selectpicker('refresh');
         var base = '<?= base_url() ?>';
-        urlConsulta = base + "index.php/consult_controller/getProductByStore/" + store_id.value;
+        if (store_id.value == 0) {
+            urlConsulta = base + "index.php/consult_controller/getProducts";
+        } else {
+            urlConsulta = base + "index.php/consult_controller/getProductByStore/" + store_id.value;
+        }
         $.ajax({url: urlConsulta,
             success: function (result) {
                 $("#product_id").empty();
@@ -195,15 +200,20 @@
     $('#btnAdcionar').click(function () {
         var store = $("#store_id option:selected").val();
         var product = $("#product_id option:selected").val();
-        urlConsulta = base_url.url + "index.php/Consult_controller/getProductByStore/" + store + '/' + product;
+        if (store == 0) {
+            urlConsulta = base_url.url + "index.php/consult_controller/getProducts/" + product;
+        } else {
+            urlConsulta = base_url.url + "index.php/Consult_controller/getProductByStore/" + store + '/' + product;
+        }
         var jqTds = $('>td');
         $.ajax({url: urlConsulta,
             success: function (result) {
                 $.each(JSON.parse(result), function (index, item) {
                     var table = $('.sample_1').DataTable();
-                    table.row.add([item.store, item.code, item.name, $('#amount').val(), '<a type="button" onClick="remove(this)">Delete</a>']).draw();
+                    var rowNode = table.row.add([store == 0 ? 'Estoque' : item.cnpj + ' - ' + item.store, item.code, item.name, $('#amount').val(), '<a type="button" onClick="remove(this)">Delete</a>' + '<input type="hidden" name="product_id[]" value="' + item.id + '">' + '<input type="hidden" name="value[]" value="' + item.value + '">' + '<input type="hidden" name="amount[]" value="' + $('#amount').val() + '">']).draw().node();
+                    $(rowNode).find('td').attr('name', 'line1');
                 });
-                $('#amount').val('');
+                $('#amount').val('63');
             },
             error: function (error) {
                 alert("Falha ao consultar produto!");

@@ -18,7 +18,28 @@ class Vendas_controller extends CI_Controller {
         $this->load->model('Stock_model');
         $this->load->model('Team_model');
         $this->load->model('Store_model');
-        $stores = array('' => 'Selecione a loja');
+        if ($this->input->post()) {
+            foreach ($this->input->post('product_id') as $key => $value) {
+                $product = $this->Stock_model->get_product_by_id($value);
+                for ($i = 0; $i < $this->input->post('amount')[$key]; $i++) {
+                    $data['pdf'][] = array('name' => $product->product_name, 'amount' => $this->input->post('amount')[$key], 'value' => $this->input->post('value')[$key], 'code' => $product->code);
+                }
+            }
+
+            //print_r($data['pdf']);die;
+            //print_r($this->input->post());die;
+            ini_set('max_execution_time', 0);
+            ini_set('memory_limit', '-1');
+            $this->load->library('mpdf60/mpdf.php');
+            ob_start(); // inicia o buffer
+
+            $mpdf = new mPDF('utf-8', 'Letter', 0, '', -1, 0, 9, 0, 0, 0);
+
+            $description = $this->load->view('description', $data, true);
+            $mpdf->WriteHTML($description);
+            $mpdf->Output();
+        }
+        $stores = array('' => 'Selecione a loja', '0' => 'Estoque');
         $data['stores'] = $stores + $this->Team_model->get_stores_select();
         $data['products'] = array('' => 'Selecione a loja de origem');
         $this->load->view("_inc/header");

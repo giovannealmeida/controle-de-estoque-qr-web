@@ -52,6 +52,15 @@ class consult_controller extends CI_Controller {
         print_r(json_encode($query->result()));
     }
 
+    public function getProducts($product_id = null) {
+        if($product_id != null){
+            $this->db->where('id', $product_id);
+        }
+        $this->db->select('p.id as id, p.product_name as name, p.quantity_in_stock as amount, p.retail_value as value, p.code as code');
+        $query = $this->db->get('tb_products p');
+        print_r(json_encode($query->result()));
+    }
+
     public function getStores() {
         $query = $this->db->get('tb_stores');
         print_r(json_encode($query->result()));
