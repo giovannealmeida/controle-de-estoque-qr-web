@@ -22,6 +22,13 @@ class Clientes_controller extends CI_Controller {
         $this->load->view("_inc/footer");
     }
 
+    public function editar_clientes() {
+        $this->load->view("_inc/header");
+        $this->load->view("_inc/menu");
+        $this->load->view("clientes/editar_clientes");
+        $this->load->view("_inc/footer");
+    }
+
     public function excluir() {
         $this->load->model('Client_model');
         $id = $this->input->get_post('id');
