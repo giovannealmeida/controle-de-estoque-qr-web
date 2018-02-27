@@ -1,6 +1,6 @@
 <?php
 
-class Equipe_controller extends CI_Controller {
+class Equipe extends CI_Controller {
 
     private $user_info;
 
@@ -14,10 +14,11 @@ class Equipe_controller extends CI_Controller {
         }
     }
 
-    public function loja() {
+    public function lojas() {
         $this->load->library('form_validation');
         $this->load->model('States_model');
         $this->load->model('Team_model');
+        $this->load->model('Store_model');
         $data = $this->user_info;
         if ($this->input->post()) {
             $this->form_validation->set_rules('fantasy_name', 'Nome Fantasia', 'required');
@@ -31,22 +32,22 @@ class Equipe_controller extends CI_Controller {
                 $insert = $this->Team_model->insert_store($this->input->post());
                 if ($insert) {
                     $this->session->set_flashdata('success', 'Loja cadastrada com sucesso!');
-                    redirect('Equipe_controller/loja');
                 } else {
                     $this->session->set_flashdata('fail', 'Não foi possível cadastrar');
-                    redirect('Equipe_controller/loja');
                 }
+                redirect('Equipe/lojas');
             }
         }
+        $data['stores'] = $this->Store_model->get_all_stores();
         $data['states'] = $this->States_model->get_all();
         $data['cities'] = array(NULL => 'Selecione um estado');
         $this->load->view("_inc/header", $data);
         $this->load->view("_inc/menu");
-        $this->load->view("cadastro_equipe/cadastro_loja");
+        $this->load->view("equipe/cadastro_loja");
         $this->load->view("_inc/footer");
     }
 
-    public function vendedor() {
+    public function vendedores() {
         $this->load->library('form_validation');
         $this->load->model('States_model');
         $this->load->model('Team_model');
@@ -81,13 +82,13 @@ class Equipe_controller extends CI_Controller {
                     $insert_user_store['type_sale_id'] = $this->input->post('sale_id');
                     $this->Team_model->insert_user_store($insert_user_store);
                     $this->session->set_flashdata('success', 'Vendedor cadastrado com sucesso!');
-                    redirect('Equipe_controller/vendedor');
                 } else {
                     $this->session->set_flashdata('fail', 'Não foi possível cadastrar');
-                    redirect('Equipe_controller/vendedor');
                 }
+                redirect('Equipe/vendedores');
             }
         }
+        $data['sellers'] = $this->User_model->get_all_sellers();
         $data['genders'] = $this->User_model->get_all_genders();
         $data['stores'] = $this->Team_model->get_stores_select();
         $data['type_sales'] = $this->Team_model->get_all_type_sale();
@@ -95,11 +96,11 @@ class Equipe_controller extends CI_Controller {
         $data['cities'] = array(NULL => 'Selecione um estado');
         $this->load->view("_inc/header", $data);
         $this->load->view("_inc/menu");
-        $this->load->view("cadastro_equipe/cadastro_vendedor");
+        $this->load->view("equipe/cadastro_vendedor");
         $this->load->view("_inc/footer");
     }
 
-    public function administrador() {
+    public function administradores() {
         $this->load->library('form_validation');
         $this->load->model('States_model');
         $this->load->model('Team_model');
@@ -127,20 +128,20 @@ class Equipe_controller extends CI_Controller {
                 $insert_user['level_id'] = 1;
                 $insert = $this->User_model->insert($insert_user, $this->input->post('password'));
                 if ($insert != NULL) {
-                    $this->session->set_flashdata('success', 'Vendedor cadastrado com sucesso!');
-                    redirect('Equipe_controller/administrador');
+                    $this->session->set_flashdata('success', 'Administrador cadastrado com sucesso!');
                 } else {
                     $this->session->set_flashdata('fail', 'Não foi possível cadastrar');
-                    redirect('Equipe_controller/administrador');
                 }
+                redirect('Equipe/administradores');
             }
         }
+        $data['administrators'] = $this->User_model->get_all_administrators();
         $data['genders'] = $this->User_model->get_all_genders();
         $data['states'] = $this->States_model->get_all();
         $data['cities'] = array(NULL => 'Selecione um estado');
         $this->load->view("_inc/header", $data);
         $this->load->view("_inc/menu");
-        $this->load->view("cadastro_equipe/cadastro_administrador");
+        $this->load->view("equipe/cadastro_administrador");
         $this->load->view("_inc/footer");
     }
 
@@ -197,6 +198,51 @@ class Equipe_controller extends CI_Controller {
             return TRUE;
         }
         return FALSE;
+    }
+
+    public function excluir_administrador() {
+        $this->load->model('User_model');
+        $id = $this->input->get_post('id');
+
+        $delete = $this->User_model->delete($id);
+        if ($delete) {
+            $this->session->set_flashdata('success', 'Administrador excluído com sucesso!');
+        } else {
+            $this->session->set_flashdata('fail', 'Não foi possível excluir');
+        }
+        redirect('Equipe/administradores');
+    }
+
+    public function excluir_vendedor() {
+        $this->load->model('User_model');
+        $id = $this->input->get_post('id');
+
+        $delete = $this->User_model->delete($id);
+        if ($delete) {
+            $this->session->set_flashdata('success', 'Vendedor excluído com sucesso!');
+        } else {
+            $this->session->set_flashdata('fail', 'Não foi possível excluir');
+        }
+        redirect('Equipe/vendedores');
+    }
+
+    public function excluir_loja() {
+        $this->load->model('Store_model');
+        $this->load->model('Stock_model');
+        $id = $this->input->get_post('id');
+        $associations = $this->Store_model->get_association($id);
+        $delete = $this->Store_model->delete_store($id);
+        if ($delete) {
+            foreach ($associations as $value) {
+                $product = $this->Stock_model->get_product_by_id($value->product_id);
+                $update = array('quantity_in_stock' => $value->amount + $product->quantity_in_stock);
+                $this->Stock_model->update_product($update, $value->product_id);
+            }
+            $this->session->set_flashdata('success', 'Loja excluída com sucesso!');
+        } else {
+            $this->session->set_flashdata('fail', 'Não foi possível excluir');
+        }
+        redirect('Equipe/lojas');
     }
 
 }

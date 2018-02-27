@@ -40,7 +40,10 @@ class Vendas_controller extends CI_Controller {
             $mpdf->Output();
         }
         $stores = array('' => 'Selecione a loja', '0' => 'Estoque');
-        $data['stores'] = $stores + $this->Team_model->get_stores_select();
+        if ($this->Team_model->get_stores_select() != null)
+            $data['stores'] = $stores + $this->Team_model->get_stores_select();
+        else
+            $data['stores'] = $stores;
         $data['products'] = array('' => 'Selecione a loja de origem');
         $this->load->view("_inc/header");
         $this->load->view("_inc/menu");

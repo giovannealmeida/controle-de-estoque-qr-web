@@ -1,6 +1,6 @@
 <?php
 
-class Home_controller extends CI_Controller {
+class Inicio extends CI_Controller {
 
     private $user_info;
 

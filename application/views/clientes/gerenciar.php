@@ -14,17 +14,17 @@
         <div class="page-bar">
             <ul class="page-breadcrumb">
                 <li>
-                    <a href="#">Cliente</a>
+                    <a href="#">Clientes</a>
                     <i class="fa fa-circle"></i>
                 </li>
                 <li>
-                    <a href="#">Visualizar clientes</a>
+                    <a href="#">Gerenciar</a>
                     <i class="fa fa-circle"></i>
                 </li>
             </ul>
         </div>
         <!-- END PAGE BAR -->
-        <h3 class="page-title"> Visualizar Clientes
+        <h3 class="page-title"> Gerenciar Clientes
             <small>cadastrados</small>
         </h3>
         <?php if ($this->session->flashdata("success")): ?>
@@ -46,7 +46,7 @@
                     <div class="portlet-title">
                         <div class="caption font-dark">
                             <i class="icon-settings font-dark"></i>
-                            <span class="caption-subject bold uppercase">Lista de Produtos</span>
+                            <span class="caption-subject bold uppercase">Lista de Clientes</span>
                         </div>
                         <div class="tools"> </div>
                     </div>
@@ -84,9 +84,9 @@
                                         <td><?= $value->city ?>-<?= $value->state ?></td>
                                         <td>
                                             <div class="margin-bottom-5">
-                                                <a type="button" href="<?= base_url('Clientes_controller/editar?id=' . $value->id) ?>" class="btn green">
+                                                <a type="button" href="<?= base_url('Clientes/editar?id=' . $value->id) ?>" class="btn green">
                                                     <i class="fa fa-pencil"></i> Editar</a>
-                                                <a class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir?')" href="<?= base_url('Clientes_controller/excluir?id=' . $value->id) ?>"><span class="glyphicon glyphicon-remove"></span> Remover</a>
+                                                <a class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir?')" href="<?= base_url('Clientes/excluir?id=' . $value->id) ?>"><span class="glyphicon glyphicon-remove"></span> Remover</a>
                                             </div>
                                         </td>
                                     </tr>

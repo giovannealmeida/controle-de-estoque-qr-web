@@ -1,6 +1,6 @@
 <?php
 
-class Clientes_controller extends CI_Controller {
+class Clientes extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -12,13 +12,13 @@ class Clientes_controller extends CI_Controller {
         }
     }
 
-    public function visualizar_clientes() {
+    public function index() {
         $this->load->model('Client_model');
         $data = $this->user_info;
         $data['clients'] = $this->Client_model->all();
         $this->load->view("_inc/header");
         $this->load->view("_inc/menu");
-        $this->load->view("clientes/visualizar_clientes", $data);
+        $this->load->view("clientes/gerenciar", $data);
         $this->load->view("_inc/footer");
     }
 
@@ -62,7 +62,7 @@ class Clientes_controller extends CI_Controller {
                 } else {
                     $this->session->set_flashdata("fail", "Falha ao atualizar! Consulte administrador do sistema");
                 }
-                redirect('clientes_controller/visualizar_clientes');
+                redirect('clientes');
             }
         }
         $data['state_selected'] = $this->States_model->get_by_city($data['user_profile']->city_id)->id;
@@ -71,7 +71,7 @@ class Clientes_controller extends CI_Controller {
         $data['cities'] = $this->Cities_model->get_by_state_id($data['state_selected']);
         $this->load->view("_inc/header");
         $this->load->view("_inc/menu");
-        $this->load->view("clientes/editar_clientes", $data);
+        $this->load->view("clientes/editar", $data);
         $this->load->view("_inc/footer");
     }
 
@@ -82,11 +82,10 @@ class Clientes_controller extends CI_Controller {
         $delete = $this->Client_model->delete($id);
         if ($delete) {
             $this->session->set_flashdata('success', 'Cliente excluído com sucesso!');
-            redirect('Clientes_controller/visualizar_clientes');
         } else {
             $this->session->set_flashdata('fail', 'Não foi possível excluir');
-            redirect('Clientes_controller/visualizar_clientes');
         }
+        redirect('Clientes');
     }
 
     public function cpf_sum($second) {

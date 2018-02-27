@@ -1,6 +1,6 @@
 <?php
 
-class Estoque_controller extends CI_Controller {
+class Estoque extends CI_Controller {
 
     private $user_info;
 
@@ -51,10 +51,10 @@ class Estoque_controller extends CI_Controller {
                 $insert = $this->Stock_model->insert_product($data_insert);
                 if ($insert) {
                     $this->session->set_flashdata('success', 'Produto cadastrado com sucesso!');
-                    redirect('Estoque_controller/cadastro');
+                    redirect('Estoque');
                 } else {
                     $this->session->set_flashdata('fail', 'Não foi possível cadastrar');
-                    redirect('Estoque_controller/cadastro');
+                    redirect('Estoque/cadastro');
                 }
             }
         }
@@ -62,18 +62,18 @@ class Estoque_controller extends CI_Controller {
         $data['last'] = $this->Stock_model->get_last_product_record();
         $this->load->view("_inc/header", $data);
         $this->load->view("_inc/menu");
-        $this->load->view("estoque/cadastro_produto");
+        $this->load->view("estoque/cadastro");
         $this->load->view("_inc/footer");
     }
 
-    public function visualizar() {
+    public function index() {
 
         $data = $this->user_info;
         $this->load->model('Stock_model');
         $data['products'] = $this->Stock_model->get_products();
         $this->load->view("_inc/header", $data);
         $this->load->view("_inc/menu");
-        $this->load->view("estoque/visualizar_produto");
+        $this->load->view("estoque/gerenciar");
         $this->load->view("_inc/footer");
     }
 
@@ -96,11 +96,10 @@ class Estoque_controller extends CI_Controller {
                 $update = $this->Stock_model->update_product($this->input->post(), $this->input->get_post('id'));
                 if ($update) {
                     $this->session->set_flashdata('success', 'Produto atualizado com sucesso!');
-                    redirect('Estoque_controller/editar?id=' . $this->input->get_post('id'));
                 } else {
                     $this->session->set_flashdata('fail', 'Não foi possível atualizar');
-                    redirect('Estoque_controller/editar?id=' . $this->input->get_post('id'));
                 }
+                redirect('Estoque');
             }
         }
 
@@ -109,7 +108,7 @@ class Estoque_controller extends CI_Controller {
         $data['last'] = $this->Stock_model->get_last_product_record();
         $this->load->view("_inc/header", $data);
         $this->load->view("_inc/menu");
-        $this->load->view("estoque/cadastro_produto");
+        $this->load->view("estoque/cadastro");
         $this->load->view("_inc/footer");
     }
 
@@ -122,14 +121,13 @@ class Estoque_controller extends CI_Controller {
             $delete = $this->Stock_model->delete_product($id);
             if ($delete) {
                 $this->session->set_flashdata('success', 'Produto excluído com sucesso!');
-                redirect('Estoque_controller/visualizar');
             } else {
                 $this->session->set_flashdata('fail', 'Não foi possível excluir');
-                redirect('Estoque_controller/visualizar');
             }
+            redirect('Estoque');
         } else {
             $this->session->set_flashdata('fail', 'O produto está associado ao estoque de uma loja, remova primeiro da loja para poder excluir');
-            redirect('Estoque_controller/visualizar');
+            redirect('Estoque');
         }
     }
 

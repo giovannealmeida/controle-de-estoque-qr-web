@@ -13,27 +13,39 @@
         <div class="page-bar">
             <ul class="page-breadcrumb">
                 <li>
-                    <a href="#">Cadastro de Vendedor</a>
+                    <a href="index.html">Estoque</a>
                     <i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <span><?= isset($product->id) ? 'Edição' : 'Cadastro' ?></span>
                 </li>
             </ul>
         </div>
         <!-- END PAGE BAR -->
         <!-- BEGIN PAGE TITLE-->
-        <h3 class="page-title"> Preencha as informações
-            <small>abaixo</small>
+        <h3 class="page-title"> <?= isset($product->id) ? 'Edição de Produto' : 'Cadastro de Produto' ?>
         </h3>
         <!-- END PAGE TITLE-->
         <!-- END PAGE HEADER-->
         <div class="row">
             <div class="col-md-12">
                 <div class="tabbable-line boxless tabbable-reversed">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#tab_2" data-toggle="tab" aria-expanded="true"> <?= isset($product->id) ? 'Edição' : 'Cadastro' ?> </a>
+                        </li>
+                        <li>
+                            <a href="#tab_3" data-toggle="tab"> Último cadastrado </a>
+                        </li>
+                    </ul>
+
+
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_2">
                             <div class="portlet box green">
                                 <div class="portlet-title">
                                     <div class="caption">
-                                        <i class="fa fa-gift"></i>Formulário de Cadastro</div>
+                                        <i class="fa fa-gift"></i>Formulário de <?= isset($product->id) ? 'edição' : 'cadastro' ?></div>
                                     <div class="tools">
                                         <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
                                         <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
@@ -43,7 +55,8 @@
                                 </div>
                                 <div class="portlet-body form">
                                     <!-- BEGIN FORM-->
-                                    <form action="<?= base_url('Equipe_controller/vendedor') ?>" class="form-horizontal" method="post" data-toggle ="validator">
+                                    <form action="<?= isset($product->id) ? base_url('Estoque/editar?id=') . $product->id : base_url('Estoque/cadastro') ?>" class="form-horizontal" method="post" data-toggle ="validator">
+
                                         <?php if (validation_errors()): ?>
                                             <br/>
                                             <div class="alert alert-danger">
@@ -62,14 +75,15 @@
                                                 <strong><?= $this->session->flashdata("fail"); ?></strong><br/>
                                             </div>
                                         <?php endif; ?>
+
                                         <div class="form-body">
                                             <h3 class="form-section">Informações Básicas</h3>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="control-label col-md-3">Nome Completo</label>
+                                                        <label class="control-label col-md-3">Nome do Produto</label>
                                                         <div class="col-md-9">
-                                                            <?= form_input('name', set_value('name'), array('class' => 'form-control', 'placeholder' => 'ex: Tiago Silva', 'required' => 'required')); ?>
+                                                            <input type="text" name="product_name" class="form-control" placeholder="ex: Colar de prata com pedra" required="required" value="<?= isset($product->product_name) ? $product->product_name : '' ?> ">
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
@@ -77,31 +91,13 @@
                                                 <!--/span-->
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="control-label col-md-3">CPF</label>
+                                                        <label class="control-label col-md-3">Categoria</label>
                                                         <div class="col-md-9">
-                                                            <?= form_input('cpf', set_value('cpf'), array('class' => 'form-control cpf', 'placeholder' => 'ex: 200122521893', 'required' => 'required')); ?>
-                                                            <div class="help-block with-errors"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!--/span-->
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="control-label col-md-3">E-mail</label>
-                                                        <div class="col-md-9">
-                                                            <?= form_input(array('name' => 'email', 'class' => 'form-control', 'id' => 'email', 'type' => 'email', 'placeholder' => 'ex: contato@....', 'required' => 'required'), set_value('email')); ?>
-                                                            <div class="help-block with-errors"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!--/span-->
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="control-label col-md-3">Senha</label>
-                                                        <div class="col-md-9">
-                                                            <?= form_password(array("name" => "password", "class" => "form-control", "placeholder" => "Digite uma senha para o primeiro acesso", "required" => "required")); ?>
+                                                            <select name="category" class="form-control selectpicker" data-live-search ="true">
+                                                                <?php foreach ($category as $value): ?>
+                                                                    <option value="<?= $value->id ?>" <?= isset($product->category) && $product->category == $value->id ? 'selected' : '' ?>><?= $value->description ?></option>
+                                                                <?php endforeach; ?>
+                                                            </select>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
@@ -112,76 +108,58 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="control-label col-md-3">Estado</label>
+                                                        <label class="control-label col-md-3">Descrição</label>
                                                         <div class="col-md-9">
-                                                            <?php echo form_dropdown(array('class' => "form-control selectpicker", 'data-live-search' => "true", 'required' => "true", 'id' => "selectState",), $states, set_value('selectState')); ?>
+                                                            <input name="description" type="text" class="form-control" placeholder="ex: corrente entrelaçada com pedra indiana" required="required" value="<?= isset($product->description) ? $product->description : '' ?>">
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <!--/span-->
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="control-label col-md-3">Cidade</label>
-                                                        <div class="col-md-9">
-                                                            <?php echo form_dropdown(array('class' => "form-control selectpicker", 'data-live-search' => "true", 'data-width' => "100%", 'required' => "true", 'name' => "city_id", 'id' => "selectCity"), $cities, set_value('city_id')); ?>
+                                                        <label class="control-label col-md-3">Valor Atacado</label>
+                                                        <div class="col-md-3">
+                                                            <input name="wholesale_value" type="text" class="form-control money" placeholder="ex: 5,00" required="required" value="<?= isset($product->wholesale_value) ? $product->wholesale_value : '' ?>">
+                                                            <div class="help-block with-errors"></div>
+                                                        </div>
+                                                        <label class="control-label col-md-3">Valor Varejo</label>
+                                                        <div class="col-md-3">
+                                                            <input name="retail_value" type="text" class="form-control money" placeholder="ex: 5,00" required="required" value="<?= isset($product->retail_value) ? $product->retail_value : '' ?>">
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <!--/span-->
                                             </div>
                                             <!--/row-->
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="control-label col-md-3">Data de nascimento</label>
-                                                        <div class="col-md-9">
-                                                            <?= form_input(array('name' => 'birthday', 'class' => 'form-control', 'id' => 'birthday', 'type' => 'date', 'required' => 'true'), set_value('birthday')); ?>
+                                                        <label class="control-label col-md-3">Peso</label>
+                                                        <div class="col-md-6">
+                                                            <input name="weight" type="number" class="form-control" placeholder="ex: 200g" value="<?= isset($product->weight) ? $product->weight : '' ?>">
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="control-label col-md-3">Gênero</label>
-                                                        <div class="col-md-9">
-                                                            <?php echo form_dropdown(array('class' => "form-control selectpicker", 'data-live-search' => "true", 'data-width' => "100%", 'required' => "true", 'name' => "gender_id", 'id' => "gender_id"), $genders, set_value('gender_id')); ?>
+                                                        <label class="control-label col-md-3">Quantidade em estoque</label>
+                                                        <div class="col-md-6">
+                                                            <input name="quantity_in_stock" type="number" class="form-control" placeholder="ex: 200" required="required" value="<?= isset($product->quantity_in_stock) ? $product->quantity_in_stock : '' ?>">
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <h3 class="form-section">Informações para Venda</h3>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="control-label col-md-3">Loja vinculada</label>
-                                                        <div class="col-md-9">
-                                                             <?php echo form_dropdown(array('class' => "form-control selectpicker", 'data-live-search' => 'true', 'data-width' => "100%", 'required' => "true", 'name' => "store_id", 'id' => "store_id",), $stores, set_value('store_id')); ?>
-                                                            <div class="help-block with-errors"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!--/span-->
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="control-label col-md-3">Tipo de Venda</label> <!-- Atacado,Varejo, Ambos-->
-                                                        <div class="col-md-9">
-                                                            <?php echo form_dropdown(array('class' => "form-control selectpicker", 'data-live-search' => 'true', 'data-width' => "100%", 'required' => "true", 'name' => "sale_id", 'id' => "sale_id",), $type_sales, set_value('sale_id')); ?>
-                                                            <div class="help-block with-errors"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!--/span-->
-                                            </div>
-
                                         </div>
                                         <div class="form-actions">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="row">
                                                         <div class="col-md-offset-3 col-md-9">
-                                                            <button type="submit" class="btn green"> Enviar </button>
+                                                            <button type="submit" class="btn green">Salvar</button>
                                                             <button type="button" class="btn default">Cancelar</button>
                                                         </div>
                                                     </div>
@@ -194,57 +172,105 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--row-->
-        <div class="row">
-            <div class="col-md-12">
-                <!-- BEGIN EXAMPLE TABLE PORTLET-->
-                <div class="portlet light bordered">
-                    <div class="portlet-title">
-                        <div class="caption font-dark">
-                            <i class="icon-settings font-dark"></i>
-                            <span class="caption-subject bold uppercase">Lista Vendedores</span>
+                        <!-- SEGUNDA ABA: VISUALIZAÇÃO -->
+                        <div class="tab-pane" id="tab_3">
+                            <div class="portlet box blue">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-gift"></i>Último Produto Cadastrado</div>
+                                    <div class="tools">
+                                        <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                                        <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+                                        <a href="javascript:;" class="reload" data-original-title="" title=""> </a>
+                                        <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                    <!-- BEGIN FORM-->
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-body">
+                                            <h2 class="margin-bottom-20"> Detalhes do produto </h2>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3">Nome do Produto</label>
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static"> <?= isset($last->product_name) ? $last->product_name : '' ?> </p> <!-- Entrar com informações do banco -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3">Categoria:</label>
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static"> <?= isset($last->category) ? $last->category : '' ?> </p> <!-- Entrar com informações do banco -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3">Descrição:</label>
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static"> <?= isset($last->description) ? $last->description : '' ?> </p> <!-- Entrar com informações do banco -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3">Valor de atacado:</label>
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static"> <?= isset($last->wholesale_value) ? $last->wholesale_value : '' ?> </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3">Quantidade:</label>
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static"> <?= isset($last->quantity_in_stock) ? $last->quantity_in_stock : '' ?> </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3">Valor de varejo:</label>
+                                                        <div class="col-md-9">
+                                                            <p class="form-control-static"> <?= isset($last->retail_value) ? $last->retail_value : '' ?> </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                        </div>
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-offset-3 col-md-9">
+                                                            <a type="button" href="<?= isset($last->id) ? base_url('Estoque/editar?id=' . $last->id) : '#' ?>" class="btn green">
+                                                                <i class="fa fa-pencil"></i> Editar</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6"> </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- END FORM-->
+                                </div>
+                            </div>
                         </div>
-                        <div class="tools"> </div>
-                    </div>
-                    <div class="portlet-body">
-                        <table class="table table-striped table-bordered table-hover sample_1">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        Nome
-                                    </th>
-                                    <th>
-                                        CPF
-                                    </th>
-                                    <th>
-                                        E-mail
-                                    </th>
-                                    <th>
-                                        Estado
-                                    </th>
-                                    <th>
-                                        Cidade
-                                    </th>
-                                    <th>
-                                        Nascimento
-                                    </th>
-                                    <th>
-                                        Loja
-                                    </th>
-                                    <th>
-                                        Tipo Venda
-                                    </th>
-                                    <th>
-                                        Opções
-                                    </th>
-                                </tr>
-                            </thead>
-
-                        </table>
                     </div>
                 </div>
             </div>
@@ -262,5 +288,4 @@
 <script src="<?= base_url('assets/js/mask.js') ?>"  type="text/javascript"></script>
 <script src="<?= base_url("assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js") ?>" type="text/javascript"></script>
 <script src="<?= base_url("assets/pages/scripts/components-bootstrap-select.min.js") ?>"  type="text/javascript"></script>
-<script src="<?= base_url('assets/js/changeCity.js') ?>"  type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->

@@ -13,7 +13,11 @@
         <div class="page-bar">
             <ul class="page-breadcrumb">
                 <li>
-                    <a href="index.html">Cadastro de Loja</a>
+                    <a href="#">Equipe</a>
+                    <i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <a href="#">Administradores</a>
                     <i class="fa fa-circle"></i>
                 </li>
             </ul>
@@ -43,7 +47,7 @@
                                 </div>
                                 <div class="portlet-body form">
                                     <!-- BEGIN FORM-->
-                                    <form action="<?= base_url('Equipe_controller/administrador') ?>" class="form-horizontal" method="post" data-toggle ="validator">
+                                    <form action="<?= base_url('Equipe/administradores') ?>" class="form-horizontal" method="post" data-toggle ="validator">
                                         <?php if (validation_errors()): ?>
                                             <br/>
                                             <div class="alert alert-danger">
@@ -91,7 +95,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">E-mail</label>
                                                         <div class="col-md-9">
-                                                           <?= form_input(array('name' => 'email', 'class' => 'form-control', 'id' => 'email', 'type' => 'email', 'placeholder' => 'ex: contato@....', 'required' => 'required'), set_value('email')); ?>
+                                                            <?= form_input(array('name' => 'email', 'class' => 'form-control', 'id' => 'email', 'type' => 'email', 'placeholder' => 'ex: contato@....', 'required' => 'required'), set_value('email')); ?>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
@@ -156,8 +160,8 @@
                                                 <div class="col-md-6">
                                                     <div class="row">
                                                         <div class="col-md-offset-3 col-md-9">
-                                                            <button type="submit" class="btn green"> Enviar </button>
-                                                            <button type="button" class="btn default">Cancelar</button>
+                                                            <button type="submit" class="btn green"> Salvar </button>
+                                                            <!--<button type="button" class="btn default">Cancelar</button>-->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -215,7 +219,26 @@
                                     </th>
                                 </tr>
                             </thead>
-
+                            <?php if (count($administrators) > 0): ?>
+                                <?php foreach ($administrators as $value): ?>
+                                    <tr>
+                                        <td> <?= $value->name ?> </td>
+                                        <td> <?= $value->cpf ?> </td>
+                                        <td> <?= $value->email ?> </td>
+                                        <td> <?= $value->state ?> </td>
+                                        <td> <?= $value->city ?> </td>
+                                        <td> <?= $value->birthday ?> </td>
+                                        <td> <?= $value->gender ?> </td>
+                                        <td>
+                                            <div class="margin-bottom-5">
+                                                <a type="button" href="<?= base_url('Clientes_controller/editar?id=' . $value->id) ?>" class="btn green">
+                                                    <i class="fa fa-pencil"></i> Editar</a>
+                                                <a class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir o administrador e todo o seu histórico?')" href="<?= base_url('Equipe/excluir_administrador?id=' . $value->id) ?>"><span class="glyphicon glyphicon-remove"></span> Remover</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </table>
                     </div>
                 </div>

@@ -13,7 +13,11 @@
         <div class="page-bar">
             <ul class="page-breadcrumb">
                 <li>
-                    <a href="index.html">Cadastro de Loja</a>
+                    <a href="#">Equipe</a>
+                    <i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <a href="#">Lojas</a>
                     <i class="fa fa-circle"></i>
                 </li>
             </ul>
@@ -43,7 +47,7 @@
                                 </div>
                                 <div class="portlet-body form">
                                     <!-- BEGIN FORM-->
-                                    <form action="<?= base_url('Equipe_controller/loja') ?>" class="form-horizontal" method="post" data-toggle ="validator">
+                                    <form action="<?= base_url('Equipe/lojas') ?>" class="form-horizontal" method="post" data-toggle ="validator">
                                         <?php if (validation_errors()): ?>
                                             <br/>
                                             <div class="alert alert-danger">
@@ -143,8 +147,8 @@
                                                 <div class="col-md-6">
                                                     <div class="row">
                                                         <div class="col-md-offset-3 col-md-9">
-                                                            <button type="submit" class="btn green"> Enviar </button>
-                                                            <button type="button" class="btn default">Cancelar</button>
+                                                            <button type="submit" class="btn green"> Salvar </button>
+                                                            <!--<button type="button" class="btn default">Cancelar</button>-->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -199,7 +203,25 @@
                                     </th>
                                 </tr>
                             </thead>
-
+                            <?php if (count($stores) > 0): ?>
+                                <?php foreach ($stores as $value): ?>
+                                    <tr>
+                                        <td> <?= $value->fantasy_name ?> </td>
+                                        <td> <?= $value->cnpj ?> </td>
+                                        <td> <?= $value->state ?> </td>
+                                        <td> <?= $value->city ?> </td>
+                                        <td> <?= $value->phone ?> </td>
+                                        <td> <?= $value->email ?> </td>
+                                        <td>
+                                            <div class="margin-bottom-5">
+                                                <a type="button" href="<?= base_url('Clientes_controller/editar?id=' . $value->id) ?>" class="btn green">
+                                                    <i class="fa fa-pencil"></i> Editar</a>
+                                                <a class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir a Loja e todo o seu histórico? Os produtos do estoque da loja irão voltar para o estoque geral')" href="<?= base_url('Equipe/excluir_loja?id=' . $value->id) ?>"><span class="glyphicon glyphicon-remove"></span> Remover</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </table>
                     </div>
                 </div>

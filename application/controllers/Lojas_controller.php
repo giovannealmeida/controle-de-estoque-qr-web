@@ -156,7 +156,10 @@ class Lojas_controller extends CI_Controller {
         }
 
         $stores = array('' => 'Selecione a loja');
-        $data['stores'] = $stores + $this->Team_model->get_stores_select();
+        if ($this->Team_model->get_stores_select() != null)
+            $data['stores'] = $stores + $this->Team_model->get_stores_select();
+        else
+            $data['stores'] = $stores;
         $data['products'] = array('' => 'Selecione a loja de origem');
         $this->load->view("_inc/header");
         $this->load->view("_inc/menu");
@@ -165,7 +168,6 @@ class Lojas_controller extends CI_Controller {
     }
 
     public function excluir() {
-        $this->load->model('Stock_model');
         $this->load->model('Store_model');
         $id = $this->input->get_post('id');
         $association = $this->Store_model->get_association_by_id($id);

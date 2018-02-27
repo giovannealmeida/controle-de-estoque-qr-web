@@ -17,7 +17,7 @@
                     <i class="fa fa-circle"></i>
                 </li>
                 <li>
-                    <a href="#">Visualizar Produtos</a>
+                    <a href="#">Gerenciar</a>
                     <i class="fa fa-circle"></i>
                 </li>
             </ul>
@@ -94,9 +94,9 @@
                                         <?php endif; ?>
                                         <td>
                                             <div class="margin-bottom-5">
-                                                <a type="button" href="<?= base_url('Estoque_controller/editar?id=' . $value->id) ?>" class="btn green">
+                                                <a type="button" href="<?= base_url('Estoque/editar?id=' . $value->id) ?>" class="btn green">
                                                     <i class="fa fa-pencil"></i> Editar</a>
-                                                <a class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir?')" href="<?= base_url('Estoque_controller/excluir?id=' . $value->id) ?>"><span class="glyphicon glyphicon-remove"></span> Remover</a>
+                                                <a class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir?')" href="<?= base_url('Estoque/excluir?id=' . $value->id) ?>"><span class="glyphicon glyphicon-remove"></span> Remover</a>
                                             </div>
                                         </td>
                                     </tr>

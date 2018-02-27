@@ -17,6 +17,37 @@ class User_model extends CI_Model {
 
         return null;
     }
+    
+    public function get_all_sellers() {
+        $this->db->select('u.*, c.name as city, st.name as state, s.fantasy_name as store, t.description as type');
+        $this->db->where('level_id', 2);
+        $this->db->join('tb_cities c', 'c.id = u.city_id', 'inner');
+        $this->db->join('tb_states st', 'st.id = c.state_id', 'inner');
+        $this->db->join('tb_user_store us', 'u.id = us.user_id', 'inner');
+        $this->db->join('tb_stores s', 's.id = us.store_id', 'inner');
+        $this->db->join('tb_type_sales t', 't.id = us.type_sale_id', 'inner');
+        $result = $this->db->get('tb_users u');
+        if ($result->num_rows() > 0) {
+            return $result->result();
+        }
+
+        return null;
+    }
+    
+    public function get_all_administrators() {
+        $this->db->select('u.*, c.name as city, st.name as state, g.name as gender');
+        $this->db->where('u.level_id', 1);
+        $this->db->where('u.id <>', $this->session->userdata('logged_in')->id);
+        $this->db->join('tb_cities c', 'c.id = u.city_id', 'inner');
+        $this->db->join('tb_states st', 'st.id = c.state_id', 'inner');
+        $this->db->join('tb_genders g', 'g.id = u.gender_id', 'inner');
+        $result = $this->db->get('tb_users u');
+        if ($result->num_rows() > 0) {
+            return $result->result();
+        }
+
+        return null;
+    }
 
     public function get_by_id($user_id) {
         $result = $this->db->get_where('tb_users', array('id' => $user_id));

@@ -29,7 +29,7 @@
                     <h3 class="uppercase">Menu</h3>
                 </li>
                 <li class="nav-item  ">
-                    <a href="<?= base_url("Home_controller/index") ?>" class="nav-link nav-toggle">
+                    <a href="<?= base_url("Inicio") ?>" class="nav-link nav-toggle">
                         <i class="icon-bar-chart"></i>
                         <span class="title">Paindel de Controle</span>
                     </a>
@@ -37,23 +37,23 @@
                 <li class="nav-item  ">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="fa fa-users"></i>
-                        <span class="title">Cadastro de Equipe</span>
+                        <span class="title">Equipe</span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
                         <li class="nav-item  ">
-                            <a href="<?= base_url("Equipe_controller/loja") ?>" class="nav-link ">
-                                <span class="title">Loja</span>
+                            <a href="<?= base_url("Equipe/administradores") ?>" class="nav-link ">
+                                <span class="title">Administradores</span>
                             </a>
                         </li>
                         <li class="nav-item  ">
-                            <a href="<?= base_url("Equipe_controller/vendedor") ?>" class="nav-link ">
-                                <span class="title">Vendedor</span>
+                            <a href="<?= base_url("Equipe/lojas") ?>" class="nav-link ">
+                                <span class="title">Lojas</span>
                             </a>
                         </li>
                         <li class="nav-item  ">
-                            <a href="<?= base_url("Equipe_controller/administrador") ?>" class="nav-link ">
-                                <span class="title">Administrador</span>
+                            <a href="<?= base_url("Equipe/vendedores") ?>" class="nav-link ">
+                                <span class="title">Vendedores</span>
                             </a>
                         </li>
                     </ul>
@@ -66,13 +66,13 @@
                     </a>
                     <ul class="sub-menu">
                         <li class="nav-item  ">
-                            <a href="<?= base_url("Estoque_controller/cadastro") ?>" class="nav-link ">
-                                <span class="title">Cadastro de Produto</span>
+                            <a href="<?= base_url("Estoque/cadastro") ?>" class="nav-link ">
+                                <span class="title">Cadastrar</span>
                             </a>
                         </li>
                         <li class="nav-item  ">
-                            <a href="<?= base_url("Estoque_controller/visualizar") ?>" class="nav-link ">
-                                <span class="title">Visualizar Estoque</span>
+                            <a href="<?= base_url("Estoque") ?>" class="nav-link ">
+                                <span class="title">Gerenciar</span>
                             </a>
                         </li>
                     </ul>
@@ -128,10 +128,10 @@
                     </a>
                     <ul class="sub-menu">
                         <li class="nav-item  ">
-                            <a href="<?= base_url("Clientes_controller/visualizar_clientes") ?>" class="nav-link ">
-                                <span class="title">Ver Lista</span>
+                            <a href="<?= base_url("Clientes") ?>" class="nav-link ">
+                                <span class="title">Gerenciar</span>
                             </a>
-                      </li>
+                        </li>
                     </ul>
                 </li>
             </ul>

@@ -42,7 +42,7 @@
                     </div>
                     <div class="portlet-body form">
                         <!-- BEGIN FORM-->
-                        <form action="<?= base_url('Clientes_controller/editar?id=' . $client->id) ?>" class="horizontal-form" method="post" data-toggle ="validator">
+                        <form action="<?= base_url('Clientes/editar?id=' . $client->id) ?>" class="horizontal-form" method="post" data-toggle ="validator">
                             <?php if (validation_errors()): ?>
                                 <br/>
                                 <div class="alert alert-danger">
