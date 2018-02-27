@@ -14,11 +14,11 @@
         <div class="page-bar">
             <ul class="page-breadcrumb">
                 <li>
-                    <a href="#">Controle de Loja</a>
+                    <a href="#">Controle de Lojas</a>
                     <i class="fa fa-circle"></i>
                 </li>
                 <li>
-                    <a href="#">Translado de estoque</a>
+                    <a href="#">Translado</a>
                     <i class="fa fa-circle"></i>
                 </li>
             </ul>
@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="portlet-body form">
                                     <!-- BEGIN FORM-->
-                                    <form action="<?= base_url('Lojas_controller/translado') ?>" class="form-horizontal" method="post" data-toggle ="validator">
+                                    <form action="<?= base_url('Lojas/translado') ?>" class="form-horizontal" method="post" data-toggle ="validator">
                                         <?php if (validation_errors()): ?>
                                             <br/>
                                             <div class="alert alert-danger">
@@ -124,8 +124,8 @@
                                                     <div class="col-md-6">
                                                         <div class="row">
                                                             <div class="col-md-offset-3 col-md-9">
-                                                                <button type="submit" class="btn green"> Enviar </button>
-                                                                <button type="button" class="btn default">Cancelar</button>
+                                                                <button type="submit" class="btn green"> Salvar </button>
+                                                                <a href="<?= base_url('Lojas') ?>"type="button" class="btn default">Cancelar</a>
                                                             </div>
                                                         </div>
                                                     </div>

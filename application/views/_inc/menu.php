@@ -85,13 +85,13 @@
                     </a>
                     <ul class="sub-menu">
                         <li class="nav-item  ">
-                            <a href="<?= base_url("Vendas_controller/etiquetas") ?>" class="nav-link ">
+                            <a href="<?= base_url("Vendas/etiquetas") ?>" class="nav-link ">
                                 <span class="title">Gerar Etiqueta</span>
                             </a>
                         </li>
                         <li class="nav-item  ">
-                            <a href="<?= base_url("Vendas_controller/venda") ?>" class="nav-link ">
-                                <span class="title">Visualizar Vendas</span>
+                            <a href="<?= base_url("Vendas") ?>" class="nav-link ">
+                                <span class="title">Visualizar</span>
                             </a>
                         </li>
                     </ul>
@@ -104,18 +104,18 @@
                     </a>
                     <ul class="sub-menu">
                         <li class="nav-item  ">
-                            <a href="<?= base_url("Lojas_controller/cadastro") ?>" class="nav-link ">
+                            <a href="<?= base_url("Lojas/cadastro") ?>" class="nav-link ">
                                 <span class="title">Cadastro de Estoque</span>
                             </a>
                         </li>
                         <li class="nav-item  ">
-                            <a href="<?= base_url("Lojas_controller/visualizar") ?>" class="nav-link ">
-                                <span class="title">Visualizar Estoque</span>
+                            <a href="<?= base_url("Lojas/translado") ?>" class="nav-link ">
+                                <span class="title">Translado</span>
                             </a>
                         </li>
                         <li class="nav-item  ">
-                            <a href="<?= base_url("Lojas_controller/translado") ?>" class="nav-link ">
-                                <span class="title">Translado</span>
+                            <a href="<?= base_url("Lojas") ?>" class="nav-link ">
+                                <span class="title">Visualizar Estoque</span>
                             </a>
                         </li>
                     </ul>

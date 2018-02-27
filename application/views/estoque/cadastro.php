@@ -160,7 +160,7 @@
                                                     <div class="row">
                                                         <div class="col-md-offset-3 col-md-9">
                                                             <button type="submit" class="btn green">Salvar</button>
-                                                            <button type="button" class="btn default">Cancelar</button>
+                                                            <a href="<?= base_url('Estoque') ?>"type="button" class="btn default">Cancelar</a>
                                                         </div>
                                                     </div>
                                                 </div>

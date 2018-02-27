@@ -1,6 +1,6 @@
 <?php
 
-class Lojas_controller extends CI_Controller {
+class Lojas extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -47,7 +47,7 @@ class Lojas_controller extends CI_Controller {
                         $this->session->set_flashdata('fail', 'Não foi possível enviar');
                     }
                 }
-                redirect('Lojas_controller/cadastro');
+                redirect('Lojas');
             }
         }
         $data['stores'] = $this->Team_model->get_stores_select();
@@ -55,7 +55,7 @@ class Lojas_controller extends CI_Controller {
         $data['products'] = $this->Stock_model->get_products_select();
         $this->load->view("_inc/header", $data);
         $this->load->view("_inc/menu");
-        $this->load->view("controle_loja/loja_cadastro_estoque");
+        $this->load->view("lojas/cadastro_estoque");
         $this->load->view("_inc/footer");
     }
 
@@ -83,23 +83,23 @@ class Lojas_controller extends CI_Controller {
                 } else {
                     $this->session->set_flashdata('fail', 'Não foi possível atualizar o estoque da  loja');
                 }
-                redirect('Lojas_controller/editar?id=' . $this->input->get_post('id'));
+                redirect('Lojas');
             }
         }
         $data['stores'] = $this->Team_model->get_stores_select();
         $data['products'] = $this->Stock_model->get_products_select();
         $this->load->view("_inc/header", $data);
         $this->load->view("_inc/menu");
-        $this->load->view("controle_loja/loja_cadastro_estoque");
+        $this->load->view("lojas/cadastro_estoque");
         $this->load->view("_inc/footer");
     }
 
-    public function visualizar() {
+    public function index() {
         $this->load->model('Store_model');
         $data['records'] = $this->Store_model->get_all();
         $this->load->view("_inc/header");
         $this->load->view("_inc/menu");
-        $this->load->view("controle_loja/loja_visualizar_estoque", $data);
+        $this->load->view("lojas/visualizar_estoque", $data);
         $this->load->view("_inc/footer");
     }
 
@@ -151,7 +151,7 @@ class Lojas_controller extends CI_Controller {
                         $this->session->set_flashdata('fail', 'Não foi possível enviar');
                     }
                 }
-                redirect('Lojas_controller/translado');
+                redirect('Lojas');
             }
         }
 
@@ -163,12 +163,13 @@ class Lojas_controller extends CI_Controller {
         $data['products'] = array('' => 'Selecione a loja de origem');
         $this->load->view("_inc/header");
         $this->load->view("_inc/menu");
-        $this->load->view("controle_loja/loja_translado_estoque", $data);
+        $this->load->view("lojas/translado", $data);
         $this->load->view("_inc/footer");
     }
 
     public function excluir() {
         $this->load->model('Store_model');
+        $this->load->model('Stock_model');
         $id = $this->input->get_post('id');
         $association = $this->Store_model->get_association_by_id($id);
         $product = $this->Stock_model->get_product_by_id($association->product_id);
@@ -177,11 +178,10 @@ class Lojas_controller extends CI_Controller {
         if ($delete) {
             $update = $this->Stock_model->update_product($update, $association->product_id);
             $this->session->set_flashdata('success', 'Produto removido com sucesso!');
-            redirect('Lojas_controller/visualizar');
         } else {
             $this->session->set_flashdata('fail', 'Não foi possível remover');
-            redirect('Lojas_controller/visualizar');
         }
+        redirect('Lojas');
     }
 
     public function amount_check($str) {

@@ -26,7 +26,7 @@ class Login_controller extends CI_Controller {
             if ($this->form_validation->run() == true) {
                 if ($user = $this->users->getUserLogin($this->input->post("email"), $this->input->post("password"))) {
                     $this->session->set_userdata("logged_in", $user);
-                    redirect("Home_controller/index");
+                    redirect("Inicio");
                 } else {
                     $data["login_status"] = "error";
                 }

@@ -110,7 +110,7 @@
                         <div class="tools"> </div>
                     </div>
                     <div class="portlet-body">
-                        <form class="form-horizontal" data-toggle ="validator" action="<?= base_url('Vendas_controller/etiquetas') ?>" method="POST">
+                        <form class="form-horizontal" data-toggle ="validator" action="<?= base_url('Vendas/etiquetas') ?>" method="POST">
                             <table class="table table-striped table-bordered table-hover sample_1" >
                                 <thead id="table_etiquetas">
                                     <tr>
@@ -210,7 +210,7 @@
             success: function (result) {
                 $.each(JSON.parse(result), function (index, item) {
                     var table = $('.sample_1').DataTable();
-                    var rowNode = table.row.add([store == 0 ? 'Estoque' : item.cnpj + ' - ' + item.store, item.code, item.name, $('#amount').val(), '<a type="button" onClick="remove(this)">Delete</a>' + '<input type="hidden" name="product_id[]" value="' + item.id + '">' + '<input type="hidden" name="value[]" value="' + item.value + '">' + '<input type="hidden" name="amount[]" value="' + $('#amount').val() + '">']).draw().node();
+                    var rowNode = table.row.add([store == 0 ? 'Estoque' : item.cnpj + ' - ' + item.store, item.code, item.name, $('#amount').val(), '<a class="btn btn-danger btn-sm" type="button" onClick="remove(this)"><span class="glyphicon glyphicon-remove"></span> Remover</a></a>' + '<input type="hidden" name="product_id[]" value="' + item.id + '">' + '<input type="hidden" name="value[]" value="' + item.value + '">' + '<input type="hidden" name="amount[]" value="' + $('#amount').val() + '">']).draw().node();
                     $(rowNode).find('td').attr('name', 'line1');
                 });
                 $('#amount').val('63');

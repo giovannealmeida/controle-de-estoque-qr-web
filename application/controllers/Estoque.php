@@ -118,8 +118,10 @@ class Estoque extends CI_Controller {
         $id = $this->input->get_post('id');
         $check_association = $this->Store_model->check_association($id);
         if ($check_association == FALSE) {
+            $product = $this->Stock_model->get_product_by_id($id);
             $delete = $this->Stock_model->delete_product($id);
             if ($delete) {
+                unlink('assets/qrcode/' . $product->code . '.gif');
                 $this->session->set_flashdata('success', 'Produto excluído com sucesso!');
             } else {
                 $this->session->set_flashdata('fail', 'Não foi possível excluir');
