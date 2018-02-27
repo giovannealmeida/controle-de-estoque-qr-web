@@ -29,110 +29,118 @@
         </h3>
         <div class="row">
             <div class="col-md-12">
-              <div class="portlet box blue">
-                                          <div class="portlet-title">
-                                              <div class="caption">
-                                                  <i class="fa fa-gift"></i>Informações de Cadastro </div>
-                                              <div class="tools">
-                                                  <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
-                                                  <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
-                                                  <a href="javascript:;" class="reload" data-original-title="" title=""> </a>
-                                                  <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
-                                              </div>
-                                          </div>
-                                          <div class="portlet-body form">
-                                              <!-- BEGIN FORM-->
-                                              <form action="#" class="horizontal-form">
-                                                  <div class="form-body">
-                                                      <h3 class="form-section">Informações</h3>
-                                                      <div class="row">
-                                                          <div class="col-md-6">
-                                                              <div class="form-group">
-                                                                  <label class="control-label">Nome</label>
-                                                                  <input type="text" id="firstName" class="form-control" placeholder="Chee Kin">
-                                                                  <span class="help-block"> This is inline help </span>
-                                                              </div>
-                                                          </div>
-                                                          <!--/span-->
-                                                          <div class="col-md-6">
-                                                              <div class="form-group has-error">
-                                                                  <label class="control-label">E-mail</label>
-                                                                  <input type="text" id="lastName" class="form-control" placeholder="Lim">
-                                                                  <span class="help-block"> This field has error. </span>
-                                                              </div>
-                                                          </div>
-                                                          <!--/span-->
-                                                      </div>
-                                                      <!--/row-->
-                                                      <div class="row">
-                                                          <div class="col-md-6">
-                                                              <div class="form-group">
-                                                                  <label class="control-label">Gênero</label>
-                                                                  <select class="form-control">
-                                                                      <option value="">Masculino</option>
-                                                                      <option value="">Feminino</option>
-                                                                      <option value="">Outros</option>
-                                                                  </select>
-                                                                  <span class="help-block"> Select your gender </span>
-                                                              </div>
-                                                          </div>
-                                                          <!--/span-->
-                                                          <div class="col-md-6">
-                                                              <div class="form-group">
-                                                                  <label class="control-label">Telefone</label>
-                                                                  <input type="text" class="form-control" placeholder="(73)XXXXX-XXXX"> </div>
-                                                          </div>
-                                                          <!--/span-->
-                                                      </div>
-                                                      <!--/row-->
+                <div class="portlet box blue">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-gift"></i>Informações de Cadastro </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                            <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+                            <a href="javascript:;" class="reload" data-original-title="" title=""> </a>
+                            <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body form">
+                        <!-- BEGIN FORM-->
+                        <form action="<?= base_url('Clientes_controller/editar?id=' . $client->id) ?>" class="horizontal-form" method="post" data-toggle ="validator">
+                            <?php if (validation_errors()): ?>
+                                <br/>
+                                <div class="alert alert-danger">
+                                    <strong>Erros no formulário!</strong><br/>
+                                    <br/>
+                                    <?php echo validation_errors(); ?>
+                                </div>
+                            <?php elseif ($this->session->flashdata("success")): ?>
+                                <br/>
+                                <div class="alert alert-success">
+                                    <strong><?= $this->session->flashdata("success"); ?></strong><br/>
+                                </div>
+                            <?php elseif ($this->session->flashdata("fail")): ?>
+                                <br/>
+                                <div class="alert alert-danger">
+                                    <strong><?= $this->session->flashdata("fail"); ?></strong><br/>
+                                </div>
+                            <?php endif; ?>
+                            <div class="form-body">
+                                <h3 class="form-section">Informações</h3>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Nome</label>
+                                            <?= form_input(array('name' => 'name', 'class' => 'form-control', 'placeholder' => 'ex: Tiago Silva', 'required' => 'required', 'value' => $client->name), set_value('name')); ?>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">E-mail</label>
+                                            <?= form_input(array('name' => 'email', 'class' => 'form-control', 'placeholder' => 'ex: contato@....', 'value' => $client->email), set_value('email')); ?>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Gênero</label>
+                                            <?php echo form_dropdown(array('class' => "form-control selectpicker", 'data-live-search' => "true", 'data-width' => "100%", 'required' => "true", 'name' => "gender_id", 'id' => "gender_id"), $genders, $client->gender_id, set_value('gender_id')); ?>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Telefone</label>
+                                            <?= form_input(array('name' => 'phone', 'class' => 'form-control phone', 'required' => 'required', 'value' => $client->phone), set_value('phone')); ?>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                        <!--/span-->
+                                    </div>
+                                </div>
+                                <!--/row-->
 
-                                                      <div class="row">
-                                                          <div class="col-md-6">
-                                                              <div class="form-group">
-                                                                  <label class="control-label">Cidade</label>
-                                                                  <select class="form-control" data-placeholder="Choose a Category" tabindex="1">
-                                                                      <option value="Category 1">Category 1</option>
-                                                                      <option value="Category 2">Category 2</option>
-                                                                      <option value="Category 3">Category 5</option>
-                                                                      <option value="Category 4">Category 4</option>
-                                                                  </select>
-                                                              </div>
-                                                          </div>
-                                                          <!--/span-->
-                                                          <div class="col-md-6">
-                                                              <div class="form-group">
-                                                                <label class="control-label">Estado</label>
-                                                                <select class="form-control" data-placeholder="Choose a Category" tabindex="1">
-                                                                    <option value="Category 1">Category 1</option>
-                                                                    <option value="Category 2">Category 2</option>
-                                                                    <option value="Category 3">Category 5</option>
-                                                                    <option value="Category 4">Category 4</option>
-                                                                </select>
-                                                              </div>
-                                                          </div>
-                                                          <!--/span-->
-                                                      </div>
-                                                      <!--/row-->
-                                                      <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group has-error">
-                                                                <label class="control-label">CPF</label>
-                                                                <input type="text" id="lastName" class="form-control" placeholder="CPF">
-                                                                <span class="help-block"> This field has error. </span>
-                                                            </div>
-                                                        </div>
-                                                      </div>
-                                                      <!--/row-->
-                                                  </div>
-                                                  <div class="form-actions right">
-                                                      <button type="button" class="btn default">Cancelar</button>
-                                                      <button type="submit" class="btn blue">
-                                                          <i class="fa fa-check"></i> Salvar</button>
-                                                  </div>
-                                              </form>
-                                              <!-- END FORM-->
-                                          </div>
-                                      </div>
+                                <div class="row">
+                                    <!--/span-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Estado</label>
+                                            <?php echo form_dropdown(array('class' => "form-control selectpicker", 'data-live-search' => "true", 'required' => "true", 'id' => "selectState",), $states, $state_selected, set_value('selectState')); ?>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Cidade</label>
+                                            <?php echo form_dropdown(array('class' => "form-control selectpicker", 'data-live-search' => "true", 'data-width' => "100%", 'required' => "true", 'name' => "city_id", 'id' => "selectCity",), $cities, $user_profile->city_id, set_value('city_id')); ?>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">CPF</label>
+                                            <?= form_input(array('name' => 'cpf', 'class' => 'form-control cpf', 'placeholder' => 'ex: 200122521893', 'required' => 'required', 'value' => $user_profile->cpf), set_value('cpf')); ?>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/row-->
+                            </div>
+                            <div class="form-actions right">
+                                <button type="button" class="btn default">Cancelar</button>
+                                <button type="submit" class="btn blue">
+                                    <i class="fa fa-check"></i> Salvar</button>
+                            </div>
+                        </form>
+                        <!-- END FORM-->
+                    </div>
+                </div>
             </div>
         </div>
         <!-- END CONTENT BODY -->

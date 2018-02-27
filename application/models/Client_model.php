@@ -50,4 +50,42 @@ class Client_model extends CI_Model {
         return false;
     }
 
+    public function get_by_id($client_id) {
+        $this->db->where('id', $client_id);
+        $query = $this->db->get('tb_clients c');
+        if ($query->num_rows() == 1) {
+            return $query->row(0);
+        } else {
+            return null;
+        }
+    }
+
+    public function email_exists($email) {
+        $response_by_email = $this->db->get_where('tb_clients', array('email' => $email));
+        if ($response_by_email->num_rows() == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function cpf_exists($cpf) {
+        $response_by_cpf = $this->db->get_where('tb_clients', array('cpf' => $cpf));
+        if ($response_by_cpf->num_rows() == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function update($client_id, $data) {
+        $this->db->where('id', $client_id);
+        $this->db->update('tb_clients', $data);
+
+        if ($this->db->affected_rows() > 0) {
+            return TRUE;
+        }
+        return FALSE;
+    }
+
 }

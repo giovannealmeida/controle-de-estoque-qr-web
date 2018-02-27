@@ -91,7 +91,7 @@ class Perfil_controller extends CI_Controller {
                     $form['password'] = password_hash($this->input->post('password'), PASSWORD_BCRYPT);
                     $confirmationUpdate = $this->users->update($data["user_profile"]->id, $form);
                     if ($confirmationUpdate) {
-                        $this->session->set_flashdata("success", "Senha cadastrada com sucesso");
+                        $this->session->set_flashdata("success", "Senha alterada com sucesso");
                         $user = $this->users->get_by_id($data["user_profile"]->id);
                         $this->session->set_userdata('logged_in', $user);
                     } else {
