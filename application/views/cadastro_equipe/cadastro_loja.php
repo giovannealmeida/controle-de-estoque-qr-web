@@ -160,6 +160,51 @@
                 </div>
             </div>
         </div>
+        <!--row-->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption font-dark">
+                            <i class="icon-settings font-dark"></i>
+                            <span class="caption-subject bold uppercase">Lista de Lojas Cadastradas</span>
+                        </div>
+                        <div class="tools"> </div>
+                    </div>
+                    <div class="portlet-body">
+                        <table class="table table-striped table-bordered table-hover sample_1">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Nome Fantasia
+                                    </th>
+                                    <th>
+                                        CNPJ
+                                    </th>
+                                    <th>
+                                        Estado
+                                    </th>
+                                    <th>
+                                        Cidade
+                                    </th>
+                                    <th>
+                                        Telefone
+                                    </th>
+                                    <th>
+                                        E-mail
+                                    </th>
+                                    <th>
+                                        Opções
+                                    </th>
+                                </tr>
+                            </thead>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- END CONTENT BODY -->
 </div>

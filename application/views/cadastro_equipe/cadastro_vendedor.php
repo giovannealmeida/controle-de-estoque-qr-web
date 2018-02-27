@@ -13,7 +13,7 @@
         <div class="page-bar">
             <ul class="page-breadcrumb">
                 <li>
-                    <a href="#">Cadastro de Loja</a>
+                    <a href="#">Cadastro de Vendedor</a>
                     <i class="fa fa-circle"></i>
                 </li>
             </ul>
@@ -194,6 +194,57 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--row-->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption font-dark">
+                            <i class="icon-settings font-dark"></i>
+                            <span class="caption-subject bold uppercase">Lista Vendedores</span>
+                        </div>
+                        <div class="tools"> </div>
+                    </div>
+                    <div class="portlet-body">
+                        <table class="table table-striped table-bordered table-hover sample_1">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Nome
+                                    </th>
+                                    <th>
+                                        CPF
+                                    </th>
+                                    <th>
+                                        E-mail
+                                    </th>
+                                    <th>
+                                        Estado
+                                    </th>
+                                    <th>
+                                        Cidade
+                                    </th>
+                                    <th>
+                                        Nascimento
+                                    </th>
+                                    <th>
+                                        Loja
+                                    </th>
+                                    <th>
+                                        Tipo Venda
+                                    </th>
+                                    <th>
+                                        Opções
+                                    </th>
+                                </tr>
+                            </thead>
+
+                        </table>
                     </div>
                 </div>
             </div>
