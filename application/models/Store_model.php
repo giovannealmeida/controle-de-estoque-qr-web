@@ -26,6 +26,15 @@ class Store_model extends CI_Model {
         return false;
     }
 
+    public function get_by_id($store_id) {
+        $this->db->where('id', $store_id);
+        $query = $this->db->get('tb_stores');
+        if ($query->num_rows() > 0) {
+            return $query->row(0);
+        }
+        return NULL;
+    }
+
     public function get_all() {
         $this->db->select('sp.id as id, s.cnpj, s.fantasy_name, p.code, p.product_name, sp.amount, sp.value');
         $this->db->join('tb_stores s', 's.id = sp.store_id', 'inner');
@@ -107,6 +116,24 @@ class Store_model extends CI_Model {
             return true;
         }
         return false;
+    }
+
+    public function email_exists($email) {
+        $response_by_email = $this->db->get_where('tb_stores', array('email' => $email));
+        if ($response_by_email->num_rows() == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public function cnpj_exists($cnpj) {
+        $response_by_cpf = $this->db->get_where('tb_stores', array('cnpj' => $cnpj));
+        if ($response_by_cpf->num_rows() == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

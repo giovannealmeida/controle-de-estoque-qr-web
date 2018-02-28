@@ -1,6 +1,6 @@
 <?php
 
-class Perfil_controller extends CI_Controller {
+class Perfil extends CI_Controller {
 
     private $user_info;
 
@@ -59,7 +59,7 @@ class Perfil_controller extends CI_Controller {
                 }
                 $user = $this->users->get_by_id($data["user_profile"]->id);
                 $this->session->set_userdata('logged_in', $user);
-                redirect('Perfil_controller/conta');
+                redirect('Perfil/conta');
             }
         }
         $data['state_selected'] = $this->States_model->get_by_city($data['user_profile']->city_id)->id;
@@ -100,7 +100,7 @@ class Perfil_controller extends CI_Controller {
                 } else {
                     $this->session->set_flashdata("fail", "Senha antiga incorreta");
                 }
-                redirect('Perfil_controller/alterar_senha');
+                redirect('Perfil/alterar_senha');
             }
         }
         $this->load->view("_inc/header", $data);
@@ -120,7 +120,7 @@ class Perfil_controller extends CI_Controller {
             } else {
                 show_404();
             }
-            redirect('Home_controller/index');
+            redirect('Inicio');
         }
     }
 

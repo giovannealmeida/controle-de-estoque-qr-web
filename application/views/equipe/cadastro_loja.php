@@ -37,7 +37,7 @@
                             <div class="portlet box green">
                                 <div class="portlet-title">
                                     <div class="caption">
-                                        <i class="fa fa-gift"></i>Formulário de Cadastro</div>
+                                        <i class="fa fa-gift"></i>Formulário de <?= isset($store) ? 'Edição' : 'Cadastro' ?></div>
                                     <div class="tools">
                                         <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
                                         <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="portlet-body form">
                                     <!-- BEGIN FORM-->
-                                    <form action="<?= base_url('Equipe/lojas') ?>" class="form-horizontal" method="post" data-toggle ="validator">
+                                    <form action="<?= isset($store) ? base_url('Equipe/editar_loja?id=' . $store->id) : base_url('Equipe/lojas') ?>" class="form-horizontal" method="post" data-toggle ="validator">
                                         <?php if (validation_errors()): ?>
                                             <br/>
                                             <div class="alert alert-danger">
@@ -73,7 +73,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">Nome Fantasia</label>
                                                         <div class="col-md-9">
-                                                            <?= form_input('fantasy_name', set_value('fantasy_name'), array('class' => 'form-control', 'placeholder' => 'ex: Site RootSilver', 'required' => 'required')); ?>
+                                                            <?= form_input(array('class' => 'form-control', 'placeholder' => 'ex: Site RootSilver', 'required' => 'required', 'name' => 'fantasy_name', 'value' => isset($store) ? $store->fantasy_name : set_value('fantasy_name'))); ?>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
@@ -83,7 +83,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">CNPJ</label>
                                                         <div class="col-md-9">
-                                                            <?= form_input('cnpj', set_value('cnpj'), array('class' => 'form-control cnpj', 'placeholder' => 'ex: 200122521/2150-3', 'required' => 'required')); ?>
+                                                            <?= form_input(array('class' => 'form-control cnpj', 'placeholder' => 'ex: 200122521/2150-3', 'required' => 'required', 'name' => 'cnpj', 'value' => isset($store) ? $store->cnpj : set_value('cnpj'))); ?>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
@@ -96,7 +96,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">Estado</label>
                                                         <div class="col-md-9">
-                                                            <?= form_dropdown(array('class' => "form-control selectpicker", 'data-live-search' => "true", 'required' => "true", 'id' => "selectState",), $states, set_value('city_id')); ?>
+                                                            <?= form_dropdown(array('class' => "form-control selectpicker", 'data-live-search' => "true", 'required' => "true", 'id' => "selectState",), $states,isset($store) ? $state_selected : set_value('city_id')); ?>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
@@ -108,7 +108,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">Cidade</label>
                                                         <div class="col-md-9">
-                                                            <?= form_dropdown(array('class' => "form-control selectpicker", 'data-live-search' => "true", 'data-width' => "100%", 'required' => "true", 'name' => "city_id", 'id' => "selectCity",), $cities, set_value('selectCity')); ?>
+                                                            <?= form_dropdown(array('class' => "form-control selectpicker", 'data-live-search' => "true", 'data-width' => "100%", 'required' => "true", 'name' => "city_id", 'id' => "selectCity",), $cities, isset($store) ? $store->city_id : set_value('selectCity')); ?>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
@@ -122,7 +122,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">Telefone</label>
                                                         <div class="col-md-9">
-                                                            <?= form_input('phone', set_value('phone'), array('class' => 'form-control phone', 'placeholder' => 'ex: (0XX) XXXX-XXXX')); ?>
+                                                            <?= form_input(array('class' => 'form-control phone', 'placeholder' => 'ex: (0XX) XXXX-XXXX', 'name' => 'phone', 'value' => isset($store) ? $store->phone : set_value('phone'))); ?>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
@@ -132,7 +132,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-md-3">E-mail</label>
                                                         <div class="col-md-9">
-                                                            <?= form_input(array('name' => 'email', 'class' => 'form-control', 'id' => 'email', 'type' => 'email', 'placeholder' => 'ex: contato@....'), set_value('email')); ?>
+                                                            <?= form_input(array('name' => 'email', 'class' => 'form-control', 'id' => 'email', 'type' => 'email', 'placeholder' => 'ex: contato@....', 'value' => isset($store) ? $store->email : set_value('email'))); ?>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
@@ -148,7 +148,7 @@
                                                     <div class="row">
                                                         <div class="col-md-offset-3 col-md-9">
                                                             <button type="submit" class="btn green"> Salvar </button>
-                                                            <!--<button type="button" class="btn default">Cancelar</button>-->
+                                                            <a href="<?= base_url('Equipe/lojas') ?>"type="button" class="btn default">Cancelar</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -214,7 +214,7 @@
                                         <td> <?= $value->email ?> </td>
                                         <td>
                                             <div class="margin-bottom-5">
-                                                <a type="button" href="<?= base_url('Clientes_controller/editar?id=' . $value->id) ?>" class="btn green">
+                                                <a type="button" href="<?= base_url('Equipe/editar_loja?id=' . $value->id) ?>" class="btn green">
                                                     <i class="fa fa-pencil"></i> Editar</a>
                                                 <a class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir a Loja e todo o seu histórico? Os produtos do estoque da loja irão voltar para o estoque geral')" href="<?= base_url('Equipe/excluir_loja?id=' . $value->id) ?>"><span class="glyphicon glyphicon-remove"></span> Remover</a>
                                             </div>

@@ -13,6 +13,10 @@
         <div class="page-bar">
             <ul class="page-breadcrumb">
                 <li>
+                    <a href="index.html">Perfil</a>
+                    <i class="fa fa-circle"></i>
+                </li>
+                <li>
                     <a href="index.html">Alterar senha</a>
                     <i class="fa fa-circle"></i>
                 </li>
@@ -33,7 +37,7 @@
                             <div class="portlet box green">
                                 <div class="portlet-title">
                                     <div class="caption">
-                                        <i class="fa fa-gift"></i>Editar conta</div>
+                                        <i class="fa fa-gift"></i>Alterar senha</div>
                                     <div class="tools">
                                         <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
                                         <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
@@ -42,7 +46,7 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body form">
-                                    <form action="<?= base_url('Perfil_controller/alterar_senha') ?>" method="post" data-toggle ="validator">
+                                    <form action="<?= base_url('Perfil/alterar_senha') ?>" method="post" data-toggle ="validator">
                                         <div class="form-body">
                                             <?php if (validation_errors()): ?>
                                                 <br/>

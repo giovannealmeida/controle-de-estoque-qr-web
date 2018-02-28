@@ -57,6 +57,17 @@ class User_model extends CI_Model {
             return null;
         }
     }
+    public function get_salesman_by_id($user_id) {
+        $this->db->select('u.*, us.store_id, us.type_sale_id, us.id as user_store_id');
+        $this->db->join('tb_user_store us', 'us.user_id = u.id', 'inner');
+        $result = $this->db->get_where('tb_users u', array('u.id' => $user_id));
+        if ($result->num_rows() > 0) {
+            return $result->row(0);
+        } else {
+            return null;
+        }
+    }
+    
 
     public function get_by_email($email) {
         $this->db->select('*');

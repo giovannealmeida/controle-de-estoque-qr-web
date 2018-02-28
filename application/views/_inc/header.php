@@ -61,11 +61,11 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">
                             <li>
-                                <a href="<?= base_url("Perfil_controller/conta") ?>">
+                                <a href="<?= base_url("Perfil/conta") ?>">
                                     <i class="icon-user"></i> Editar perfil</a>
                             </li>
                              <li>
-                                <a href="<?= base_url("Perfil_controller/alterar_senha") ?>">
+                                <a href="<?= base_url("Perfil/alterar_senha") ?>">
                                     <i class="icon-key"></i> Alterar senha </a>
                             </li>
                              <li>

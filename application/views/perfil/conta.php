@@ -13,7 +13,11 @@
         <div class="page-bar">
             <ul class="page-breadcrumb">
                 <li>
-                    <a href="index.html">Edição de perfil</a>
+                    <a href="index.html">Perfil</a>
+                    <i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <a href="index.html">Conta</a>
                     <i class="fa fa-circle"></i>
                 </li>
             </ul>
@@ -43,7 +47,7 @@
                                 </div>
                                 <div class="portlet-body form">
                                     <!-- BEGIN FORM-->
-                                    <form action="<?= base_url('Perfil_controller/conta') ?>" class="form-horizontal" method="post" data-toggle ="validator">
+                                    <form action="<?= base_url('Perfil/conta') ?>" class="form-horizontal" method="post" data-toggle ="validator">
                                         <?php if (validation_errors()): ?>
                                             <br/>
                                             <div class="alert alert-danger">
