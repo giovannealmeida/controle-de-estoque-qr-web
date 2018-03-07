@@ -16,6 +16,24 @@ class Team_model extends CI_Model {
         return false;
     }
 
+    public function update_store($store_id, $data) {
+        $this->db->where('id', $store_id);
+        $this->db->update('tb_stores', $data);
+        if ($this->db->affected_rows() == 1) {
+            return true;
+        }
+        return false;
+    }
+    
+    public function update($id, $data) {
+        $this->db->where('id', $id);
+        $this->db->update('tb_user_store', $data);
+        if ($this->db->affected_rows() == 1) {
+            return true;
+        }
+        return false;
+    }
+
     public function insert_user_store($data) {
         $this->db->insert('tb_user_store', $data);
         if ($this->db->affected_rows() == 1) {
@@ -48,6 +66,15 @@ class Team_model extends CI_Model {
             return $result;
         }
         return NULL;
+    }
+
+    public function delete($id) {
+        $this->db->delete("tb_user_store", array("id" => $id));
+        if ($this->db->affected_rows() == 1) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
 
 }
