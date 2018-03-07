@@ -39,13 +39,13 @@ class Cliente_controller extends REST_Controller {
     public function register_post() {
         $this->load->model("Client_model");
         $name = $this->post('name');
-        $email = $this->post('email');
+        $email = $this->post('email'); //Opcional
         $gender_id = $this->post('gender_id');
-        $phone = $this->post('phone');
+        $phone = $this->post('phone'); //Opcional
         $city_id = $this->post('city_id');
         $cpf = $this->post('cpf');
 
-        if ($name && $gender_id && $phone && $city_id && $cpf) {
+        if ($name && $gender_id && $city_id && $cpf) {
             $data = array(
                 'name' => $name,
                 'email' => $email,
@@ -72,9 +72,9 @@ class Cliente_controller extends REST_Controller {
         if ($cpf) {
             $result = $this->Client_model->client_exists($cpf);
             if ($result == true) {
-                $this->response(array('status' => true, 'message' => 'Customer already registered'), REST_Controller::HTTP_BAD_REQUEST);
+                $this->response(array('status' => true, 'message' => 'Customer already registered'), REST_Controller::HTTP_OK);
             } else {
-                $this->response(array('status' => false, 'message' => 'Customer not yet registered'), REST_Controller::HTTP_BAD_REQUEST);
+                $this->response(array('status' => false, 'message' => 'Customer not yet registered'), REST_Controller::HTTP_OK);
             }
         }else{
             $this->response(array('status' => false, 'message' => 'Params not found'), REST_Controller::HTTP_BAD_REQUEST);
