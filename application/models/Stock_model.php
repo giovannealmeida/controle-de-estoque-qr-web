@@ -18,16 +18,26 @@ class Stock_model extends CI_Model {
         }
     }
 
-    public function get_products($code = null) {
-        $this->db->select('p.id, p.code, p.product_name, p.description, p.quantity_in_stock, p.wholesale_value, p.retail_value');
-
-        if ($code != null) {
+    public function get_products($code = null, $user_id = null) {
+        if ($user_id != null && $code != NULL) {
+            $this->db->select('us.store_id');
+            $this->db->join('tb_user_store us', 'us.user_id = u.id');
+            $this->db->where('u.id', $user_id);
+            $store_id = $this->db->get('tb_users u')->row(0);
+            if ($store_id != null) {
+                $this->db->select('p.id, p.code, p.product_name, p.description, p.weight, p.category, sp.amount as amount, sp.value as value');
+                $this->db->join("tb_store_product sp", "sp.store_id={$store_id->store_id}", "left");
+            } else {
+                 $this->db->select('p.id, p.code, p.product_name, p.description, p.weight, p.category, p.quantity_in_stock as amount, p.retail_value as value');
+            }
             $this->db->where('code', $code);
+        } else {
+            $this->db->select('p.id, p.code, p.product_name, p.description, p.quantity_in_stock, p.wholesale_value, p.retail_value');
         }
 
         $query = $this->db->get('tb_products p');
         if ($query->num_rows() > 0) {
-            return $query->result();
+            return $query->row(0);
         } else {
             return null;
         }
@@ -42,7 +52,7 @@ class Stock_model extends CI_Model {
         $query = $this->db->get('tb_products p');
         $products = array();
         if ($query->num_rows() > 0) {
-            foreach ($query->result() as $key => $value){
+            foreach ($query->result() as $key => $value) {
                 $products[$value->id] = array('quantity' => $value->quantity_in_stock, 'value' => $value->retail_value);
             }
         }

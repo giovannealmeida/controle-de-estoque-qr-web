@@ -38,10 +38,11 @@ class Estoque_controller extends REST_Controller {
 
     public function index_get() {
         $code = $this->get('code');
+        $user_id = $this->get('user_id');
         $this->load->model("Stock_model");
 
         if ($code) {
-            $result = $this->Stock_model->get_products($code);
+            $result = $this->Stock_model->get_products($code, $user_id);
             $this->response($result, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
         } else {
             $this->response(array('status' => false, 'message' => 'Params not found'), REST_Controller::HTTP_BAD_REQUEST);
