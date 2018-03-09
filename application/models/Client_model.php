@@ -77,6 +77,15 @@ class Client_model extends CI_Model {
             return false;
         }
     }
+    
+    public function get_by_cpf($cpf) {
+        $result = $this->db->get_where('tb_clients', array('cpf' => $cpf));
+        if ($result->num_rows() == 1) {
+            return $result->row(0);
+        } else {
+            return false;
+        }
+    }
 
     public function update($client_id, $data) {
         $this->db->where('id', $client_id);

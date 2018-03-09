@@ -71,12 +71,25 @@ class Cliente_controller extends REST_Controller {
         $cpf = $this->get('cpf');
         if ($cpf) {
             $result = $this->Client_model->client_exists($cpf);
+            $this->response($result, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+        } else {
+            $this->response(array('status' => false, 'message' => 'Params not found'), REST_Controller::HTTP_BAD_REQUEST);
+        }
+    }
+
+    public function client_get() {
+        $this->load->model("Client_model");
+        $cpf = $this->get('cpf');
+        if ($cpf) {
+            $result = $this->Client_model->get_by_cpf($cpf);
+            print_r($result);
+            die;
             if ($result == true) {
                 $this->response(array('status' => true, 'message' => 'Customer already registered'), REST_Controller::HTTP_OK);
             } else {
                 $this->response(array('status' => false, 'message' => 'Customer not yet registered'), REST_Controller::HTTP_OK);
             }
-        }else{
+        } else {
             $this->response(array('status' => false, 'message' => 'Params not found'), REST_Controller::HTTP_BAD_REQUEST);
         }
     }
