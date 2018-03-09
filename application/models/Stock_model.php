@@ -28,7 +28,7 @@ class Stock_model extends CI_Model {
                 $this->db->select('p.id, p.code, p.product_name, p.description, p.weight, p.category, sp.amount as amount, sp.value as value');
                 $this->db->join("tb_store_product sp", "sp.store_id={$store_id->store_id}", "left");
             } else {
-                 $this->db->select('p.id, p.code, p.product_name, p.description, p.weight, p.category, p.quantity_in_stock as amount, p.retail_value as value');
+                $this->db->select('p.id, p.code, p.product_name, p.description, p.weight, p.category, p.quantity_in_stock as amount, p.retail_value as value');
             }
             $this->db->where('code', $code);
         } else {
@@ -129,6 +129,47 @@ class Stock_model extends CI_Model {
             return $result;
         }
         return NULL;
+    }
+
+    public function update_amount_product($user_id, $product) {
+        $this->db->where('id', $user_id);
+        $query = $this->db->get('tb_users');
+        $level_id = $query->row(0)->level_id;
+
+        if ($level_id == 1) {
+            $this->db->where('id', $product['product_id']);
+            $amount = $this->db->get('tb_products')->row(0)->quantity_in_stock - $product['amount'];
+            $this->db->where('id', $product['product_id']);
+            $this->db->update('tb_products', array('quantity_in_stock' => $amount));
+        } else {
+            $this->db->where('user_id', $user_id);
+            $store_id = $this->db->get('tb_user_store')->row(0)->store_id;
+            $this->db->where('store_id', $store_id);
+            $amount = $this->db->get('tb_store_product')->row(0)->amount - $product['amount'];
+            $this->db->where('store_id', $store_id);
+            $this->db->update('tb_store_product', array('amount' => $amount));
+        }
+        if ($this->db->affected_rows() == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    public function get_amount_product($user_id, $product) {
+        $this->db->where('id', $user_id);
+        $query = $this->db->get('tb_users');
+        $level_id = $query->row(0)->level_id;
+
+        if ($level_id == 1) {
+            $this->db->where('id', $product['product_id']);
+            $amount = $this->db->get('tb_products')->row(0)->quantity_in_stock;
+        } else {
+            $this->db->where('user_id', $user_id);
+            $store_id = $this->db->get('tb_user_store')->row(0)->store_id;
+            $this->db->where('store_id', $store_id);
+            $amount = $this->db->get('tb_store_product')->row(0)->amount;
+        }
+        return $amount;
     }
 
 }
