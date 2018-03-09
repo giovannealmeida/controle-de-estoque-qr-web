@@ -36,9 +36,11 @@ class Stock_model extends CI_Model {
         }
 
         $query = $this->db->get('tb_products p');
-        if ($query->num_rows() > 0) {
+        if ($query->num_rows() > 0 && $code && $user_id ) {
             return $query->row(0);
-        } else {
+        } else if($query->num_rows() > 0){
+            return $query->result();
+        }else{
             return null;
         }
     }
