@@ -57,7 +57,7 @@ class Cliente_controller extends REST_Controller {
 
             $result = $this->Client_model->insert($data);
             if ($result) {
-                $this->response(array('status' => true, 'client_id' => $result,  'message' => 'Customer successfully registered'), REST_Controller::HTTP_OK);
+                $this->response(array('status' => true, 'client_id' => $result, 'name' => $name,  'message' => 'Customer successfully registered'), REST_Controller::HTTP_OK);
             } else {
                 $this->response(array('status' => false, 'message' => 'Could not register client'), REST_Controller::HTTP_OK);
             }
