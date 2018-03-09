@@ -53,7 +53,7 @@ class Venda_controller extends REST_Controller {
                     $this->Sales_model->insert($insert);
                     $this->Stock_model->update_amount_product($insert['salesman_id'], $insert);
                 } else {
-                    $this->response(array('status' => false, 'message' => 'Not enough stock left'), REST_Controller::HTTP_BAD_REQUEST);
+                    $this->response(array('status' => false, 'message' => 'Not enough stock left'), REST_Controller::HTTP_OK);
                 }
             }
             $this->response(array('status' => true, 'message' => 'sale completed successfully'), REST_Controller::HTTP_OK);
