@@ -56,7 +56,8 @@ class Venda_controller extends REST_Controller {
                     $this->response(array('status' => false, 'message' => 'Not enough stock left'), REST_Controller::HTTP_BAD_REQUEST);
                 }
             }
-            $this->response(array('status' => true, 'message' => 'sale completed successfully'), REST_Controller::HTTP_BAD_REQUEST);
+            $this->response(array('status' => true, 'message' => 'sale completed successfully'), REST_Controller::HTTP_OK
+                    );
         } else {
             $this->response(array('status' => false, 'message' => 'Params not found'), REST_Controller::HTTP_BAD_REQUEST);
         }
