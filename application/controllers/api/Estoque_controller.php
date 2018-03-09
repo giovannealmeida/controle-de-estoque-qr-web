@@ -43,7 +43,11 @@ class Estoque_controller extends REST_Controller {
 
         if ($code) {
             $result = $this->Stock_model->get_products($code, $user_id);
-            $this->response($result, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+            if ($result->amount == 0) {
+                $this->response(array('status' => false, 'data' => $result, 'message' => 'Produto fora de estoque'), REST_Controller::HTTP_OK);
+            } else {
+                $this->response(array('status' => true, 'data' => $result), REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+            }
         } else {
             $this->response(array('status' => false, 'message' => 'Params not found'), REST_Controller::HTTP_BAD_REQUEST);
         }
