@@ -43,7 +43,7 @@ class Venda_controller extends REST_Controller {
             $insert['sale_id'] = $this->Sales_model->get_last_id() + 1;
             $insert['salesman_id'] = $this->post('user_id');
             $insert['client_id'] = $this->post('client_id');
-            $products = $this->post('products');
+            $products = json_decode($this->post('products'), TRUE);
 
             foreach ($products as $value) {
                 $insert['product_id'] = $value['product_id'];
@@ -56,8 +56,7 @@ class Venda_controller extends REST_Controller {
                     $this->response(array('status' => false, 'message' => 'Not enough stock left'), REST_Controller::HTTP_BAD_REQUEST);
                 }
             }
-            $this->response(array('status' => true, 'message' => 'sale completed successfully'), REST_Controller::HTTP_OK
-                    );
+            $this->response(array('status' => true, 'message' => 'sale completed successfully'), REST_Controller::HTTP_OK);
         } else {
             $this->response(array('status' => false, 'message' => 'Params not found'), REST_Controller::HTTP_BAD_REQUEST);
         }
