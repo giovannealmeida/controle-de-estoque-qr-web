@@ -32,7 +32,7 @@
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet light bordered">
                     <div class="portlet-body">
-                        <table class="table table-striped table-bordered table-hover">
+                        <table class="table table-striped table-bordered table-hover sample_1">
                             <thead>
                                 <tr>
                                     <th>
@@ -69,15 +69,9 @@
                                     <?php $total = 0; ?>
                                     <?php foreach ($sale as $key2 => $value): ?>
                                         <tr>
-                                            <?php if ($key2 == '0'): ?>
-                                                <td rowspan="<?= count($sale) + 1 ?>">
-                                                    <?= $key ?>
-                                                </td>
-                                            <?php else: ?>
-                                                <td class="hidden">
-                                                    <?= $key ?>
-                                                </td>
-                                            <?php endif; ?>
+                                            <td>
+                                                <?= $key ?>
+                                            </td>
                                             <td>
                                                 <?= $value->store ?>
                                             </td>
@@ -105,29 +99,7 @@
                                             </td>
                                         <?php endforeach; ?>
                                     </tr>
-                                    <tr>
-                                        <td class="hidden"><?= $key ?></td>
-                                        <td colspan="7">
-                                            <b>Total</b>
-                                        </td>
-                                        <td class="hidden"></td>
-                                        <td class="hidden"></td>
-                                        <td class="hidden"></td>
-                                        <td class="hidden"></td>
-                                        <td class="hidden"></td>
-                                        <td class="hidden"></td>
-                                        <?php if (count($sale) > 1): ?>
-                                            <td>
-                                                R$ <?= number_format($sale[0]->total, 2, ',', '.') ?>
-                                            </td>
-                                        <?php else: ?>
-                                            <td>
-                                                <b>R$ <?= number_format($value->total, 2, ',', '.') ?></b
-                                            </td>
-                                        <?php endif; ?>
-                                    </tr>
                                 <?php endforeach; ?>
-
                             </tbody>
                         </table>
                     </div>

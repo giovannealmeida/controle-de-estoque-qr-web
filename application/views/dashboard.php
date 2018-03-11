@@ -28,7 +28,7 @@
                         <i class="fa fa-dollar fa-icon-medium"></i>
                     </div>
                     <div class="details">
-                        <div class="number"> $168,492.54 </div> <!--Somatório dos itens vendidos -->
+                        <div class="number"> R$ <?= number_format($total_sales->value, 2, ',', '.') ?> </div> <!--Somatório dos itens vendidos -->
                         <div class="desc"> Total de Vendas </div>
                     </div>
                     <a class="more" href="javascript:;"> Veja mais
@@ -56,7 +56,7 @@
                         <i class="fa fa-group fa-icon-medium"></i>
                     </div>
                     <div class="details">
-                        <div class="number"> 670 </div>
+                        <div class="number"> <?= count($clients) ?> </div>
                         <div class="desc"> Clientes </div>
                     </div>
                     <a class="more" href="javascript:;"> Veja mais
@@ -93,82 +93,23 @@
                                 <div class="tab-pane active" id="overview_1">
                                     <div class="table-responsive">
                                         <table class="table table-striped table-hover table-bordered">
-                                          <!-- Begin alimentar com informações do Banco-->
+                                            <!-- Begin alimentar com informações do Banco-->
                                             <thead>
                                                 <tr>
                                                     <th> Nome do Produto </th>
                                                     <th> Valor </th>
                                                     <th> Tipo </th>
-                                                    <th> </th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <?php foreach ($top_sales as $value): ?>
                                                 <tr>
                                                     <td>
-                                                        <a href="javascript:;"> Apple iPhone 4s - 16GB - Black </a>
+                                                        <?= $value->name ?>
                                                     </td>
-                                                    <td> $625.50 </td>
-                                                    <td> <span class="label label-sm label-warning"> Atacado </span> </td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> Veja </a>
-                                                    </td>
+                                                    <td>R$ <?= number_format($value->top_value, 2, ',', '.') ?></td>       
+                                                    <td> <?= $value->amount ?> </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Samsung Galaxy S III SGH-I747 - 16GB </a>
-                                                    </td>
-                                                    <td> $915.50 </td>
-                                                    <td> <span class="label label-sm label-info"> Varejo </span> </td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> Veja </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Motorola Droid 4 XT894 - 16GB - Black </a>
-                                                    </td>
-                                                    <td> $878.50 </td>
-                                                    <td> <span class="label label-sm label-info"> Varejo </span> </td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> Veja </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Samsung Galaxy Note 4 </a>
-                                                    </td>
-                                                    <td> $925.50 </td>
-                                                    <td> <span class="label label-sm label-info"> Varejo </span> </td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> Veja </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Regatta Luca 3 in 1 Jacket </a>
-                                                    </td>
-                                                    <td> $25.50 </td>
-                                                    <td> <span class="label label-sm label-warning"> Atacado </span> </td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> Veja </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Samsung Galaxy Note 3 </a>
-                                                    </td>
-                                                    <td> $925.50 </td>
-                                                    <td> <span class="label label-sm label-warning"> Atacado </span> </td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> Veja </a>
-                                                    </td>
-                                                </tr>
+                                            <?php endforeach; ?>
                                             </tbody>
                                             <!-- END alimentar com informações do Banco-->
                                         </table>
@@ -182,76 +123,18 @@
                                                     <th> Nome do vendedor </th>
                                                     <th> Qtd Vendas </th>
                                                     <th> Valor vendido </th>
-                                                    <th> </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Metronic - Responsive Admin + Frontend Theme </a>
-                                                    </td>
-                                                    <td> $20.00 </td>
-                                                    <td> 11190 </td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Regatta Luca 3 in 1 Jacket </a>
-                                                    </td>
-                                                    <td> $25.50 </td>
-                                                    <td> 1245 </td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Motorola Droid 4 XT894 - 16GB - Black </a>
-                                                    </td>
-                                                    <td> $878.50 </td>
-                                                    <td> 784 </td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Apple iPhone 4s - 16GB - Black </a>
-                                                    </td>
-                                                    <td> $625.50 </td>
-                                                    <td> 809 </td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Samsung Galaxy S III SGH-I747 - 16GB </a>
-                                                    </td>
-                                                    <td> $915.50 </td>
-                                                    <td> 6709 </td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Motorola Droid 4 XT894 - 16GB - Black </a>
-                                                    </td>
-                                                    <td> $878.50 </td>
-                                                    <td> 784 </td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View </a>
-                                                    </td>
-                                                </tr>
+                                                <?php foreach ($top_salesman as $value): ?>
+                                                    <tr>
+                                                        <td>
+                                                            <?= $value->name ?>
+                                                        </td>
+                                                        <td>R$ <?= number_format($value->top_value, 2, ',', '.') ?></td>
+                                                        <td> <?= $value->amount ?> </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -261,79 +144,21 @@
                                         <table class="table table-striped table-hover table-bordered">
                                             <thead>
                                                 <tr>
-                                                  <th> Nome da loja </th>
-                                                  <th> Qtd Vendas </th>
-                                                  <th> Valor vendido </th>
-                                                    <th> </th>
+                                                    <th> Nome da loja </th>
+                                                    <th> Qtd Vendas </th>
+                                                    <th> Valor vendido </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> David Wilson </a>
-                                                    </td>
-                                                    <td> 3 </td>
-                                                    <td> $625.50 </td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Amanda Nilson </a>
-                                                    </td>
-                                                    <td> 4 </td>
-                                                    <td> $12625.50 </td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Paul Strong </a>
-                                                    </td>
-                                                    <td> 1 </td>
-                                                    <td> $890.85 </td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Jhon Doe </a>
-                                                    </td>
-                                                    <td> 2 </td>
-                                                    <td> $125.00 </td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Bill Chang </a>
-                                                    </td>
-                                                    <td> 45 </td>
-                                                    <td> $12,125.70 </td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="javascript:;"> Paul Strong </a>
-                                                    </td>
-                                                    <td> 1 </td>
-                                                    <td> $890.85 </td>
-                                                    <td>
-                                                        <a href="javascript:;" class="btn btn-sm btn-default">
-                                                            <i class="fa fa-search"></i> View </a>
-                                                    </td>
-                                                </tr>
+                                                <?php foreach ($top_stores as $value): ?>
+                                                    <tr>
+                                                        <td>
+                                                            <?= $value->name ?>
+                                                        </td>
+                                                        <td>R$ <?= number_format($value->top_value, 2, ',', '.') ?></td>
+                                                        <td> <?= $value->amount ?> </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -365,7 +190,7 @@
                     <div class="portlet-body">
                         <div class="tab-content">
                             <div class="tab-pane active" id="portlet_ecommerce_tab_1">
-                                <div id="statistics_1" class="chart" style="padding: 0px; position: relative;"> <canvas class="flot-base" width="312" height="300" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 312px; height: 300px;"></canvas><div class="flot-text" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);"><div class="flot-x-axis flot-x1-axis xAxis x1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;"><div style="position: absolute; max-width: 84px; top: 284px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 15px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 25px; text-align: center;">03/2013</div><div style="position: absolute; max-width: 84px; top: 284px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 15px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 56px; text-align: center;">04/2013</div><div style="position: absolute; max-width: 84px; top: 284px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 15px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 86px; text-align: center;">05/2013</div><div style="position: absolute; max-width: 84px; top: 284px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 15px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 117px; text-align: center;">06/2013</div><div style="position: absolute; max-width: 84px; top: 284px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 15px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 148px; text-align: center;">07/2013</div><div style="position: absolute; max-width: 84px; top: 284px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 15px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 178px; text-align: center;">08/2013</div><div style="position: absolute; max-width: 84px; top: 284px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 15px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 209px; text-align: center;">09/2013</div><div style="position: absolute; max-width: 84px; top: 284px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 15px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 239px; text-align: center;">10/2013</div><div style="position: absolute; max-width: 84px; top: 284px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 15px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 270px; text-align: center;">11/2013</div></div><div class="flot-y-axis flot-y1-axis yAxis y1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;"><div style="position: absolute; top: 257px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 15px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 20px; text-align: right;">0</div><div style="position: absolute; top: 205px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 15px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 7px; text-align: right;">500</div><div style="position: absolute; top: 154px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 15px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 1px; text-align: right;">1000</div><div style="position: absolute; top: 103px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 15px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 1px; text-align: right;">1500</div><div style="position: absolute; top: 52px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 15px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 1px; text-align: right;">2000</div><div style="position: absolute; top: 1px; font-style: normal; font-variant: small-caps; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 15px; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(111, 123, 138); left: 1px; text-align: right;">2500</div></div></div><canvas class="flot-overlay" width="312" height="300" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 312px; height: 300px;"></canvas></div>
+                                <div id="statistics_1" class="chart" style="padding: 0px; position: relative;"> <canvas class="flot-base" width="312" height="300" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 312px; height: 300px;"></canvas></div>
                             </div>
                             <div class="tab-pane" id="portlet_ecommerce_tab_2">
                                 <div id="statistics_2" class="chart"> </div>
@@ -375,19 +200,35 @@
                             <div class="row">
                                 <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
                                     <span class="label label-success"> Atacado: </span>
-                                    <h3>$1,234,112.20</h3>
+                                    <?php if ($total_sales_retail->value != null): ?>
+                                        <h3>R$ <?= number_format($total_sales_wholesale->value, 2, ',', '.') ?></h3>
+                                    <?php else: ?>
+                                        <h3>R$ 0,00</h3>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
                                     <span class="label label-info"> Varejo: </span>
-                                    <h3>$134,90.10</h3>
+                                    <?php if ($total_sales_retail->value != null): ?>
+                                        <h3>R$ <?= number_format($total_sales_retail->value, 2, ',', '.') ?></h3>
+                                    <?php else: ?>
+                                        <h3>R$ 0,00</h3>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
                                     <span class="label label-danger"> Total de vendas Varejo </span>
-                                    <h3>150015</h3>
+                                    <?php if ($total_sales_wholesale->amount != null): ?>
+                                        <h3><?= $total_sales_wholesale->amount ?></h3>
+                                    <?php else: ?>
+                                        <h3>0</h3>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
                                     <span class="label label-warning"> Total de vendas Atacado</span> <!-- quantidade -->
-                                    <h3>235090</h3>
+                                    <?php if ($total_sales_retail->amount != null): ?>
+                                        <h3><?= $total_sales_retail->amount ?></h3>
+                                    <?php else: ?>
+                                        <h3>0</h3>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
@@ -398,10 +239,190 @@
         </div>        
     </div>
     <!-- END CONTENT BODY -->
-  </div>
+</div>
 
-<script src="<?= base_url("assets/pages/scripts/ecommerce-dashboard.min.js")?>" type="text/javascript"></script>
+<script src="<?= base_url("assets/global/plugins/flot/jquery.flot.min.js") ?>" type="text/javascript"></script>
+<script src="<?= base_url("assets/global/plugins/flot/jquery.flot.resize.min.js") ?>" type="text/javascript"></script>
+<script src="<?= base_url("assets/global/plugins/flot/jquery.flot.categories.min.js") ?>" type="text/javascript"></script>
 
-<script src="<?= base_url("assets/global/plugins/flot/jquery.flot.min.js")?>" type="text/javascript"></script>
-<script src="<?= base_url("assets/global/plugins/flot/jquery.flot.resize.min.js")?>" type="text/javascript"></script>
-<script src="<?= base_url("assets/global/plugins/flot/jquery.flot.categories.min.js")?>" type="text/javascript"></script>
+<script>
+    var EcommerceDashboard = function () {
+        function o(o, i, t, a) {
+            $('<div id="tooltip" class="chart-tooltip">R$ ' + a.toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+\,)/g, "$1.") + "</div>").css({
+                position: "absolute",
+                display: "none",
+                top: i - 40,
+                left: o - 60,
+                border: "0px solid #ccc",
+                padding: "2px 6px",
+                "background-color": "#fff"
+            }).appendTo("body").fadeIn(200)
+        }
+        var i = function () {
+            var i = [
+<?php if (count($statistics_wholesale) > 0): ?>
+    <?php foreach ($statistics_wholesale as $statistic): ?>
+                        ["<?= $statistic->month ?>/<?= $statistic->year ?>", <?= $statistic->top_value ?>],
+    <?php endforeach; ?>
+<?php endif; ?>
+                            ],
+                                    t = ($.plot($("#statistics_1"), [{
+                                            data: i,
+                                            lines: {
+                                                fill: .6,
+                                                lineWidth: 0
+                                            },
+                                            color: ["#f89f9f"]
+                                        }, {
+                                            data: i,
+                                            points: {
+                                                show: !0,
+                                                fill: !0,
+                                                radius: 5,
+                                                fillColor: "#f89f9f",
+                                                lineWidth: 3
+                                            },
+                                            color: "#fff",
+                                            shadowSize: 0
+                                        }], {
+                                        xaxis: {
+                                            tickLength: 0,
+                                            tickDecimals: 0,
+                                            mode: "categories",
+                                            min: 2,
+                                            font: {
+                                                lineHeight: 15,
+                                                style: "normal",
+                                                variant: "small-caps",
+                                                color: "#6F7B8A"
+                                            }
+                                        },
+                                        yaxis: {
+                                            ticks: 3,
+                                            tickDecimals: 0,
+                                            tickColor: "#f0f0f0",
+                                            font: {
+                                                lineHeight: 15,
+                                                style: "normal",
+                                                variant: "small-caps",
+                                                color: "#6F7B8A"
+                                            }
+                                        },
+                                        grid: {
+                                            backgroundColor: {
+                                                colors: ["#fff", "#fff"]
+                                            },
+                                            borderWidth: 1,
+                                            borderColor: "#f0f0f0",
+                                            margin: 0,
+                                            minBorderMargin: 0,
+                                            labelMargin: 20,
+                                            hoverable: !0,
+                                            clickable: !0,
+                                            mouseActiveRadius: 6
+                                        },
+                                        legend: {
+                                            show: !1
+                                        }
+                                    }), null);
+                            $("#statistics_1").bind("plothover", function (i, a, e) {
+                                if ($("#x").text(a.x.toFixed(2)), $("#y").text(a.y.toFixed(2)), e) {
+                                    if (t != e.dataIndex) {
+                                        t = e.dataIndex, $("#tooltip").remove();
+                                        e.datapoint[0].toFixed(2), e.datapoint[1].toFixed(2);
+                                        o(e.pageX, e.pageY, e.datapoint[0], e.datapoint[1])
+                                    }
+                                } else
+                                    $("#tooltip").remove(), t = null
+                            })
+                        },
+                                t = function () {
+                                    var i = [
+<?php if (count($statistics_retail) > 0): ?>
+    <?php foreach ($statistics_retail as $statistic): ?>
+                                                ["<?= $statistic->month ?>/<?= $statistic->year ?>", <?= $statistic->top_value ?>],
+    <?php endforeach; ?>
+<?php endif; ?>
+                                                            ],
+                                                                    t = ($.plot($("#statistics_2"), [{
+                                                                            data: i,
+                                                                            lines: {
+                                                                                fill: .6,
+                                                                                lineWidth: 0
+                                                                            },
+                                                                            color: ["#BAD9F5"]
+                                                                        }, {
+                                                                            data: i,
+                                                                            points: {
+                                                                                show: !0,
+                                                                                fill: !0,
+                                                                                radius: 5,
+                                                                                fillColor: "#BAD9F5",
+                                                                                lineWidth: 3
+                                                                            },
+                                                                            color: "#fff",
+                                                                            shadowSize: 0
+                                                                        }], {
+                                                                        xaxis: {
+                                                                            tickLength: 0,
+                                                                            tickDecimals: 0,
+                                                                            mode: "categories",
+                                                                            min: 2,
+                                                                            font: {
+                                                                                lineHeight: 14,
+                                                                                style: "normal",
+                                                                                variant: "small-caps",
+                                                                                color: "#6F7B8A"
+                                                                            }
+                                                                        },
+                                                                        yaxis: {
+                                                                            ticks: 3,
+                                                                            tickDecimals: 0,
+                                                                            tickColor: "#f0f0f0",
+                                                                            font: {
+                                                                                lineHeight: 14,
+                                                                                style: "normal",
+                                                                                variant: "small-caps",
+                                                                                color: "#6F7B8A"
+                                                                            }
+                                                                        },
+                                                                        grid: {
+                                                                            backgroundColor: {
+                                                                                colors: ["#fff", "#fff"]
+                                                                            },
+                                                                            borderWidth: 1,
+                                                                            borderColor: "#f0f0f0",
+                                                                            margin: 0,
+                                                                            minBorderMargin: 0,
+                                                                            labelMargin: 20,
+                                                                            hoverable: !0,
+                                                                            clickable: !0,
+                                                                            mouseActiveRadius: 6
+                                                                        },
+                                                                        legend: {
+                                                                            show: !1
+                                                                        }
+                                                                    }), null);
+                                                            $("#statistics_2").bind("plothover", function (i, a, e) {
+                                                                if ($("#x").text(a.x.toFixed(2)), $("#y").text(a.y.toFixed(2)), e) {
+                                                                    if (t != e.dataIndex) {
+                                                                        t = e.dataIndex, $("#tooltip").remove();
+                                                                        e.datapoint[0].toFixed(2), e.datapoint[1].toFixed(2);
+                                                                        o(e.pageX, e.pageY, e.datapoint[0], e.datapoint[1])
+                                                                    }
+                                                                } else
+                                                                    $("#tooltip").remove(), t = null
+                                                            })
+                                                        };
+                                                return {
+                                                    init: function () {
+                                                        i(), $("#statistics_orders_tab").on("shown.bs.tab", function (o) {
+                                                            t()
+                                                        })
+                                                    }
+                                                }
+                                            }();
+                                            jQuery(document).ready(function () {
+                                                EcommerceDashboard.init()
+                                            });
+</script>

@@ -43,13 +43,17 @@ class Venda_controller extends REST_Controller {
             $insert['sale_id'] = $this->Sales_model->get_last_id() + 1;
             $insert['salesman_id'] = $this->post('user_id');
             $insert['client_id'] = $this->post('client_id');
+            date_default_timezone_set('America/Sao_Paulo');
+            $date = date('Y-m-d H:i');
+            $insert['date'] = $date;
+            $insert['type_sale_id'] = 2;
             $products = json_decode($this->post('products'), TRUE);
 
             foreach ($products as $value) {
                 $insert['product_id'] = $value['product_id'];
                 $insert['amount'] = $value['amount'];
                 $insert['value'] = $value['value'];
-                if($this->Stock_model->get_amount_product($insert['salesman_id'], $insert) >= $insert['amount']) {
+                if ($this->Stock_model->get_amount_product($insert['salesman_id'], $insert) >= $insert['amount']) {
                     $this->Sales_model->insert($insert);
                     $this->Stock_model->update_amount_product($insert['salesman_id'], $insert);
                 } else {
