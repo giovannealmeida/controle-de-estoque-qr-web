@@ -68,7 +68,10 @@
                                         Quantidade
                                     </th>
                                     <th>
-                                        Valor
+                                        Valor Varejo
+                                    </th>
+                                    <th>
+                                        Valor Atacado
                                     </th>
                                     <th>
                                         Data
@@ -82,7 +85,8 @@
                                         <td> <?= $value->code ?> </td>
                                         <td> <?= $value->product_name ?> </td>
                                         <td> <?= $value->amount ?> </td>
-                                        <td> <?= $value->value ?> </td>
+                                        <td> <?= $value->retail_value ?> </td>
+                                        <td> <?= $value->wholesale_value ?> </td>
                                         <td>
                                             <div class="margin-bottom-5">
                                                 <a type="button" href="<?= base_url('Lojas/editar?id=' . $value->id) ?>" class="btn green">

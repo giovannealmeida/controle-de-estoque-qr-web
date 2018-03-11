@@ -55,7 +55,7 @@ class Stock_model extends CI_Model {
         $products = array();
         if ($query->num_rows() > 0) {
             foreach ($query->result() as $key => $value) {
-                $products[$value->id] = array('quantity' => $value->quantity_in_stock, 'value' => $value->retail_value);
+                $products[$value->id] = array('quantity' => $value->quantity_in_stock, 'retail_value' => $value->retail_value,  'wholesale_value' => $value->wholesale_value);
             }
         }
         return $products;

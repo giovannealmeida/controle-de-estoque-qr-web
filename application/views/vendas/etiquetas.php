@@ -210,7 +210,7 @@
             success: function (result) {
                 $.each(JSON.parse(result), function (index, item) {
                     var table = $('.sample_1').DataTable();
-                    var rowNode = table.row.add([store == 0 ? 'Estoque' : item.cnpj + ' - ' + item.store, item.code, item.name, $('#amount').val(), '<a class="btn btn-danger btn-sm" type="button" onClick="remove(this)"><span class="glyphicon glyphicon-remove"></span> Remover</a></a>' + '<input type="hidden" name="product_id[]" value="' + item.id + '">' + '<input type="hidden" name="value[]" value="' + item.value + '">' + '<input type="hidden" name="amount[]" value="' + $('#amount').val() + '">']).draw().node();
+                    var rowNode = table.row.add([store == 0 ? 'Estoque' : item.cnpj + ' - ' + item.store, item.code, item.name, $('#amount').val(), '<a class="btn btn-danger btn-sm" type="button" onClick="remove(this)"><span class="glyphicon glyphicon-remove"></span> Remover</a></a>' + '<input type="hidden" name="product_id[]" value="' + item.id + '">' + '<input type="hidden" name="retail_value[]" value="' + item.retail_value + '">'  + '<input type="hidden" name="wholesale_value[]" value="' + item.wholesale_value + '">' + '<input type="hidden" name="amount[]" value="' + $('#amount').val() + '">']).draw().node();
                     $(rowNode).find('td').attr('name', 'line1');
                 });
                 $('#amount').val('63');

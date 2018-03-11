@@ -36,7 +36,8 @@ class Lojas extends CI_Controller {
                     $insert_data['store_id'] = $this->input->post('store_id');
                     $insert_data['product_id'] = $this->input->post('product_id');
                     $insert_data['amount'] = $this->input->post('amount');
-                    $insert_data['value'] = $this->input->post('value');
+                    $insert_data['retail_value'] = $this->input->post('retail_value');
+                    $insert_data['wholesale_value'] = $this->input->post('wholesale_value');
                     date_default_timezone_set('America/Sao_Paulo');
                     $date = date('Y-m-d H:i');
                     $insert_data['date_send'] = $date;
@@ -73,7 +74,8 @@ class Lojas extends CI_Controller {
             $this->form_validation->set_message('required', 'O campo %s é obrigatório');
             if ($this->form_validation->run() == true) {
                 $update_data['amount'] = $this->input->post('amount');
-                $update_data['value'] = $this->input->post('value');
+                $update_data['retail_value'] = $this->input->post('retail_value');
+                $update_data['wholesale_value'] = $this->input->post('wholesale_value');
                 $update = $this->Store_model->update($update_data, $this->input->get_post('id'));
                 if ($update) {
                     $product = $this->Stock_model->get_product_by_id($data['store_stock']->product_id);
@@ -115,7 +117,8 @@ class Lojas extends CI_Controller {
             $this->form_validation->set_rules('destination_store_id', 'Loja de destino', 'required');
             $this->form_validation->set_rules('product_id', 'Produto', 'required');
             $this->form_validation->set_rules('amount', 'Quantidade', 'required|callback_amount_check');
-            $this->form_validation->set_rules('value', 'Valor', 'required');
+            $this->form_validation->set_rules('retail_value', 'Valor Varejo', 'required');
+            $this->form_validation->set_rules('wholesale_value', 'Valor Atacado', 'required');
             $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
             $this->form_validation->set_message('valid_amount', '');
             $this->form_validation->set_message('required', 'O campo %s é obrigatório');
@@ -126,7 +129,7 @@ class Lojas extends CI_Controller {
                     $update = array('amount' => $store_stock->amount - $this->input->post('amount'));
                     $this->Store_model->update($update, $store_stock->id);
                     $store_stock = $this->Store_model->get_association($this->input->post('destination_store_id'), $this->input->post('product_id'));
-                    $update = array('amount' => $this->input->post('amount') + $store_stock->amount, 'value' => $this->input->post('value'));
+                    $update = array('amount' => $this->input->post('amount') + $store_stock->amount, 'retail_value' => $this->input->post('retail_value'), 'wholesale_value' => $this->input->post('wholesale_value'));
                     $update = $this->Store_model->update($update, $store_stock->id);
                     if ($update) {
                         $this->session->set_flashdata('success', 'Produtos enviados com sucesso!');
@@ -140,7 +143,8 @@ class Lojas extends CI_Controller {
                     $insert_data['store_id'] = $this->input->post('destination_store_id');
                     $insert_data['product_id'] = $this->input->post('product_id');
                     $insert_data['amount'] = $this->input->post('amount');
-                    $insert_data['value'] = $this->input->post('value');
+                    $insert_data['retail_value'] = $this->input->post('retail_value');
+                    $insert_data['wholesale_value'] = $this->input->post('wholesale_value');
                     date_default_timezone_set('America/Sao_Paulo');
                     $date = date('Y-m-d H:i');
                     $insert_data['date_send'] = $date;

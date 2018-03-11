@@ -36,7 +36,7 @@ class Store_model extends CI_Model {
     }
 
     public function get_all() {
-        $this->db->select('sp.id as id, s.cnpj, s.fantasy_name, p.code, p.product_name, sp.amount, sp.value');
+        $this->db->select('sp.id as id, s.cnpj, s.fantasy_name, p.code, p.product_name, sp.amount, sp.retail_value as retail_value, sp.wholesale_value as wholesale_value');
         $this->db->join('tb_stores s', 's.id = sp.store_id', 'inner');
         $this->db->join('tb_products p', 'p.id = sp.product_id', 'inner');
         $query = $this->db->get('tb_store_product sp');

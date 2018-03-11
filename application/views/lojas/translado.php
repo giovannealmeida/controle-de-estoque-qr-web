@@ -99,9 +99,9 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label class="control-label col-md-3">Valor</label> <!-- EXIBIR MENSAGEM DE ERRO SE A QUANTIDADE ULTRAPASSAR A DO ESTOQUE GERAL-->
+                                                            <label class="control-label col-md-3">Valor Varejo</label> <!-- EXIBIR MENSAGEM DE ERRO SE A QUANTIDADE ULTRAPASSAR A DO ESTOQUE GERAL-->
                                                             <div class="col-md-5">
-                                                                <?= form_input(array('name' => 'value', 'class' => 'form-control money', 'id' => 'value', 'type' => 'text', 'required' => 'required'), set_value('value')); ?>
+                                                                <?= form_input(array('name' => 'retail_value', 'class' => 'form-control money', 'id' => 'retail_value', 'type' => 'text', 'required' => 'required'), set_value('retail_value')); ?>
                                                                 <div class="help-block with-errors"></div>
                                                             </div>
                                                         </div>
@@ -113,6 +113,15 @@
                                                             <label class="control-label col-md-3">Quantidade</label> <!-- EXIBIR MENSAGEM DE ERRO SE A QUANTIDADE ULTRAPASSAR A DO ESTOQUE GERAL-->
                                                             <div class="col-md-5">
                                                                 <?= form_input(array('name' => 'amount', 'class' => 'form-control', 'id' => 'amount', 'type' => 'number', 'placeholder' => 'Digite a quantidade do produto', 'required' => 'required'), set_value('amount')); ?>
+                                                                <div class="help-block with-errors"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">Valor</label> <!-- EXIBIR MENSAGEM DE ERRO SE A QUANTIDADE ULTRAPASSAR A DO ESTOQUE GERAL-->
+                                                            <div class="col-md-5">
+                                                                <?= form_input(array('name' => 'wholesale_value', 'class' => 'form-control money', 'id' => 'wholesale_value', 'type' => 'text', 'required' => 'required'), set_value('wholesale_value')); ?>
                                                                 <div class="help-block with-errors"></div>
                                                             </div>
                                                         </div>
@@ -209,7 +218,8 @@
                 $('#product_id').prop('disabled', false);
                 $('#product_id').selectpicker('refresh');
                 if (origem == 2) {
-                    $("#value").val('');
+                    $("#retail_value").val('');
+                    $("#wholesale_value").val('');
                     $("#amount").val('');
                 }
             },
@@ -220,17 +230,20 @@
     }
     $('#product_id').change(function (ev) {
         $('#amount').prop('disabled', true);
-        $('#value').prop('disabled', true);
+        $("#retail_value").prop('disabled', true);
+        $("#wholesale_value").prop('disabled', true);
         urlConsulta = base_url.url + "index.php/consult_controller/getProductByStore/" + $('#home_store_id').val() + '/' + this.value;
         $.ajax({url: urlConsulta,
             success: function (result) {
                 $.each(JSON.parse(result), function (index, item) {
-                    $("#value").val(item.value);
+                    $("#retail_value").val(item.retail_value);
+                     $("#wholesale_value").val(item.wholesale_value);
                     $("#amount").val(item.amount);
                 });
 
                 $('#amount').prop('disabled', false);
-                $('#value').prop('disabled', false);
+                $("#retail_value").prop('disabled', false);
+                $("#wholesale_value").prop('disabled', false);
             },
             error: function (error) {
                 alert("Falha ao consultar produto!");

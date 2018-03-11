@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="portlet-body form">
                                     <!-- BEGIN FORM-->
-                                    <form action="<?= isset($store_stock->id)  ? base_url('Lojas/editar?id=' . $store_stock->id) : base_url('Lojas/cadastro') ?>" class="form-horizontal" method="post" data-toggle ="validator">
+                                    <form action="<?= isset($store_stock->id) ? base_url('Lojas/editar?id=' . $store_stock->id) : base_url('Lojas/cadastro') ?>" class="form-horizontal" method="post" data-toggle ="validator">
                                         <?php if (validation_errors()): ?>
                                             <br/>
                                             <div class="alert alert-danger">
@@ -93,9 +93,20 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class="control-label col-md-3">Valor</label> <!-- EXIBIR MENSAGEM DE ERRO SE A QUANTIDADE ULTRAPASSAR A DO ESTOQUE GERAL-->
+                                                        <label class="control-label col-md-3">Valor Varejo</label> <!-- EXIBIR MENSAGEM DE ERRO SE A QUANTIDADE ULTRAPASSAR A DO ESTOQUE GERAL-->
                                                         <div class="col-md-5">
-                                                            <?= form_input(array('name' => 'value', 'class' => 'form-control money', 'id' => 'value', 'type' => 'text', 'required' => 'required', 'value' => isset($store_stock->value) ? $store_stock->value : ''), set_value('value')); ?>
+                                                            <?= form_input(array('name' => 'retail_value', 'class' => 'form-control money', 'id' => 'retail_value', 'type' => 'text', 'required' => 'required', 'value' => isset($store_stock->retail_value) ? $store_stock->retail_value : ''), set_value('retail_value')); ?>
+                                                            <div class="help-block with-errors"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-3">Valor Atacado</label> <!-- EXIBIR MENSAGEM DE ERRO SE A QUANTIDADE ULTRAPASSAR A DO ESTOQUE GERAL-->
+                                                        <div class="col-md-5">
+                                                            <?= form_input(array('name' => 'wholesale_value', 'class' => 'form-control money', 'id' => 'wholesale_value', 'type' => 'text', 'required' => 'required', 'value' => isset($store_stock->wholesale_value) ? $store_stock->wholesale_value : ''), set_value('wholesale_value')); ?>
                                                             <div class="help-block with-errors"></div>
                                                         </div>
                                                     </div>
@@ -145,17 +156,19 @@
 <!-- END THEME LAYOUT SCRIPTS -->
 <script>
 <?php if (isset($store_stock)): ?>
-    document.getElementById("product_id").disabled = true;
-    document.getElementById("store_id").disabled = true;
+        document.getElementById("product_id").disabled = true;
+        document.getElementById("store_id").disabled = true;
 <?php endif; ?>
     var products_info = <?php isset($products_info) ? print_r($products_info) : print_r('null') ?>;
     if (products_info !== null) {
-        $("#value").val(products_info[$('select[name=product_id]').val()].value);
+        $("#retail_value").val(products_info[$('select[name=product_id]').val()].retail_value);
+        $("#wholesale_value").val(products_info[$('select[name=product_id]').val()].wholesale_value);
         $("#amount").val(products_info[$('select[name=product_id]').val()].quantity);
     }
 
     $('#product_id').change(function (ev) {
-        $("#value").val(products_info[this.value].value);
+        $("#retail_value").val(products_info[this.value].retail_value);
+        $("#wholesale_value").val(products_info[this.value].wholesale_value);
         $("#amount").val(products_info[this.value].quantity);
         //$("#amount").val();
     });

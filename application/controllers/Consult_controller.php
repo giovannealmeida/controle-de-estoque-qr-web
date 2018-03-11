@@ -44,7 +44,7 @@ class consult_controller extends CI_Controller {
         if ($product_id != null) {
             $this->db->where('sp.product_id', $product_id);
         }
-        $this->db->select('p.id as id, p.product_name as name, sp.amount, sp.value, s.fantasy_name as store, s.cnpj as cnpj, p.code as code');
+        $this->db->select('p.id as id, p.product_name as name, sp.amount, sp.wholesale_value as wholesale_value, sp.retail_value as retail_value, s.fantasy_name as store, s.cnpj as cnpj, p.code as code');
         $this->db->join('tb_stores s', 's.id = sp.store_id', 'inner');
         $this->db->join('tb_products p', 'p.id = sp.product_id', 'inner');
         $this->db->where('sp.store_id', $store_id);

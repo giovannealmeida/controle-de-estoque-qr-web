@@ -22,7 +22,7 @@ class Vendas extends CI_Controller {
             foreach ($this->input->post('product_id') as $key => $value) {
                 $product = $this->Stock_model->get_product_by_id($value);
                 for ($i = 0; $i < $this->input->post('amount')[$key]; $i++) {
-                    $data['pdf'][] = array('name' => $product->product_name, 'amount' => $this->input->post('amount')[$key], 'value' => $this->input->post('value')[$key], 'code' => $product->code);
+                    $data['pdf'][] = array('name' => $product->product_name, 'amount' => $this->input->post('amount')[$key], 'retail_value' => $this->input->post('retail_value')[$key], 'wholesale_value' => $this->input->post('wholesale_value')[$key], 'code' => $product->code);
                 }
             }
             ini_set('max_execution_time', 0);
