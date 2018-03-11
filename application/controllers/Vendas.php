@@ -47,9 +47,12 @@ class Vendas extends CI_Controller {
     }
 
     public function index() {
+        $data = $this->user_info;
+        $this->load->model('Sales_model');
+        $data['sales'] = $this->Sales_model->all();
         $this->load->view("_inc/header");
         $this->load->view("_inc/menu");
-        $this->load->view("vendas/visualizar");
+        $this->load->view("vendas/visualizar", $data);
         $this->load->view("_inc/footer");
     }
 

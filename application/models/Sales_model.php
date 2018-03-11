@@ -26,4 +26,30 @@ class Sales_model extends CI_Model {
         return false;
     }
 
+    public function all() {
+        $this->db->select('s.amount, s.value, s.sale_id, s.date, u.name as salesman, st.fantasy_name as store, p.product_name as product, c.name as client');
+        $this->db->join('tb_users u', 'u.id = s.salesman_id', 'inner');
+        $this->db->join('tb_user_store us', 'us.user_id = s.salesman_id', 'inner');
+        $this->db->join('tb_stores st', 'st.id = us.store_id', 'inner');
+        $this->db->join('tb_products p', 'p.id = s.product_id', 'inner');
+        $this->db->join('tb_clients c', 'c.id = s.client_id', 'left');
+        $query = $this->db->get('tb_sales s');
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $value) {
+                $sales[$value->sale_id][] = $value;
+            }
+
+            foreach ($sales as $key => $sale) {
+                $total = 0;
+                foreach ($sale as $key2 => $value) {
+                    $total += $value->value * $value->amount;
+                }
+                $sales[$value->sale_id][0]->total = $total;
+            }
+            return $sales;
+        } else {
+            return NULL;
+        }
+    }
+
 }

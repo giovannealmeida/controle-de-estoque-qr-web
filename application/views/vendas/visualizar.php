@@ -3,7 +3,6 @@
 <!--PAGE LEVELS PLUGINS-->
 <link href="<?= base_url('/assets/global/plugins/datatables/datatables.min.css'); ?>" rel="stylesheet" type="text/css" />
 <link href="<?= base_url('/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css'); ?>" rel="stylesheet" type="text/css" />
-<link href="../assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
 
 <!-- BEGIN CONTENT -->
 <div class="page-content-wrapper">
@@ -33,7 +32,7 @@
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet light bordered">
                     <div class="portlet-body">
-                        <table class="table table-striped table-bordered table-hover sample_1">
+                        <table class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>
@@ -60,8 +59,76 @@
                                     <th>
                                         Cliente
                                     </th>
+                                    <th>
+                                        Total
+                                    </th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                <?php foreach ($sales as $key => $sale): ?>
+                                    <?php $total = 0; ?>
+                                    <?php foreach ($sale as $key2 => $value): ?>
+                                        <tr>
+                                            <?php if ($key2 == '0'): ?>
+                                                <td rowspan="<?= count($sale) + 1 ?>">
+                                                    <?= $key ?>
+                                                </td>
+                                            <?php else: ?>
+                                                <td class="hidden">
+                                                    <?= $key ?>
+                                                </td>
+                                            <?php endif; ?>
+                                            <td>
+                                                <?= $value->store ?>
+                                            </td>
+                                            <td>
+                                                <?= $value->salesman ?>
+                                            </td>
+                                            <td>
+                                                <?= $value->product ?>
+                                            </td>
+                                            <td>
+                                                R$ <?= number_format($value->value, 2, ',', '.') ?>
+                                            </td>
+                                            <td>
+                                                <?= $value->amount ?>
+                                            </td>
+                                            <td>
+                                                <?php $date = date_create($value->date); ?>
+                                                <?php echo date_format($date, "d/m/Y H:m:s"); ?>
+                                            </td>
+                                            <td>
+                                                <?= $value->client ?>
+                                            </td>
+                                            <td>
+                                                R$ <?= number_format($value->amount * $value->value, 2, ',', '.') ?>
+                                            </td>
+                                        <?php endforeach; ?>
+                                    </tr>
+                                    <tr>
+                                        <td class="hidden"><?= $key ?></td>
+                                        <td colspan="7">
+                                            <b>Total</b>
+                                        </td>
+                                        <td class="hidden"></td>
+                                        <td class="hidden"></td>
+                                        <td class="hidden"></td>
+                                        <td class="hidden"></td>
+                                        <td class="hidden"></td>
+                                        <td class="hidden"></td>
+                                        <?php if (count($sale) > 1): ?>
+                                            <td>
+                                                R$ <?= number_format($sale[0]->total, 2, ',', '.') ?>
+                                            </td>
+                                        <?php else: ?>
+                                            <td>
+                                                <b>R$ <?= number_format($value->total, 2, ',', '.') ?></b
+                                            </td>
+                                        <?php endif; ?>
+                                    </tr>
+                                <?php endforeach; ?>
+
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -82,8 +149,6 @@
 <script src="<?= base_url('/assets/global/plugins/datatables/datatables.min.js'); ?>" type="text/javascript"></script>
 <script src="<?= base_url('/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js'); ?>" type="text/javascript"></script>
 <script src="<?= base_url('/assets/pages/scripts/table-datatables-buttons.min.js'); ?>" type="text/javascript"></script>
-<script src="<?= base_url("assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js") ?>" type="text/javascript"></script>
-<script src="<?= base_url("assets/pages/scripts/components-bootstrap-select.min.js") ?>"  type="text/javascript"></script>
 
 <!-- END CONTAINER -->
 <!-- END THEME LAYOUT SCRIPTS -->
