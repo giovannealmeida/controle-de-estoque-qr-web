@@ -46,7 +46,7 @@ class Venda_controller extends REST_Controller {
             date_default_timezone_set('America/Sao_Paulo');
             $date = date('Y-m-d H:i');
             $insert['date'] = $date;
-            $insert['type_sale_id'] = 2;
+            $insert['type_sale_id'] = $this->post('type_sale_id');
             $products = json_decode($this->post('products'), TRUE);
 
             foreach ($products as $value) {
