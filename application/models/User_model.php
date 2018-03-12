@@ -108,10 +108,11 @@ class User_model extends CI_Model {
                 $this->db->where('user_id', $user->id);
                 $type_sale_id = $this->db->get('tb_user_store');
                 if ($type_sale_id->num_rows() > 0) {
-                    return array('userData' => $user, 'key' => $key, 'type_sale_id' => $type_sale_id->row(0)->type_sale_id);
+                    $user->type_sale_id = $type_sale_id->row(0)->type_sale_id;
                 } else {
-                    return array('userData' => $user, 'key' => $key, 'type_sale_id' => 3);
+                    $user->type_sale_id = 3;
                 }
+                return array('userData' => $user, 'key' => $key);
             }
         }
 
