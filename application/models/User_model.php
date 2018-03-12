@@ -17,7 +17,7 @@ class User_model extends CI_Model {
 
         return null;
     }
-    
+
     public function get_all_sellers() {
         $this->db->select('u.*, c.name as city, st.name as state, s.fantasy_name as store, t.description as type');
         $this->db->where('level_id', 2);
@@ -33,7 +33,7 @@ class User_model extends CI_Model {
 
         return null;
     }
-    
+
     public function get_all_administrators() {
         $this->db->select('u.*, c.name as city, st.name as state, g.name as gender');
         $this->db->where('u.level_id', 1);
@@ -57,6 +57,7 @@ class User_model extends CI_Model {
             return null;
         }
     }
+
     public function get_salesman_by_id($user_id) {
         $this->db->select('u.*, us.store_id, us.type_sale_id, us.id as user_store_id');
         $this->db->join('tb_user_store us', 'us.user_id = u.id', 'inner');
@@ -67,7 +68,6 @@ class User_model extends CI_Model {
             return null;
         }
     }
-    
 
     public function get_by_email($email) {
         $this->db->select('*');
@@ -98,14 +98,20 @@ class User_model extends CI_Model {
     }
 
     public function get_access($email, $password) {
-        $this->db->where("level_id", 2);
+        //$this->db->where("level_id", 2);
         $result = $this->db->get_where('tb_users', array('email' => $email));
         if ($result->num_rows() > 0) {
-            $user = $result->result()[0];
+            $user = $result->row(0);
             $key = $this->has_key($user->id)->key;
             if (password_verify($password, $user->password)) {          // Se a senha está correta
                 //print_r("teste");die;
-                return array('userData' => $user, 'key' => $key);
+                $this->db->where('user_id', $user->id);
+                $type_sale_id = $this->db->get('tb_user_store');
+                if ($type_sale_id->num_rows() > 0) {
+                    return array('userData' => $user, 'key' => $key, 'type_sale_id' => $type_sale_id->row(0)->type_sale_id);
+                } else {
+                    return array('userData' => $user, 'key' => $key, 'type_sale_id' => 3);
+                }
             }
         }
 
@@ -196,12 +202,12 @@ class User_model extends CI_Model {
         $this->db->insert('tb_users', $data);
         $user_id = $this->db->insert_id();
         if ($this->db->affected_rows() == 1) {
-            if ($data['level_id'] != 1) {
-                $this->create_key($user_id);
-                return $this->get_access($data['email'], $password);
-            } else {
-                return TRUE;
-            }
+            //if ($data['level_id'] != 1) {
+            $this->create_key($user_id);
+            return $this->get_access($data['email'], $password);
+            //} else {
+            //return TRUE;
+            //}
         }
 
         return null;

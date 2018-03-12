@@ -18,14 +18,17 @@ class Stock_model extends CI_Model {
         }
     }
 
-    public function get_products($code = null, $user_id = null) {
+    public function get_products($code = null, $user_id = null, $type_sale_id = null) {
         if ($user_id != null && $code != NULL) {
             $this->db->select('us.store_id');
             $this->db->join('tb_user_store us', 'us.user_id = u.id');
             $this->db->where('u.id', $user_id);
             $store_id = $this->db->get('tb_users u')->row(0);
             if ($store_id != null) {
-                $this->db->select('p.id, p.code, p.product_name, p.description, p.weight, p.category, sp.amount as amount, sp.value as value');
+                if ($type_sale_id == 1)
+                    $this->db->select('p.id, p.code, p.product_name, p.description, p.weight, p.category, sp.amount as amount, sp.wholesale_value as value');
+                else
+                    $this->db->select('p.id, p.code, p.product_name, p.description, p.weight, p.category, sp.amount as amount, sp.retail_value as value');
                 $this->db->join("tb_store_product sp", "sp.store_id={$store_id->store_id}", "left");
             } else {
                 $this->db->select('p.id, p.code, p.product_name, p.description, p.weight, p.category, p.quantity_in_stock as amount, p.retail_value as value');
@@ -36,11 +39,11 @@ class Stock_model extends CI_Model {
         }
 
         $query = $this->db->get('tb_products p');
-        if ($query->num_rows() > 0 && $code && $user_id ) {
+        if ($query->num_rows() > 0 && $code && $user_id) {
             return $query->row(0);
-        } else if($query->num_rows() > 0){
+        } else if ($query->num_rows() > 0) {
             return $query->result();
-        }else{
+        } else {
             return null;
         }
     }
@@ -55,7 +58,7 @@ class Stock_model extends CI_Model {
         $products = array();
         if ($query->num_rows() > 0) {
             foreach ($query->result() as $key => $value) {
-                $products[$value->id] = array('quantity' => $value->quantity_in_stock, 'retail_value' => $value->retail_value,  'wholesale_value' => $value->wholesale_value);
+                $products[$value->id] = array('quantity' => $value->quantity_in_stock, 'retail_value' => $value->retail_value, 'wholesale_value' => $value->wholesale_value);
             }
         }
         return $products;

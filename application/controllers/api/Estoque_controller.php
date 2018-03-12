@@ -39,10 +39,11 @@ class Estoque_controller extends REST_Controller {
     public function index_get() {
         $code = $this->get('code');
         $user_id = $this->get('user_id');
+        $type_level_id = $this->get('type_level_id');
         $this->load->model("Stock_model");
 
-        if ($code) {
-            $result = $this->Stock_model->get_products($code, $user_id);
+        if ($code && $user_id && $type_level_id) {
+            $result = $this->Stock_model->get_products($code, $user_id, $type_level_id);
             if ($result->amount == 0) {
                 $this->response(array('status' => false, 'data' => $result, 'message' => 'Produto fora de estoque'), REST_Controller::HTTP_OK);
             } else {
