@@ -31,7 +31,10 @@ class Stock_model extends CI_Model {
                     $this->db->select('p.id, p.code, p.product_name, p.description, p.weight, p.category, sp.amount as amount, sp.retail_value as value');
                 $this->db->join("tb_store_product sp", "sp.store_id={$store_id->store_id}", "left");
             } else {
-                $this->db->select('p.id, p.code, p.product_name, p.description, p.weight, p.category, p.quantity_in_stock as amount, p.retail_value as value');
+                if ($type_sale_id == 1)
+                    $this->db->select('p.id, p.code, p.product_name, p.description, p.weight, p.category, p.quantity_in_stock as amount, p.wholesale_value as value');
+                else
+                    $this->db->select('p.id, p.code, p.product_name, p.description, p.weight, p.category, p.quantity_in_stock as amount, p.retail_value as value');
             }
             $this->db->where('code', $code);
         } else {
