@@ -25,7 +25,7 @@ class Estoque_controller extends REST_Controller {
 
         // Configure limits on our controller methods
         // Ensure you have created the 'limits' table and enabled 'limits' within application/config/rest.php
-        $this->config->config['rest_enable_keys'] = FALSE;
+        $this->config->config['rest_enable_keys'] = TRUE;
         $this->methods['index_get']['limit'] = LIMIT_REQUESTS;
     }
 
