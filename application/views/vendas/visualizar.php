@@ -65,7 +65,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (count($sales) > 0): ?>
+                                <?php if ($sales != null): ?>
                                     <?php foreach ($sales as $key => $sale): ?>
                                         <?php $total = 0; ?>
                                         <?php foreach ($sale as $key2 => $value): ?>

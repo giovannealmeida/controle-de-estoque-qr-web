@@ -251,7 +251,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <?php if (count($sellers) > 0): ?>
+                            <?php if ($sellers != null): ?>
                                 <?php foreach ($sellers as $value): ?>
                                     <tr>
                                         <td> <?= $value->name ?> </td>

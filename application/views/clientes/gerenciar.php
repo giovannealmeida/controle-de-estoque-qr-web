@@ -74,7 +74,7 @@
                                     </th>                                    
                                 </tr>
                             </thead>
-                            <?php if (count($clients) > 0): ?>
+                            <?php if ($clients != null): ?>
                                 <?php foreach ($clients as $value): ?>
                                     <tr>
                                         <td><?= $value->name ?></td>

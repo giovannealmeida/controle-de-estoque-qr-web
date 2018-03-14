@@ -203,7 +203,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <?php if (count($stores) > 0): ?>
+                            <?php if ($stores != NULL): ?>
                                 <?php foreach ($stores as $value): ?>
                                     <tr>
                                         <td> <?= $value->fantasy_name ?> </td>

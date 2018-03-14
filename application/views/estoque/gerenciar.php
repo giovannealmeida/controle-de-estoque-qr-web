@@ -77,7 +77,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <?php if (count($products) > 0): ?>
+                            <?php if ($products != null): ?>
                                 <?php foreach ($products as $value): ?>
                                     <tr>
                                         <td tabindex="0" class="sorting_1"> <?= $value->code ?> </td>

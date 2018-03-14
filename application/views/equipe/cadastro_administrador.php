@@ -223,7 +223,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <?php if (count($administrators) > 0): ?>
+                            <?php if ($administrators != null): ?>
                                 <?php foreach ($administrators as $value): ?>
                                     <tr>
                                         <td> <?= $value->name ?> </td>

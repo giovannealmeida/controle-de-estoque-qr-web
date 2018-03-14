@@ -78,7 +78,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <?php if (count($records) > 0): ?>
+                            <?php if ($records != null): ?>
                                 <?php foreach ($records as $value): ?>
                                     <tr>
                                         <td tabindex="0" class="sorting_1"> <?= $value->cnpj . ' - ' . $value->fantasy_name ?> </td>
