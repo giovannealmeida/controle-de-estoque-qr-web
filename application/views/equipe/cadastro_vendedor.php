@@ -266,7 +266,12 @@
                                             <div class="margin-bottom-5">
                                                 <a type="button" href="<?= base_url('Equipe/editar_vendedor?id=' . $value->id) ?>" class="btn green">
                                                     <i class="fa fa-pencil"></i> Editar</a>
-                                                <a class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir o vendedor e todo o seu histórico??')" href="<?= base_url('Equipe/excluir_vendedor?id=' . $value->id) ?>"><span class="glyphicon glyphicon-remove"></span> Remover</a>
+                                                <?php if ($value->disabled == 0): ?>
+                                                    <a class="btn btn-warning btn-sm" onclick="return confirm('Tem certeza que deseja desativar o vendedor ?')" href="<?= base_url('Equipe/desativar_vendedor?id=' . $value->id) ?>"><span class="glyphicon glyphicon-remove"></span> Desativar</a>
+                                                <?php else: ?>
+                                                    <a class="btn btn-warning btn-sm" onclick="return confirm('Tem certeza que deseja desativar o vendedor ?')" href="<?= base_url('Equipe/ativar_vendedor?id=' . $value->id) ?>"><span class="glyphicon glyphicon-remove"></span> Ativar</a>
+                                                <?php endif; ?>
+                                                <a class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir o vendedor ? Ao excluir um vendedor será excluído todo o seu histórico no sistema, incluindo as vendas')" href="<?= base_url('Equipe/excluir_vendedor?id=' . $value->id) ?>"><span class="glyphicon glyphicon-remove"></span> Remover</a>
                                             </div>
                                         </td>
                                     </tr>

@@ -40,8 +40,12 @@ class Venda_controller extends REST_Controller {
         if ($this->post('user_id') && $this->post('products')) {
             $this->load->model('Sales_model');
             $this->load->model('Stock_model');
+            $this->load->model('User_model');
             $insert['sale_id'] = $this->Sales_model->get_last_id() + 1;
             $insert['salesman_id'] = $this->post('user_id');
+            $user_store = $this->User_model->get_salesman_by_id($insert['salesman_id']);
+            $insert['salesman_name'] = $user_store->name;
+            $insert['store_name'] = $user_store->store;
             $insert['client_id'] = $this->post('client_id');
             date_default_timezone_set('America/Sao_Paulo');
             $date = date('Y-m-d H:i');
@@ -51,6 +55,7 @@ class Venda_controller extends REST_Controller {
 
             foreach ($products as $value) {
                 $insert['product_id'] = $value['product_id'];
+                $insert['product_name'] = $this->Stock_model->get_product_by_id($insert['product_id'])->product_name;
                 $insert['amount'] = $value['amount'];
                 $insert['value'] = $value['value'];
                 if ($this->Stock_model->get_amount_product($insert['salesman_id'], $insert) >= $insert['amount']) {

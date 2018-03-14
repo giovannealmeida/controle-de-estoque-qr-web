@@ -65,41 +65,61 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($sales as $key => $sale): ?>
-                                    <?php $total = 0; ?>
-                                    <?php foreach ($sale as $key2 => $value): ?>
-                                        <tr>
-                                            <td>
-                                                <?= $key ?>
-                                            </td>
-                                            <td>
-                                                <?= $value->store ?>
-                                            </td>
-                                            <td>
-                                                <?= $value->salesman ?>
-                                            </td>
-                                            <td>
-                                                <?= $value->product ?>
-                                            </td>
-                                            <td>
-                                                R$ <?= number_format($value->value, 2, ',', '.') ?>
-                                            </td>
-                                            <td>
-                                                <?= $value->amount ?>
-                                            </td>
-                                            <td>
-                                                <?php $date = date_create($value->date); ?>
-                                                <?php echo date_format($date, "d/m/Y H:m:s"); ?>
-                                            </td>
-                                            <td>
-                                                <?= $value->client ?>
-                                            </td>
-                                            <td>
-                                                R$ <?= number_format($value->amount * $value->value, 2, ',', '.') ?>
-                                            </td>
-                                        <?php endforeach; ?>
-                                    </tr>
-                                <?php endforeach; ?>
+                                <?php if (count($sales) > 0): ?>
+                                    <?php foreach ($sales as $key => $sale): ?>
+                                        <?php $total = 0; ?>
+                                        <?php foreach ($sale as $key2 => $value): ?>
+                                            <tr>
+                                                <td>
+                                                    <?= $key ?>
+                                                </td>
+                                                <td>
+                                                    <?php if ($value->store == null): ?>
+                                                        <?= $value->store_name ?>
+                                                        <span class="label label-sm label-danger"> Excluido </span>
+                                                    <?php else: ?>
+                                                        <?= $value->store ?>
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td>
+                                                    <?php if ($value->status == 1): ?>
+                                                        <span class="label label-sm label-warning"> Desativado </span>
+                                                    <?php endif; ?>
+                                                    <?php if ($value->product == null): ?>
+                                                        <?= $value->salesman_name ?>
+                                                        <span class="label label-sm label-danger"> Excluido </span>
+                                                    <?php else: ?>
+                                                        <?= $value->salesman ?>
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td>
+                                                    <?php if ($value->product == null): ?>
+                                                        <?= $value->product_name ?>
+                                                        <span class="label label-sm label-danger"> Excluido </span>
+                                                    <?php else: ?>
+                                                        <?= $value->product ?>
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td>
+                                                    R$ <?= number_format($value->value, 2, ',', '.') ?>
+                                                </td>
+                                                <td>
+                                                    <?= $value->amount ?>
+                                                </td>
+                                                <td>
+                                                    <?php $date = date_create($value->date); ?>
+                                                    <?php echo date_format($date, "d/m/Y H:m:s"); ?>
+                                                </td>
+                                                <td>
+                                                    <?= $value->client ?>
+                                                </td>
+                                                <td>
+                                                    R$ <?= number_format($value->amount * $value->value, 2, ',', '.') ?>
+                                                </td>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>

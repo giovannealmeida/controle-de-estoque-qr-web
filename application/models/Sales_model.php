@@ -27,11 +27,11 @@ class Sales_model extends CI_Model {
     }
 
     public function all() {
-        $this->db->select('s.amount, s.value, s.sale_id, s.date, u.name as salesman, st.fantasy_name as store, p.product_name as product, c.name as client');
-        $this->db->join('tb_users u', 'u.id = s.salesman_id', 'inner');
-        $this->db->join('tb_user_store us', 'us.user_id = s.salesman_id', 'inner');
-        $this->db->join('tb_stores st', 'st.id = us.store_id', 'inner');
-        $this->db->join('tb_products p', 'p.id = s.product_id', 'inner');
+        $this->db->select('s.amount, s.value, s.sale_id, s.date, u.name as salesman, st.fantasy_name as store, p.product_name as product, c.name as client, u.disabled as status, s.salesman_name, s.store_name, s.product_name');
+        $this->db->join('tb_users u', 'u.id = s.salesman_id', 'left');
+        $this->db->join('tb_user_store us', 'us.user_id = s.salesman_id', 'left');
+        $this->db->join('tb_stores st', 'st.id = us.store_id', 'left');
+        $this->db->join('tb_products p', 'p.id = s.product_id', 'left');
         $this->db->join('tb_clients c', 'c.id = s.client_id', 'left');
         $query = $this->db->get('tb_sales s');
         if ($query->num_rows() > 0) {
@@ -53,7 +53,7 @@ class Sales_model extends CI_Model {
     }
 
     public function get_total_sales($type_sale_id = null) {
-        if($type_sale_id != null){
+        if ($type_sale_id != null) {
             $this->db->where('type_sale_id', $type_sale_id);
         }
         $this->db->select('sum(amount * value) as value, sum(amount) as amount');
@@ -66,10 +66,10 @@ class Sales_model extends CI_Model {
     }
 
     public function get_top_salesman() {
-        $this->db->select('u.name as name, sum(s.amount * s.value) as top_value, sum(s.amount) as amount');
+        $this->db->select('u.name as name, sum(s.amount * s.value) as top_value, sum(s.amount) as amount, s.salesman_name, u.disabled as status');
         $this->db->order_by('top_value', 'desc');
         $this->db->group_by('salesman_id');
-        $this->db->join('tb_users u', 'u.id = s.salesman_id', 'inner');
+        $this->db->join('tb_users u', 'u.id = s.salesman_id', 'left');
         $query = $this->db->get('tb_sales s');
         if ($query->num_rows() > 0) {
             return $query->result();
@@ -79,9 +79,9 @@ class Sales_model extends CI_Model {
     }
 
     public function get_top_stores() {
-        $this->db->select('st.fantasy_name as name, sum(s.amount * s.value) as top_value, sum(s.amount) as amount');
-        $this->db->join('tb_user_store us', 'us.user_id = s.salesman_id', 'inner');
-        $this->db->join('tb_stores st', 'st.id = us.store_id', 'inner');
+        $this->db->select('st.fantasy_name as name, sum(s.amount * s.value) as top_value, sum(s.amount) as amount, s.store_name');
+        $this->db->join('tb_user_store us', 'us.user_id = s.salesman_id', 'left');
+        $this->db->join('tb_stores st', 'st.id = us.store_id', 'left');
         $this->db->order_by('top_value', 'desc');
         $this->db->group_by('st.id');
         $query = $this->db->get('tb_sales s');
@@ -93,8 +93,8 @@ class Sales_model extends CI_Model {
     }
 
     public function get_top_sales() {
-        $this->db->select('p.product_name as name, sum(s.amount * s.value) as top_value, sum(s.amount) as amount');
-        $this->db->join('tb_products p', 'p.id = s.product_id', 'inner');
+        $this->db->select('p.product_name as name, sum(s.amount * s.value) as top_value, sum(s.amount) as amount, s.product_name');
+        $this->db->join('tb_products p', 'p.id = s.product_id', 'left');
         $this->db->order_by('top_value', 'desc');
         $this->db->group_by('s.product_id');
         $query = $this->db->get('tb_sales s');

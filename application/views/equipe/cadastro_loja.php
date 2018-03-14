@@ -216,7 +216,7 @@
                                             <div class="margin-bottom-5">
                                                 <a type="button" href="<?= base_url('Equipe/editar_loja?id=' . $value->id) ?>" class="btn green">
                                                     <i class="fa fa-pencil"></i> Editar</a>
-                                                <a class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir a Loja e todo o seu histórico? Os produtos do estoque da loja irão voltar para o estoque geral')" href="<?= base_url('Equipe/excluir_loja?id=' . $value->id) ?>"><span class="glyphicon glyphicon-remove"></span> Remover</a>
+                                                <a class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir a Loja? Ao excluir uma loja, automaticamente todos os seus vendedores e históricos de vendas serão excluídos e os produtos do estoque da loja irão voltar para o estoque geral')" href="<?= base_url('Equipe/excluir_loja?id=' . $value->id) ?>"><span class="glyphicon glyphicon-remove"></span> Remover</a>
                                             </div>
                                         </td>
                                     </tr>

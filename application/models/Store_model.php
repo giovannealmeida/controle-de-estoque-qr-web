@@ -126,7 +126,7 @@ class Store_model extends CI_Model {
             return false;
         }
     }
-    
+
     public function cnpj_exists($cnpj) {
         $response_by_cpf = $this->db->get_where('tb_stores', array('cnpj' => $cnpj));
         if ($response_by_cpf->num_rows() == 1) {
@@ -134,6 +134,28 @@ class Store_model extends CI_Model {
         } else {
             return false;
         }
+    }
+
+    public function get_sellers($id) {
+        $this->db->where('store_id', $id);
+        $query = $this->db->get('tb_user_store');
+        if ($query->num_rows() == 1) {
+            foreach ($query->result() as $value) {
+                $result[] = $value->user_id;
+            }
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
+    public function delete_sellers($ids) {
+        $this->db->where_in('id', $ids);
+        $this->db->delete('tb_users');
+        if ($this->db->affected_rows() == 1) {
+            return true;
+        }
+        return false;
     }
 
 }

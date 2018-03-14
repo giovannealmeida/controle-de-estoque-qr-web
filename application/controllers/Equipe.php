@@ -415,8 +415,12 @@ class Equipe extends CI_Controller {
         $this->load->model('Stock_model');
         $id = $this->input->get_post('id');
         $associations = $this->Store_model->get_association($id);
+        $sellers = $this->Store_model->get_sellers($id);
         $delete = $this->Store_model->delete_store($id);
         if ($delete) {
+            if($sellers){
+                $this->Store_model->delete_sellers($sellers);
+            }
             foreach ($associations as $value) {
                 $product = $this->Stock_model->get_product_by_id($value->product_id);
                 $update = array('quantity_in_stock' => $value->amount + $product->quantity_in_stock);
@@ -451,6 +455,54 @@ class Equipe extends CI_Controller {
         }
         $resto = $soma % 11;
         return $cnpj{13} == ($resto < 2 ? 0 : 11 - $resto);
+    }
+
+    public function desativar_vendedor() {
+        $this->load->model('User_model');
+        $id = $this->input->get_post('id');
+        $update = $this->User_model->update($id, array('disabled' => 1));
+        if ($update) {
+            $this->session->set_flashdata('success', 'Vendedor desativado com sucesso!');
+        } else {
+            $this->session->set_flashdata('fail', 'Não foi possível desativar');
+        }
+        redirect('Equipe/vendedores');
+    }
+
+    public function ativar_vendedor() {
+        $this->load->model('User_model');
+        $id = $this->input->get_post('id');
+        $update = $this->User_model->update($id, array('disabled' => 0));
+        if ($update) {
+            $this->session->set_flashdata('success', 'Vendedor ativado com sucesso!');
+        } else {
+            $this->session->set_flashdata('fail', 'Não foi possível ativar');
+        }
+        redirect('Equipe/vendedores');
+    }
+    
+        public function desativar_administrador() {
+        $this->load->model('User_model');
+        $id = $this->input->get_post('id');
+        $update = $this->User_model->update($id, array('disabled' => 1));
+        if ($update) {
+            $this->session->set_flashdata('success', 'Administrador desativado com sucesso!');
+        } else {
+            $this->session->set_flashdata('fail', 'Não foi possível desativar');
+        }
+        redirect('Equipe/administradores');
+    }
+
+    public function ativar_administrador() {
+        $this->load->model('User_model');
+        $id = $this->input->get_post('id');
+        $update = $this->User_model->update($id, array('disabled' => 0));
+        if ($update) {
+            $this->session->set_flashdata('success', 'Administrador ativado com sucesso!');
+        } else {
+            $this->session->set_flashdata('fail', 'Não foi possível ativar');
+        }
+        redirect('Equipe/administradores');
     }
 
 }

@@ -101,15 +101,22 @@
                                                     <th> Tipo </th>
                                                 </tr>
                                             </thead>
-                                            <?php foreach ($top_sales as $value): ?>
-                                                <tr>
-                                                    <td>
-                                                        <?= $value->name ?>
-                                                    </td>
-                                                    <td>R$ <?= number_format($value->top_value, 2, ',', '.') ?></td>       
-                                                    <td> <?= $value->amount ?> </td>
-                                                </tr>
-                                            <?php endforeach; ?>
+                                            <?php if (count($top_sales) > 0): ?>
+                                                <?php foreach ($top_sales as $value): ?>
+                                                    <tr>
+                                                        <td>
+                                                            <?php if ($value->name == null): ?>
+                                                                <?= $value->product_name ?>
+                                                                <span class="label label-sm label-danger"> Excluido </span>
+                                                            <?php else: ?>
+                                                                <?= $value->name ?>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td>R$ <?= number_format($value->top_value, 2, ',', '.') ?></td>       
+                                                        <td> <?= $value->amount ?> </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
                                             </tbody>
                                             <!-- END alimentar com informações do Banco-->
                                         </table>
@@ -126,15 +133,25 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach ($top_salesman as $value): ?>
-                                                    <tr>
-                                                        <td>
-                                                            <?= $value->name ?>
-                                                        </td>
-                                                        <td>R$ <?= number_format($value->top_value, 2, ',', '.') ?></td>
-                                                        <td> <?= $value->amount ?> </td>
-                                                    </tr>
-                                                <?php endforeach; ?>
+                                                <?php if (count($top_salesman) > 0): ?>
+                                                    <?php foreach ($top_salesman as $value): ?>
+                                                        <tr>
+                                                            <td>
+                                                                <?php if ($value->name == null): ?>
+                                                                    <?= $value->salesman_name ?>
+                                                                    <span class="label label-sm label-danger"> Excluido </span>
+                                                                <?php else: ?>
+                                                                    <?= $value->name ?>
+                                                                <?php endif; ?>
+                                                                <?php if ($value->status == 1): ?>
+                                                                    <span class="label label-sm label-warning"> Desativado </span>
+                                                                <?php endif; ?>
+                                                            </td>
+                                                            <td>R$ <?= number_format($value->top_value, 2, ',', '.') ?></td>
+                                                            <td> <?= $value->amount ?> </td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                <?php endif; ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -150,15 +167,22 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach ($top_stores as $value): ?>
-                                                    <tr>
-                                                        <td>
-                                                            <?= $value->name ?>
-                                                        </td>
-                                                        <td>R$ <?= number_format($value->top_value, 2, ',', '.') ?></td>
-                                                        <td> <?= $value->amount ?> </td>
-                                                    </tr>
-                                                <?php endforeach; ?>
+                                                <?php if (count($top_stores) > 0): ?>
+                                                    <?php foreach ($top_stores as $value): ?>
+                                                        <tr>
+                                                            <td>
+                                                                <?php if ($value->name == null): ?>
+                                                                    <?= $value->store_name ?>
+                                                                    <span class="label label-sm label-danger"> Excluido </span>
+                                                                <?php else: ?>
+                                                                    <?= $value->name ?>
+                                                                <?php endif; ?>
+                                                            </td>
+                                                            <td>R$ <?= number_format($value->top_value, 2, ',', '.') ?></td>
+                                                            <td> <?= $value->amount ?> </td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                <?php endif; ?>
                                             </tbody>
                                         </table>
                                     </div>

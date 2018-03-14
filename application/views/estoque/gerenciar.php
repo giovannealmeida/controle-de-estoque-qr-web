@@ -96,7 +96,7 @@
                                             <div class="margin-bottom-5">
                                                 <a type="button" href="<?= base_url('Estoque/editar?id=' . $value->id) ?>" class="btn green">
                                                     <i class="fa fa-pencil"></i> Editar</a>
-                                                <a class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir?')" href="<?= base_url('Estoque/excluir?id=' . $value->id) ?>"><span class="glyphicon glyphicon-remove"></span> Remover</a>
+                                                <a class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir? Ao excluir um produto será ecluído todo o seu histórico no sistema, incluindo as vendas')" href="<?= base_url('Estoque/excluir?id=' . $value->id) ?>"><span class="glyphicon glyphicon-remove"></span> Remover</a>
                                             </div>
                                         </td>
                                     </tr>

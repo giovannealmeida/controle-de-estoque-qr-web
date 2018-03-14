@@ -59,8 +59,9 @@ class User_model extends CI_Model {
     }
 
     public function get_salesman_by_id($user_id) {
-        $this->db->select('u.*, us.store_id, us.type_sale_id, us.id as user_store_id');
+        $this->db->select('u.*, us.store_id, us.type_sale_id, us.id as user_store_id, s.fantasy_name as store');
         $this->db->join('tb_user_store us', 'us.user_id = u.id', 'inner');
+        $this->db->join('tb_stores s', 's.id = us.store_id', 'inner');
         $result = $this->db->get_where('tb_users u', array('u.id' => $user_id));
         if ($result->num_rows() > 0) {
             return $result->row(0);
@@ -98,7 +99,7 @@ class User_model extends CI_Model {
     }
 
     public function get_access($email, $password) {
-        //$this->db->where("level_id", 2);
+        $this->db->where("disabled", 0);
         $result = $this->db->get_where('tb_users', array('email' => $email));
         if ($result->num_rows() > 0) {
             $user = $result->row(0);
@@ -316,6 +317,7 @@ class User_model extends CI_Model {
     public function getUserLogin($email, $password) {
         $this->db->where("email", $email);
         $this->db->where("level_id", 1);
+        $this->db->where('disabled', 0);
         $response = $this->db->get('tb_users');
         if ($response->num_rows() == 1) {
             $user = $response->result()[0];
