@@ -101,7 +101,7 @@
                                                     <th> Tipo </th>
                                                 </tr>
                                             </thead>
-                                            <?php if (count($top_sales) > 0): ?>
+                                            <?php if ($top_sales != null): ?>
                                                 <?php foreach ($top_sales as $value): ?>
                                                     <tr>
                                                         <td>
@@ -133,7 +133,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php if (count($top_salesman) > 0): ?>
+                                                <?php if ($top_salesman != null): ?>
                                                     <?php foreach ($top_salesman as $value): ?>
                                                         <tr>
                                                             <td>
@@ -167,7 +167,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php if (count($top_stores) > 0): ?>
+                                                <?php if ($top_stores != null): ?>
                                                     <?php foreach ($top_stores as $value): ?>
                                                         <tr>
                                                             <td>
