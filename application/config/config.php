@@ -23,8 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-//$config['base_url'] = 'http://iking.versalius.com.br/';
-$config['base_url'] = 'http://localhost/rootsilver/';
+$config['base_url'] = 'http://www.rootssilver.com.br/';
 
 /*
 |--------------------------------------------------------------------------

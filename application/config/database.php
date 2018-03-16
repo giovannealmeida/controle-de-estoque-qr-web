@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '50.116.87.140',
-	'username' => 'versa713',
-	'password' => 'fnEl3667Xw',
-	'database' => 'versa713_rootsilver',
+	'hostname' => '192.185.131.50',
+	'username' => 'rootssilver',
+	'password' => '100s3nh4',
+	'database' => 'rootssil_rootssilver',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
